@@ -1,0 +1,41 @@
+:root {
+  /* Renkler */
+  --color-bg: #101010;
+  --color-white: #fbfbfb;
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-10: rgba(255, 255, 255, 0.1);
+  --color-expense: #ff868d;
+  --color-income: #ffb627;
+  --color-nav-bg: rgba(82, 59, 126, 0.6);
+  --color-btn-text: #623f8b;
+  --color-form-bg: rgba(255, 255, 255, 0.1);
+
+  /* Gradient */
+  --gradient-btn: linear-gradient(125deg, #ffc727 16%, #9e40ba 97%, #7000ff);
+
+  /* Shadow */
+  --shadow-form: 0px 4px 60px rgba(0, 0, 0, 0.25);
+  --shadow-btn: 1px 9px 15px rgba(0, 0, 0, 0.2);
+  --shadow-header: 0px 4px 40px rgba(0, 0, 0, 0.25);
+
+  /* Border radius */
+  --radius-form: 8px;
+  --radius-btn: 20px;
+
+  /* Font */
+  --font-main: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  color: var(--color-white);
+}

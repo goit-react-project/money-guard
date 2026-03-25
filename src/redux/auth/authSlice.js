@@ -1,0 +1,63 @@
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  fetchCurrentUser,
+} from "./authOperations";
+
+const initialState = {
+  user: {
+    name: null,
+    email: null,
+  },
+  token: null,
+  isLoggedIn: false,
+  isRefreshing: false,
+};
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    // Register
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
+    // Login
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
+    // Logout
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    });
+    // Fetch current user
+    builder.addCase(fetchCurrentUser.pending, (state) => {
+      state.isRefreshing = true;
+    });
+    builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isRefreshing = false;
+    });
+    builder.addCase(fetchCurrentUser.rejected, (state) => {
+      state.isRefreshing = false;
+    });
+  },
+});
+
+export default authSlice.reducer;
+
+// Selectors
+export const selectUser = (state) => state.auth.user;
+export const selectToken = (state) => state.auth.token;
+export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
+export const selectIsRefreshing = (state) => state.auth.isRefreshing;
