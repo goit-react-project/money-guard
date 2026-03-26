@@ -77,7 +77,13 @@ git checkout feature/login-page
 
 > Bu adım, takım arkadaşlarının yaptığı değişiklikleri sana getirir ve ileride oluşabilecek conflict'leri önler.
 
-### 6. Değişiklikleri Push Et
+### 6. Uygulamayı Çalıştır
+
+```bash
+npm run dev
+```
+
+### 7. Değişiklikleri Push Et
 
 Kodunu yazdıktan sonra kendi branch'ine push et:
 
@@ -93,11 +99,55 @@ git push origin kendi-branch-adin
 git push origin feature/login-page
 ```
 
-### 7. Uygulamayı Çalıştır
+### 8. Pull Request Açma
+
+Kodunu yazdıktan sonra:
+
+1. Değişikliklerini branch'ine push et:
 
 ```bash
-npm run dev
+git push origin feature/gelir-ekleme-ekrani
 ```
+
+2. GitHub'da **Compare & pull request** butonuna tıkla
+
+3. PR başlığını ve açıklamasını doldur. Açıklamaya şunu ekle:
+
+```
+Closes #3
+```
+
+Bu sayede PR merge edilince issue otomatik kapanır.
+
+4. **Reviewers** kısmına takım liderini ekle
+
+5. **Create pull request** ile gönder
+
+### 9. PR Açıklaması Şablonu
+
+```
+## Ne Yaptım?
+Gelir ekleme ekranı oluşturuldu.
+
+## Nasıl Test Edilir?
+1. Uygulamayı çalıştır
+2. "Gelir Ekle" butonuna tıkla
+3. Formu doldur ve kaydet
+
+## İlgili Issue
+Closes #3
+```
+
+---
+
+## Code Review Süreci
+
+1. PR açtıktan sonra takım liderinin incelemesini bekle
+2. Değişiklik istenirse yorumlara göre düzenle ve yeni commit at
+3. Onay verildikten sonra takım lideri merge eder
+4. Merge sonrası branch silinebilir
+
+---
 
 ---
 
@@ -148,6 +198,39 @@ Her issue'nun otomatik bir **numarası** olur (ör. `#3`). Bu numarayı PR açı
 
 ---
 
+## Commit Mesajları
+
+Commit mesajları ne yapıldığını açıkça belirtmelidir.
+
+### Format
+
+```
+tip: kısa açıklama
+```
+
+### Örnekler
+
+```
+feat: gelir ekleme formu tamamlandı
+fix: tarih seçici mobil hatası giderildi
+refactor: transaction servisi yeniden düzenlendi
+docs: kurulum adımları güncellendi
+style: buton renkleri düzenlendi
+```
+
+### Commit Tipleri
+
+| Tip        | Ne Zaman                          |
+| ---------- | --------------------------------- |
+| `feat`     | Yeni özellik                      |
+| `fix`      | Bug düzeltme                      |
+| `refactor` | Kod iyileştirme                   |
+| `docs`     | Dokümantasyon                     |
+| `style`    | Sadece görsel değişiklik          |
+| `chore`    | Bağımlılık, config güncellemeleri |
+
+---
+
 ## Branch Oluşturma
 
 > **Not:** Herkesin branch'i zaten oluşturulmuş durumdadır. Yeni bir branch açman gerekmiyor. Bu bölüm yalnızca bilgi amaçlıdır.
@@ -182,89 +265,6 @@ git checkout -b feature/gelir-ekleme-ekrani
 1. Sol alt köşede `main` yazan yere tıkla
 2. **Create new branch** seç
 3. Branch adını yaz
-
----
-
-## Commit Mesajları
-
-Commit mesajları ne yapıldığını açıkça belirtmelidir.
-
-### Format
-
-```
-tip: kısa açıklama
-```
-
-### Örnekler
-
-```
-feat: gelir ekleme formu tamamlandı
-fix: tarih seçici mobil hatası giderildi
-refactor: transaction servisi yeniden düzenlendi
-docs: kurulum adımları güncellendi
-style: buton renkleri düzenlendi
-```
-
-### Commit Tipleri
-
-| Tip        | Ne Zaman                          |
-| ---------- | --------------------------------- |
-| `feat`     | Yeni özellik                      |
-| `fix`      | Bug düzeltme                      |
-| `refactor` | Kod iyileştirme                   |
-| `docs`     | Dokümantasyon                     |
-| `style`    | Sadece görsel değişiklik          |
-| `chore`    | Bağımlılık, config güncellemeleri |
-
----
-
-## Pull Request Açma
-
-Kodunu yazdıktan sonra:
-
-1. Değişikliklerini branch'ine push et:
-
-```bash
-git push origin feature/gelir-ekleme-ekrani
-```
-
-2. GitHub'da **Compare & pull request** butonuna tıkla
-
-3. PR başlığını ve açıklamasını doldur. Açıklamaya şunu ekle:
-
-```
-Closes #3
-```
-
-Bu sayede PR merge edilince issue otomatik kapanır.
-
-4. **Reviewers** kısmına takım liderini ekle
-
-5. **Create pull request** ile gönder
-
-### PR Açıklaması Şablonu
-
-```
-## Ne Yaptım?
-Gelir ekleme ekranı oluşturuldu.
-
-## Nasıl Test Edilir?
-1. Uygulamayı çalıştır
-2. "Gelir Ekle" butonuna tıkla
-3. Formu doldur ve kaydet
-
-## İlgili Issue
-Closes #3
-```
-
----
-
-## Code Review Süreci
-
-1. PR açtıktan sonra takım liderinin incelemesini bekle
-2. Değişiklik istenirse yorumlara göre düzenle ve yeni commit at
-3. Onay verildikten sonra takım lideri merge eder
-4. Merge sonrası branch silinebilir
 
 ---
 
