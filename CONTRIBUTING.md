@@ -8,12 +8,12 @@ MoneyGuard, kişisel gelir-gider takibine yönelik bir React uygulamasıdır. Bu
 
 - [Başlangıç](#başlangıç)
 - [Genel Kurallar](#genel-kurallar)
-- [İş Akışı](#iş-akışı)
-- [Issue Açma](#issue-açma)
-- [Branch Oluşturma](#branch-oluşturma)
-- [Commit Mesajları](#commit-mesajları)
-- [Pull Request Açma](#pull-request-açma)
+- [İş Akışı](#5-günlük-çalışma-akışı)
+- [Pull Request Açma](#8-pull-request-açma)
 - [Code Review Süreci](#code-review-süreci)
+- [Issue Açma](#issue-açma)
+- [Commit Mesajları](#commit-mesajları)
+- [Branch Oluşturma](#branch-oluşturma)
 
 ---
 
@@ -28,17 +28,7 @@ git clone https://github.com/kullanici-adi/money-guard.git
 cd money-guard
 ```
 
-### 2. Bağımlılıkları Yükle
-
-Projeyi klonladıktan sonra, projenin çalışması için gerekli paketleri yüklemen gerekir. `node_modules` klasörü git'e dahil edilmediği için her klonlamada bu adımı uygulamalısın:
-
-```bash
-npm install
-```
-
-> Yükleme tamamlandıktan sonra `node_modules` klasörü oluşacaktır. Bu klasörü **commit'leme**, zaten `.gitignore` ile hariç tutulmuştur.
-
-### 3. Kendi Branch'ine Geç
+### 2. Kendi Branch'ine Geç
 
 Branch'ine doğrudan geç:
 
@@ -52,15 +42,31 @@ git checkout kendi-branch-adin
 git checkout feature/login-page
 ```
 
-### 4. Günlük Çalışma Akışı
+### 3. Güncel dosyaları al
 
-Kod yazmadan önce her gün main'deki son değişiklikleri çek:
+Kendi branchinde olduğundan emin oldudktan sonra main branchindeki güncel dosyaları aldığından emin olmalısın:
 
 ```bash
-git checkout main
 git pull origin main
+```
+
+### 4. Bağımlılıkları Yükle
+
+Projeyi klonladıktan sonra, projenin çalışması için gerekli paketleri yüklemen gerekir. `node_modules` klasörü git'e dahil edilmediği için her klonlamada bu adımı uygulamalısın:
+
+```bash
+npm install
+```
+
+> Yükleme tamamlandıktan sonra `node_modules` klasörü oluşacaktır. Bu klasörü **commit'leme**, zaten `.gitignore` ile hariç tutulmuştur.
+
+### 5. Günlük Çalışma Akışı
+
+Kod yazmadan önce her gün main'deki son değişiklikleri çek, hepsini tek seferde değil adım adım yapmalısın, öncelikle kendi branchinde olduğundan mutlaka emin olmalısın:
+
+```bash
 git checkout kendi-branch-adin
-git merge main
+git pull origin main
 ```
 
 Örneğin;
@@ -71,7 +77,13 @@ git checkout feature/login-page
 
 > Bu adım, takım arkadaşlarının yaptığı değişiklikleri sana getirir ve ileride oluşabilecek conflict'leri önler.
 
-### 5. Değişiklikleri Push Et
+### 6. Uygulamayı Çalıştır
+
+```bash
+npm run dev
+```
+
+### 7. Değişiklikleri Push Et
 
 Kodunu yazdıktan sonra kendi branch'ine push et:
 
@@ -87,11 +99,55 @@ git push origin kendi-branch-adin
 git push origin feature/login-page
 ```
 
-### 6. Uygulamayı Çalıştır
+### 8. Pull Request Açma
+
+Kodunu yazdıktan sonra:
+
+1. Değişikliklerini branch'ine push et:
 
 ```bash
-npm run dev
+git push origin feature/gelir-ekleme-ekrani
 ```
+
+2. GitHub'da **Compare & pull request** butonuna tıkla
+
+3. PR başlığını ve açıklamasını doldur. Açıklamaya şunu ekle:
+
+```
+Closes #3
+```
+
+Bu sayede PR merge edilince issue otomatik kapanır.
+
+4. **Reviewers** kısmına takım liderini ekle
+
+5. **Create pull request** ile gönder
+
+### 9. PR Açıklaması Şablonu
+
+```
+## Ne Yaptım?
+Gelir ekleme ekranı oluşturuldu.
+
+## Nasıl Test Edilir?
+1. Uygulamayı çalıştır
+2. "Gelir Ekle" butonuna tıkla
+3. Formu doldur ve kaydet
+
+## İlgili Issue
+Closes #3
+```
+
+---
+
+## Code Review Süreci
+
+1. PR açtıktan sonra takım liderinin incelemesini bekle
+2. Değişiklik istenirse yorumlara göre düzenle ve yeni commit at
+3. Onay verildikten sonra takım lideri merge eder
+4. Merge sonrası branch silinebilir
+
+---
 
 ---
 
@@ -105,6 +161,8 @@ npm run dev
 ---
 
 ## İş Akışı
+
+Bu iş akışı sadece Takım Lideriniz tarafından sürecin nasıl yönetildiğini tanıtmaya yöneliktir.
 
 ```
 Issue aç → Branch oluştur → Kodu yaz → Push et → PR aç → İnceleme → Merge
@@ -137,6 +195,39 @@ Her issue'nun otomatik bir **numarası** olur (ör. `#3`). Bu numarayı PR açı
    - `docs` → Dokümantasyon
 5. **Assignee** kısmından kendini ata
 6. Issue'yu kaydet ve **numarasını not al** (branch adında kullanacaksın)
+
+---
+
+## Commit Mesajları
+
+Commit mesajları ne yapıldığını açıkça belirtmelidir.
+
+### Format
+
+```
+tip: kısa açıklama
+```
+
+### Örnekler
+
+```
+feat: gelir ekleme formu tamamlandı
+fix: tarih seçici mobil hatası giderildi
+refactor: transaction servisi yeniden düzenlendi
+docs: kurulum adımları güncellendi
+style: buton renkleri düzenlendi
+```
+
+### Commit Tipleri
+
+| Tip        | Ne Zaman                          |
+| ---------- | --------------------------------- |
+| `feat`     | Yeni özellik                      |
+| `fix`      | Bug düzeltme                      |
+| `refactor` | Kod iyileştirme                   |
+| `docs`     | Dokümantasyon                     |
+| `style`    | Sadece görsel değişiklik          |
+| `chore`    | Bağımlılık, config güncellemeleri |
 
 ---
 
@@ -174,89 +265,6 @@ git checkout -b feature/gelir-ekleme-ekrani
 1. Sol alt köşede `main` yazan yere tıkla
 2. **Create new branch** seç
 3. Branch adını yaz
-
----
-
-## Commit Mesajları
-
-Commit mesajları ne yapıldığını açıkça belirtmelidir.
-
-### Format
-
-```
-tip: kısa açıklama
-```
-
-### Örnekler
-
-```
-feat: gelir ekleme formu tamamlandı
-fix: tarih seçici mobil hatası giderildi
-refactor: transaction servisi yeniden düzenlendi
-docs: kurulum adımları güncellendi
-style: buton renkleri düzenlendi
-```
-
-### Commit Tipleri
-
-| Tip        | Ne Zaman                          |
-| ---------- | --------------------------------- |
-| `feat`     | Yeni özellik                      |
-| `fix`      | Bug düzeltme                      |
-| `refactor` | Kod iyileştirme                   |
-| `docs`     | Dokümantasyon                     |
-| `style`    | Sadece görsel değişiklik          |
-| `chore`    | Bağımlılık, config güncellemeleri |
-
----
-
-## Pull Request Açma
-
-Kodunu yazdıktan sonra:
-
-1. Değişikliklerini branch'ine push et:
-
-```bash
-git push origin feature/gelir-ekleme-ekrani
-```
-
-2. GitHub'da **Compare & pull request** butonuna tıkla
-
-3. PR başlığını ve açıklamasını doldur. Açıklamaya şunu ekle:
-
-```
-Closes #3
-```
-
-Bu sayede PR merge edilince issue otomatik kapanır.
-
-4. **Reviewers** kısmına takım liderini ekle
-
-5. **Create pull request** ile gönder
-
-### PR Açıklaması Şablonu
-
-```
-## Ne Yaptım?
-Gelir ekleme ekranı oluşturuldu.
-
-## Nasıl Test Edilir?
-1. Uygulamayı çalıştır
-2. "Gelir Ekle" butonuna tıkla
-3. Formu doldur ve kaydet
-
-## İlgili Issue
-Closes #3
-```
-
----
-
-## Code Review Süreci
-
-1. PR açtıktan sonra takım liderinin incelemesini bekle
-2. Değişiklik istenirse yorumlara göre düzenle ve yeni commit at
-3. Onay verildikten sonra takım lideri merge eder
-4. Merge sonrası branch silinebilir
 
 ---
 
