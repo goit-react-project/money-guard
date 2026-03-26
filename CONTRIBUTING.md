@@ -8,12 +8,12 @@ MoneyGuard, kişisel gelir-gider takibine yönelik bir React uygulamasıdır. Bu
 
 - [Başlangıç](#başlangıç)
 - [Genel Kurallar](#genel-kurallar)
-- [İş Akışı](#iş-akışı)
-- [Issue Açma](#issue-açma)
-- [Branch Oluşturma](#branch-oluşturma)
-- [Commit Mesajları](#commit-mesajları)
-- [Pull Request Açma](#pull-request-açma)
+- [İş Akışı](#5-günlük-çalışma-akışı)
+- [Pull Request Açma](#8-pull-request-açma)
 - [Code Review Süreci](#code-review-süreci)
+- [Issue Açma](#issue-açma)
+- [Commit Mesajları](#commit-mesajları)
+- [Branch Oluşturma](#branch-oluşturma)
 
 ---
 
