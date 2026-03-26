@@ -37,11 +37,13 @@ npm install
 ### 3. Kendi Branch'ine Geç
 
 Branch'in yoksa oluştur:
+
 ```bash
 git checkout -b feature/issue-numarası-açıklama
 ```
 
 Branch'in zaten varsa doğrudan geç:
+
 ```bash
 git checkout feature/issue-numarası-açıklama
 ```
@@ -66,7 +68,13 @@ Kodunu yazdıktan sonra kendi branch'ine push et:
 ```bash
 git add .
 git commit -m "feat: yaptığın şeyin açıklaması"
-git push origin feature/issue-numarası-açıklama
+git push origin kendi-branch-adin
+```
+
+Örneğin;
+
+```bash
+git push origin feature/login-page
 ```
 
 ### 6. Uygulamayı Çalıştır
@@ -119,16 +127,17 @@ tip/issue-numarası-kısa-açıklama
 
 ### Örnekler
 
-| Durum | Branch Adı |
-|---|---|
-| Yeni özellik | `feature/3-gelir-ekleme-ekrani` |
-| Bug düzeltme | `fix/7-grafik-hatasi` |
-| Kod iyileştirme | `refactor/12-api-servisi` |
-| Dokümantasyon | `docs/2-readme-guncelleme` |
+| Durum           | Branch Adı                      |
+| --------------- | ------------------------------- |
+| Yeni özellik    | `feature/3-gelir-ekleme-ekrani` |
+| Bug düzeltme    | `fix/7-grafik-hatasi`           |
+| Kod iyileştirme | `refactor/12-api-servisi`       |
+| Dokümantasyon   | `docs/2-readme-guncelleme`      |
 
 ### VS Code'da Branch Oluşturma
 
 **Terminal ile:**
+
 ```bash
 git checkout main
 git pull origin main
@@ -136,6 +145,7 @@ git checkout -b feature/3-gelir-ekleme-ekrani
 ```
 
 **VS Code arayüzü ile:**
+
 1. Sol alt köşede `main` yazan yere tıkla
 2. **Create new branch** seç
 3. Branch adını yaz
@@ -164,14 +174,14 @@ style: buton renkleri düzenlendi
 
 ### Commit Tipleri
 
-| Tip | Ne Zaman |
-|---|---|
-| `feat` | Yeni özellik |
-| `fix` | Bug düzeltme |
-| `refactor` | Kod iyileştirme |
-| `docs` | Dokümantasyon |
-| `style` | Sadece görsel değişiklik |
-| `chore` | Bağımlılık, config güncellemeleri |
+| Tip        | Ne Zaman                          |
+| ---------- | --------------------------------- |
+| `feat`     | Yeni özellik                      |
+| `fix`      | Bug düzeltme                      |
+| `refactor` | Kod iyileştirme                   |
+| `docs`     | Dokümantasyon                     |
+| `style`    | Sadece görsel değişiklik          |
+| `chore`    | Bağımlılık, config güncellemeleri |
 
 ---
 
@@ -180,6 +190,7 @@ style: buton renkleri düzenlendi
 Kodunu yazdıktan sonra:
 
 1. Değişikliklerini branch'ine push et:
+
 ```bash
 git push origin feature/3-gelir-ekleme-ekrani
 ```
@@ -187,9 +198,11 @@ git push origin feature/3-gelir-ekleme-ekrani
 2. GitHub'da **Compare & pull request** butonuna tıkla
 
 3. PR başlığını ve açıklamasını doldur. Açıklamaya şunu ekle:
+
 ```
 Closes #3
 ```
+
 Bu sayede PR merge edilince issue otomatik kapanır.
 
 4. **Reviewers** kısmına takım liderini ekle
