@@ -1,0 +1,64 @@
+.homeContainer {
+    display: flex;
+    flex-direction:row;
+    gap: 20px;
+    justify-content: center;
+}
+
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #101010;
+    color: white;
+}
+
+/* SOL PANEL */
+.left {
+    width: 480px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* AYRAÇ */
+.divider {
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* SAĞ PANEL */
+.right {
+    flex: 1;
+    padding: 20px;
+}
+
+/*  MOBILE */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left {
+        width: 100%;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .right {
+        width: 100%;
+    }
+}

@@ -44,6 +44,10 @@ const App = () => {
               <LoginPage />
             </PublicRoute>
           }
+          />
+        <Route
+          path="/home"
+          element={<HomeTab />}
         />
         <Route
           path="/dashboard"
@@ -58,7 +62,7 @@ const App = () => {
           <Route path="currency" element={<CurrencyTab />} />
           <Route index element={<Navigate to="home" />} />
         </Route>
-        <Route path="*" element={<Navigate to="/login" />} />
+         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
       </Suspense>
     </>
