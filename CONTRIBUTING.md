@@ -6,6 +6,7 @@ MoneyGuard, kişisel gelir-gider takibine yönelik bir React uygulamasıdır. Bu
 
 ## İçindekiler
 
+- [Başlangıç](#başlangıç)
 - [Genel Kurallar](#genel-kurallar)
 - [İş Akışı](#iş-akışı)
 - [Issue Açma](#issue-açma)
@@ -13,6 +14,66 @@ MoneyGuard, kişisel gelir-gider takibine yönelik bir React uygulamasıdır. Bu
 - [Commit Mesajları](#commit-mesajları)
 - [Pull Request Açma](#pull-request-açma)
 - [Code Review Süreci](#code-review-süreci)
+
+---
+
+## Başlangıç
+
+### 1. Projeyi Klonla
+
+GitHub'daki repo sayfasına git, yeşil **Code** butonuna tıkla ve HTTPS linkini kopyala. Ardından terminalde çalıştır:
+
+```bash
+git clone https://github.com/kullanici-adi/money-guard.git
+cd money-guard
+```
+
+### 2. Bağımlılıkları Yükle
+
+```bash
+npm install
+```
+
+### 3. Kendi Branch'ine Geç
+
+Branch'in yoksa oluştur:
+```bash
+git checkout -b feature/issue-numarası-açıklama
+```
+
+Branch'in zaten varsa doğrudan geç:
+```bash
+git checkout feature/issue-numarası-açıklama
+```
+
+### 4. Günlük Çalışma Akışı
+
+Kod yazmadan önce her gün main'deki son değişiklikleri çek:
+
+```bash
+git checkout main
+git pull origin main
+git checkout feature/issue-numarası-açıklama
+git merge main
+```
+
+> Bu adım, takım arkadaşlarının yaptığı değişiklikleri sana getirir ve ileride oluşabilecek conflict'leri önler.
+
+### 5. Değişiklikleri Push Et
+
+Kodunu yazdıktan sonra kendi branch'ine push et:
+
+```bash
+git add .
+git commit -m "feat: yaptığın şeyin açıklaması"
+git push origin feature/issue-numarası-açıklama
+```
+
+### 6. Uygulamayı Çalıştır
+
+```bash
+npm run dev
+```
 
 ---
 
