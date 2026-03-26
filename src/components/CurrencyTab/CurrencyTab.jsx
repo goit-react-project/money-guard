@@ -1,3 +1,5 @@
+import styles from './CurrencyTab.module.css';
+
 const CurrencyTab = () => {
   return (
     <div>

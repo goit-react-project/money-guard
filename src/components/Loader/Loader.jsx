@@ -1,3 +1,4 @@
+import styles from './Loader.module.css';
 import { useSelector } from "react-redux";
 import { ThreeDots } from "react-loader-spinner";
 import { selectIsLoading } from "../../redux/global/globalSlice";

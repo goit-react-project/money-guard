@@ -1,3 +1,5 @@
+import styles from './Currency.module.css';
+
 const Currency = () => {
   return (
     <div>

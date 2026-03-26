@@ -1,3 +1,5 @@
+import styles from './StatisticsTab.module.css';
+
 const StatisticsTab = () => {
   return (
     <div>
