@@ -36,16 +36,16 @@ npm install
 
 ### 3. Kendi Branch'ine Geç
 
-Branch'in yoksa oluştur:
-
-```bash
-git checkout -b kendi-branch-adin
-```
-
-Branch'in zaten varsa doğrudan geç:
+Branch'ine doğrudan geç:
 
 ```bash
 git checkout kendi-branch-adin
+```
+
+Örneğin;
+
+```bash
+git checkout feature/login-page
 ```
 
 ### 4. Günlük Çalışma Akışı
@@ -137,6 +137,8 @@ Her issue'nun otomatik bir **numarası** olur (ör. `#3`). Bu numarayı PR açı
 ---
 
 ## Branch Oluşturma
+
+> **Not:** Herkesin branch'i zaten oluşturulmuş durumdadır. Yeni bir branch açman gerekmiyor. Bu bölüm yalnızca bilgi amaçlıdır.
 
 Branch adları şu formatta olmalıdır:
 
