@@ -39,13 +39,13 @@ npm install
 Branch'in yoksa oluştur:
 
 ```bash
-git checkout -b feature/issue-numarası-açıklama
+git checkout -b kendi-branch-adin
 ```
 
 Branch'in zaten varsa doğrudan geç:
 
 ```bash
-git checkout feature/issue-numarası-açıklama
+git checkout kendi-branch-adin
 ```
 
 ### 4. Günlük Çalışma Akışı
@@ -108,6 +108,19 @@ Issue aç → Branch oluştur → Kodu yaz → Push et → PR aç → İnceleme 
 
 ---
 
+## Issue Nedir?
+
+Issue, GitHub üzerinde bir görevi, hatayı veya iyileştirme önerisini takip etmek için açılan bir kayıttır. Kısaca "yapılacak iş kartı" gibi düşünebilirsin.
+
+Örneğin:
+
+- "Login sayfası tasarımı yapılacak" → `feature` issue
+- "Butona tıklayınca hata veriyor" → `bug` issue
+
+Her issue'nun otomatik bir **numarası** olur (ör. `#3`). Bu numarayı PR açıklamasında kullanırsın, böylece hangi kodun hangi göreve ait olduğu net olur.
+
+---
+
 ## Issue Açma
 
 1. GitHub'da **Issues** sekmesine git
@@ -147,7 +160,7 @@ tip/issue-numarası-kısa-açıklama
 ```bash
 git checkout main
 git pull origin main
-git checkout -b feature/3-gelir-ekleme-ekrani
+git checkout -b feature/gelir-ekleme-ekrani
 ```
 
 **VS Code arayüzü ile:**
@@ -198,7 +211,7 @@ Kodunu yazdıktan sonra:
 1. Değişikliklerini branch'ine push et:
 
 ```bash
-git push origin feature/3-gelir-ekleme-ekrani
+git push origin feature/gelir-ekleme-ekrani
 ```
 
 2. GitHub'da **Compare & pull request** butonuna tıkla
