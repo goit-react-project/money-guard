@@ -55,8 +55,14 @@ Kod yazmadan önce her gün main'deki son değişiklikleri çek:
 ```bash
 git checkout main
 git pull origin main
-git checkout feature/issue-numarası-açıklama
+git checkout kendi-branch-adin
 git merge main
+```
+
+Örneğin;
+
+```bash
+git checkout feature/login-page
 ```
 
 > Bu adım, takım arkadaşlarının yaptığı değişiklikleri sana getirir ve ileride oluşabilecek conflict'leri önler.
