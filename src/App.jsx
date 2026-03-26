@@ -1,17 +1,18 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "./redux/auth/authOperations";
 import { selectIsRefreshing } from "./redux/auth/authSlice";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import PublicRoute from "./components/routes/PublicRoute";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage.jsx";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import HomeTab from "./components/HomeTab/HomeTab";
-import StatisticsTab from "./components/StatisticsTab/StatisticsTab";
-import CurrencyTab from "./components/CurrencyTab/CurrencyTab";
 import Loader from "./components/Loader/Loader.jsx";
+
+const RegistrationPage = lazy(() => import("./pages/RegistrationPage/RegistrationPage.jsx"));
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
+const HomeTab = lazy(() => import("./components/HomeTab/HomeTab"));
+const StatisticsTab = lazy(() => import("./components/StatisticsTab/StatisticsTab"));
+const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const App = () => {
   return (
     <>
       <Loader />
+      <Suspense fallback={null}>
       <Routes>
         <Route
           path="/register"
@@ -58,6 +60,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
+      </Suspense>
     </>
   );
 };
