@@ -28,17 +28,7 @@ git clone https://github.com/kullanici-adi/money-guard.git
 cd money-guard
 ```
 
-### 2. Bağımlılıkları Yükle
-
-Projeyi klonladıktan sonra, projenin çalışması için gerekli paketleri yüklemen gerekir. `node_modules` klasörü git'e dahil edilmediği için her klonlamada bu adımı uygulamalısın:
-
-```bash
-npm install
-```
-
-> Yükleme tamamlandıktan sonra `node_modules` klasörü oluşacaktır. Bu klasörü **commit'leme**, zaten `.gitignore` ile hariç tutulmuştur.
-
-### 3. Kendi Branch'ine Geç
+### 2. Kendi Branch'ine Geç
 
 Branch'ine doğrudan geç:
 
@@ -52,15 +42,31 @@ git checkout kendi-branch-adin
 git checkout feature/login-page
 ```
 
-### 4. Günlük Çalışma Akışı
+### 3. Güncel dosyaları al
 
-Kod yazmadan önce her gün main'deki son değişiklikleri çek:
+Kendi branchinde olduğundan emin oldudktan sonra main branchindeki güncel dosyaları aldığından emin olmalısın:
 
 ```bash
-git checkout main
 git pull origin main
+```
+
+### 4. Bağımlılıkları Yükle
+
+Projeyi klonladıktan sonra, projenin çalışması için gerekli paketleri yüklemen gerekir. `node_modules` klasörü git'e dahil edilmediği için her klonlamada bu adımı uygulamalısın:
+
+```bash
+npm install
+```
+
+> Yükleme tamamlandıktan sonra `node_modules` klasörü oluşacaktır. Bu klasörü **commit'leme**, zaten `.gitignore` ile hariç tutulmuştur.
+
+### 5. Günlük Çalışma Akışı
+
+Kod yazmadan önce her gün main'deki son değişiklikleri çek, hepsini tek seferde değil adım adım yapmalısın, öncelikle kendi branchinde olduğundan mutlaka emin olmalısın:
+
+```bash
 git checkout kendi-branch-adin
-git merge main
+git pull origin main
 ```
 
 Örneğin;
@@ -71,7 +77,7 @@ git checkout feature/login-page
 
 > Bu adım, takım arkadaşlarının yaptığı değişiklikleri sana getirir ve ileride oluşabilecek conflict'leri önler.
 
-### 5. Değişiklikleri Push Et
+### 6. Değişiklikleri Push Et
 
 Kodunu yazdıktan sonra kendi branch'ine push et:
 
@@ -87,7 +93,7 @@ git push origin kendi-branch-adin
 git push origin feature/login-page
 ```
 
-### 6. Uygulamayı Çalıştır
+### 7. Uygulamayı Çalıştır
 
 ```bash
 npm run dev
@@ -105,6 +111,8 @@ npm run dev
 ---
 
 ## İş Akışı
+
+Bu iş akışı sadece Takım Lideriniz tarafından sürecin nasıl yönetildiğini tanıtmaya yöneliktir.
 
 ```
 Issue aç → Branch oluştur → Kodu yaz → Push et → PR aç → İnceleme → Merge
