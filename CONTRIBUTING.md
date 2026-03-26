@@ -30,9 +30,13 @@ cd money-guard
 
 ### 2. Bağımlılıkları Yükle
 
+Projeyi klonladıktan sonra, projenin çalışması için gerekli paketleri yüklemen gerekir. `node_modules` klasörü git'e dahil edilmediği için her klonlamada bu adımı uygulamalısın:
+
 ```bash
 npm install
 ```
+
+> Yükleme tamamlandıktan sonra `node_modules` klasörü oluşacaktır. Bu klasörü **commit'leme**, zaten `.gitignore` ile hariç tutulmuştur.
 
 ### 3. Kendi Branch'ine Geç
 
