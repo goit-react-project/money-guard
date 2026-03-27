@@ -161,6 +161,30 @@ Closes #3
 
 ---
 
+## Toast Bildirimleri (react-toastify)
+
+Projede kullanıcıya hata ve başarı bildirimleri göstermek için `react-toastify` kullanılmaktadır.
+
+### Nasıl Kullanılır?
+
+```js
+import { toast } from "react-toastify";
+
+toast.success("İşlem başarılı!");
+toast.error("Bir hata oluştu.");
+```
+
+`ToastContainer` ve stiller global olarak `App.jsx` ve `index.css` içinde tanımlanmıştır. Başka bir kurulum yapmana gerek yok, sadece `toast` import edip çağırman yeterli.
+
+### Kurallar
+
+- Toast metinleri **İngilizce** yazılmalıdır (proje genelinde tutarlılık için).
+- Başarı durumları için `toast.success()`, hata durumları için `toast.error()` kullanılmalıdır.
+- Arka planda çalışan veri çekme işlemlerine (fetch, get) toast ekleme — sadece kullanıcının tetiklediği işlemlere ekle (ekleme, silme, güncelleme, giriş, kayıt vb.).
+- Stilini **değiştirme** — renkler ve font projenin `index.css`'indeki design token'larıyla merkezi olarak yönetiliyor.
+
+---
+
 ## İş Akışı
 
 Bu iş akışı sadece Takım Lideriniz tarafından sürecin nasıl yönetildiğini tanıtmaya yöneliktir.

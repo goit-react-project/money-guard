@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCurrentUser } from "./redux/auth/authOperations";
-import { selectIsRefreshing } from "./redux/auth/authSlice";
+import { selectIsRefreshing } from "./redux/auth/authSelectors";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import PublicRoute from "./components/routes/PublicRoute";
 import Loader from "./components/Loader/Loader.jsx";

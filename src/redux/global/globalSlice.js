@@ -18,7 +18,3 @@ const globalSlice = createSlice({
 
 export const { setLoading, setError } = globalSlice.actions;
 export default globalSlice.reducer;
-
-// Selectors
-export const selectIsLoading = (state) => state.global.isLoading;
-export const selectError = (state) => state.global.error;
