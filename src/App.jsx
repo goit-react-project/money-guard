@@ -6,6 +6,8 @@ import { selectIsRefreshing } from "./redux/auth/authSlice";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import PublicRoute from "./components/routes/PublicRoute";
 import Loader from "./components/Loader/Loader.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationPage = lazy(() => import("./pages/RegistrationPage/RegistrationPage.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -26,6 +28,7 @@ const App = () => {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} />
       <Loader />
       <Suspense fallback={null}>
       <Routes>

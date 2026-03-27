@@ -67,6 +67,7 @@ Kod yazmadan önce her gün main'deki son değişiklikleri çek, hepsini tek sef
 ```bash
 git checkout kendi-branch-adin
 git pull origin main
+npm install
 ```
 
 Örneğin;
