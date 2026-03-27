@@ -28,6 +28,30 @@
   --font-main: "Poppins", sans-serif;
 }
 
+/* react-toastify overrides */
+.Toastify__toast {
+  background: rgba(82, 59, 126, 0.9);
+  color: var(--color-white);
+  font-family: var(--font-main);
+  border-radius: var(--radius-form);
+}
+
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: var(--color-income);
+}
+
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: var(--color-expense);
+}
+
+.Toastify__progress-bar--success {
+  background: var(--color-income);
+}
+
+.Toastify__progress-bar--error {
+  background: var(--color-expense);
+}
+
 * {
   margin: 0;
   padding: 0;
