@@ -1,39 +1,32 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Link } from 'react-router-dom'
-import * as Yup from 'yup'
-import styles from './RegistrationForm.module.css'
-
-const registerSchema = Yup.object({
-  username: Yup.string()
-    .min(4, 'Name must be at least 4 characters')
-    .required('Name is required'),
-  email: Yup.string()
-    .email('Please write valid email')
-    .required('Email is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .max(15)
-    .required('Password is required'),
-  confirmPassword: Yup.string()
-    .oneOf(
-      [Yup.ref('password'), null],
-      "Passwords don't match, please try again."
-    )
-    .min(6, 'Password must be at least 6 characters')
-    .required('Confirm password is required'),
-}).required()
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Link } from 'react-router-dom';
+import { registerSchema } from '../../utils/validationSchema';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../../redux/auth/authOperations';
+import styles from './RegistrationForm.module.css';
 
 const initialValues = {
   username: '',
   email: '',
   password: '',
   confirmPassword: '',
-}
+};
 
 const RegistrationForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, actions) => {
+    dispatch(registerUser(values));
+    actions.resetForm();
+  };
+
   return (
     <div>
-      <Formik initialValues={initialValues} validationSchema={registerSchema}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={registerSchema}
+        onSubmit={handleSubmit}
+      >
         <Form className={styles.formContainer}>
           {/* icon */}
           <p className={styles.regTitle}>Money Guard</p>
@@ -42,10 +35,11 @@ const RegistrationForm = () => {
             <Field
               className={styles.input}
               type="text"
-              name="name"
+              name="username"
               placeholder="Name"
+              autoComplete="username"
             />
-            <ErrorMessage name="name" component="div" />
+            <ErrorMessage name="username" component="div" />
           </div>
           <div className={styles.label}>
             {/* icon */}
@@ -54,6 +48,7 @@ const RegistrationForm = () => {
               type="email"
               name="email"
               placeholder="E-mail"
+              autoComplete="email"
             />
             <ErrorMessage name="email" component="div" />
           </div>
@@ -64,6 +59,7 @@ const RegistrationForm = () => {
               type="password"
               name="password"
               placeholder="Password"
+              autoComplete="new-password"
             />
             <ErrorMessage name="password" component="div" />
           </div>
@@ -74,6 +70,7 @@ const RegistrationForm = () => {
               type="password"
               name="confirmPassword"
               placeholder="Confirm password"
+              autoComplete="new-password"
             />
             <ErrorMessage name="confirmPassword" component="div" />
           </div>
@@ -87,6 +84,6 @@ const RegistrationForm = () => {
         </Form>
       </Formik>
     </div>
-  )
-}
-export default RegistrationForm
+  );
+};
+export default RegistrationForm;
