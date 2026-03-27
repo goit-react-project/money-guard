@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { registerSchema } from '../../utils/validationSchema';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/authOperations';
+
+// İkonlar
+import LogoIcon from '../../assets/icons/LogoIcon';
+import UserIcon from '../../assets/icons/UserIcon';
+import EmailIcon from '../../assets/icons/EmailIcon';
+import LockIcon from '../../assets/icons/LockIcon';
 import styles from './RegistrationForm.module.css';
 
 const initialValues = {
@@ -21,17 +27,20 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
+    <div className={styles.regContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={registerSchema}
         onSubmit={handleSubmit}
       >
         <Form className={styles.formContainer}>
-          {/* icon */}
-          <p className={styles.regTitle}>Money Guard</p>
+          <div className={styles.regContent}>
+            <LogoIcon className={styles.logoIcon} />
+            <p className={styles.regTitle}>Money Guard</p>
+          </div>
+
           <div className={styles.label}>
-            {/* icon */}
+            <UserIcon className={styles.icon} />
             <Field
               className={styles.input}
               type="text"
@@ -39,10 +48,15 @@ const RegistrationForm = () => {
               placeholder="Name"
               autoComplete="username"
             />
-            <ErrorMessage name="username" component="div" />
+            <ErrorMessage
+              name="username"
+              component="div"
+              className={styles.errorText}
+            />
           </div>
+
           <div className={styles.label}>
-            {/* icon */}
+            <EmailIcon className={styles.icon} />
             <Field
               className={styles.input}
               type="email"
@@ -50,10 +64,15 @@ const RegistrationForm = () => {
               placeholder="E-mail"
               autoComplete="email"
             />
-            <ErrorMessage name="email" component="div" />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className={styles.errorText}
+            />
           </div>
+
           <div className={styles.label}>
-            {/* icon */}
+            <LockIcon className={styles.icon} />
             <Field
               className={styles.input}
               type="password"
@@ -61,10 +80,16 @@ const RegistrationForm = () => {
               placeholder="Password"
               autoComplete="new-password"
             />
-            <ErrorMessage name="password" component="div" />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className={styles.errorText}
+            />
+            {/* Password Strengh Bar */}
           </div>
+
           <div className={styles.label}>
-            {/* icon */}
+            <LockIcon className={styles.icon} />
             <Field
               className={styles.input}
               type="password"
@@ -72,15 +97,21 @@ const RegistrationForm = () => {
               placeholder="Confirm password"
               autoComplete="new-password"
             />
-            <ErrorMessage name="confirmPassword" component="div" />
+            <ErrorMessage
+              name="confirmPassword"
+              component="div"
+              className={styles.errorText}
+            />
           </div>
 
-          <button className={styles.regButton} type="submit">
-            REGISTER
-          </button>
-          <Link to="/login">
-            <button className={styles.loginButton}>Login</button>
-          </Link>
+          <div className={styles.buttonContainer}>
+            <button className={styles.registerButton} type="submit">
+              REGISTER
+            </button>
+            <Link to="/login">
+              <button className={styles.loginButton}>Login</button>
+            </Link>
+          </div>
         </Form>
       </Formik>
     </div>
