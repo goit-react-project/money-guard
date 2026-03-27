@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axiosInstance";
 
 export const fetchTransactions = createAsyncThunk(
@@ -33,8 +34,10 @@ export const addTransaction = createAsyncThunk(
         "/transactions",
         transactionData,
       );
+      toast.success("Transaction added successfully!");
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to add transaction.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -45,8 +48,10 @@ export const deleteTransaction = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await axiosInstance.delete(`/transactions/${id}`);
+      toast.success("Transaction deleted.");
       return { id };
     } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete transaction.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -57,8 +62,10 @@ export const editTransaction = createAsyncThunk(
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await axiosInstance.patch(`/transactions/${id}`, data);
+      toast.success("Transaction updated.");
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to update transaction.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },

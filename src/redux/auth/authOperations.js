@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import axiosInstance, {
   setAuthHeader,
   clearAuthHeader,
@@ -10,8 +11,10 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axiosInstance.post("/auth/sign-up", credentials);
       setAuthHeader(response.data.token);
+      toast.success("Registration successful!");
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -23,8 +26,10 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axiosInstance.post("/auth/sign-in", credentials);
       setAuthHeader(response.data.token);
+      toast.success("Login successful!");
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -37,6 +42,7 @@ export const logoutUser = createAsyncThunk(
       await axiosInstance.delete("/auth/sign-out");
       clearAuthHeader();
     } catch (error) {
+      toast.error("Logout failed.");
       return thunkAPI.rejectWithValue(error.message);
     }
   },
