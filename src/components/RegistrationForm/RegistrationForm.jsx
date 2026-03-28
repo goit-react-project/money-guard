@@ -47,7 +47,7 @@ const RegistrationForm = () => {
         validationSchema={registerSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmiting }) => (
+        {({ isSubmitting }) => (
           <Form className={styles.formContainer}>
             <div className={styles.regContent}>
               <LogoIcon className={styles.logoIcon} />
@@ -123,9 +123,9 @@ const RegistrationForm = () => {
               <button
                 className={styles.registerButton}
                 type="submit"
-                disabled={isSubmiting}
+                disabled={isSubmitting}
               >
-                {isSubmiting ? 'REGISTERING...' : 'REGİSTER'}
+                {isSubmitting ? 'REGISTERING...' : 'REGİSTER'}
               </button>
               <Link to="/login">
                 <button className={styles.loginButton}>Login</button>
