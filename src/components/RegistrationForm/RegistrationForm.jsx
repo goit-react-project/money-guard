@@ -4,12 +4,17 @@ import { registerSchema } from '../../utils/validationSchema';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/authOperations';
 
+import PasswordStrengthBarPkg from 'react-password-strength-bar';
+
 // İkonlar
-import LogoIcon from '../../assets/icons/LogoIcon';
-import UserIcon from '../../assets/icons/UserIcon';
-import EmailIcon from '../../assets/icons/EmailIcon';
-import LockIcon from '../../assets/icons/LockIcon';
+import LogoIcon from '../../assets/icons/logo-icon.svg?react';
+import UserIcon from '../../assets/icons/name-icon.svg?react';
+import EmailIcon from '../../assets/icons/email-icon.svg?react';
+import PasswordIcon from '../../assets/icons/password-icon.svg?react';
 import styles from './RegistrationForm.module.css';
+
+const PasswordStrengthBar =
+  PasswordStrengthBarPkg.default ?? PasswordStrengthBarPkg;
 
 const initialValues = {
   username: '',
@@ -47,7 +52,7 @@ const RegistrationForm = () => {
         validationSchema={registerSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values }) => (
           <Form className={styles.formContainer}>
             <div className={styles.regContent}>
               <LogoIcon className={styles.logoIcon} />
@@ -87,7 +92,7 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.label}>
-              <LockIcon className={styles.icon} />
+              <PasswordIcon className={styles.icon} />
               <Field
                 className={styles.input}
                 type="password"
@@ -100,11 +105,10 @@ const RegistrationForm = () => {
                 component="div"
                 className={styles.errorText}
               />
-              {/* Password Strengh Bar */}
             </div>
 
             <div className={styles.label}>
-              <LockIcon className={styles.icon} />
+              <PasswordIcon className={styles.icon} />
               <Field
                 className={styles.input}
                 type="password"
@@ -117,6 +121,8 @@ const RegistrationForm = () => {
                 component="div"
                 className={styles.errorText}
               />
+              {/* Password Strengh Bar */}
+              <PasswordStrengthBar password={values.password} />
             </div>
 
             <div className={styles.buttonContainer}>
@@ -125,7 +131,7 @@ const RegistrationForm = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'REGISTERING...' : 'REGİSTER'}
+                {isSubmitting ? 'REGISTERING...' : 'REGISTER'}
               </button>
               <Link to="/login">
                 <button className={styles.loginButton}>Login</button>

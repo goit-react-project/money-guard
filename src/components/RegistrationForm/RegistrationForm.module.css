@@ -39,6 +39,14 @@
   position: relative;
 }
 
+.icon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+}
+
 .input {
   position: relative;
   font-family: var(--font-main);
@@ -128,11 +136,6 @@
     height: 36px;
   }
 
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
-
   .formContainer {
     width: 533px;
     height: 624px;
@@ -155,6 +158,4 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-
-
 }
