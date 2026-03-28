@@ -12,7 +12,9 @@ export const registerUser = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Registration failed.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Registration failed.'
+      );
     }
   }
 );
@@ -39,7 +41,9 @@ export const logoutUser = createAsyncThunk(
       await axiosInstance.delete('/auth/sign-out');
       clearAuthHeader();
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout failed.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Logout failed.'
+      );
     }
   }
 );
@@ -51,10 +55,12 @@ export const fetchCurrentUser = createAsyncThunk(
     if (!token) return thunkAPI.rejectWithValue('No token found');
     try {
       setAuthHeader(token);
-      const response = await axiosInstance.get('/auth/current');
+      const response = await axiosInstance.get('/users/current');
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Session expired.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Session expired.'
+      );
     }
   }
 );
