@@ -1,15 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   registerUser,
   loginUser,
   logoutUser,
   fetchCurrentUser,
-} from "./authOperations";
+} from './authOperations';
 
 const initialState = {
   user: {
-    name: null,
+    id: null,
+    username: null,
     email: null,
+    balance: null,
   },
   token: null,
   isLoggedIn: false,
@@ -17,7 +19,7 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -35,7 +37,7 @@ const authSlice = createSlice({
     });
     // Logout
     builder.addCase(logoutUser.fulfilled, (state) => {
-      state.user = { name: null, email: null };
+      state.user = { id: null, username: null, email: null, balance: null };
       state.token = null;
       state.isLoggedIn = false;
     });
