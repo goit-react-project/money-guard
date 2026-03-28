@@ -9,9 +9,14 @@ export const fetchTransactions = createAsyncThunk(
       const response = await axiosInstance.get("/transactions");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        error.response?.data?.message || error.message || "Failed to fetch transactions.";
+
+      toast.error(message);       /// ND EKLENEN KISIM
+
+      return thunkAPI.rejectWithValue(message);
     }
-  },
+  }
 );
 
 export const fetchCategories = createAsyncThunk(
