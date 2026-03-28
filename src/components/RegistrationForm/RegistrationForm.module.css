@@ -1,5 +1,5 @@
 .regContainer {
-  background-image: url("../../assets/images/register-mobile.png");
+  background: var(--gradient-bg-mobile);
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
