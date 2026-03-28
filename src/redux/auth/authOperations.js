@@ -55,7 +55,7 @@ export const fetchCurrentUser = createAsyncThunk(
     if (!token) return thunkAPI.rejectWithValue('No token found');
     try {
       setAuthHeader(token);
-      const response = await axiosInstance.get('/auth/current');
+      const response = await axiosInstance.get('/users/current');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
