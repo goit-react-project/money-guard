@@ -1,20 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance, { setAuthHeader } from '../../utils/axiosInstance';
 
 export const fetchTransactions = createAsyncThunk(
-  'finance/fetchTransactions',
+  "finance/fetchTransactions",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get('/transactions');
+      const token = thunkAPI.getState().auth.token || localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
+
+      setAuthHeader(token); // Header'a token ekle          // ND
+
+      const response = await axiosInstance.get("/transactions");
       return response.data;
     } catch (error) {
-      const message =
-        error.response?.data?.message || error.message || "Failed to fetch transactions.";
-
-      toast.error(message);       /// ND EKLENEN KISIM
-
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );

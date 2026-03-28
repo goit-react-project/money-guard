@@ -15,12 +15,23 @@ const initialState = {
   statistics: [],
   totalBalance: 0,
   currency: [],
+  loading: false,
+  error: null,
 };
 
 const financeSlice = createSlice({
   name: "finance",
   initialState,
-  reducers: {},
+  reducers: {
+    //  login sonrası backend’den gelen transactions için
+    setTransactions: (state, action) => {
+      state.transactions = action.payload;
+      state.totalBalance = action.payload.reduce(
+        (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),
+        0
+      );
+    },
+  },
   extraReducers: (builder) => {
     // Transactions
     builder.addCase(fetchTransactions.fulfilled, (state, action) => {
@@ -75,4 +86,5 @@ const financeSlice = createSlice({
   },
 });
 
+export const { setTransactions } = financeSlice.actions;
 export default financeSlice.reducer;
