@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/authOperations';
 
 // İkonlar
-import LogoIcon from '../../assets/icons/LogoIcon';
-import UserIcon from '../../assets/icons/UserIcon';
-import EmailIcon from '../../assets/icons/EmailIcon';
-import LockIcon from '../../assets/icons/LockIcon';
+import LogoIcon from '../../../public/money-guard-favicon.svg?react';
+import UserIcon from '../../assets/icons/name-icon.svg?react';
+import EmailIcon from '../../assets/icons/email-icon.svg?react';
+import PasswordIcon from '../../assets/icons/password-icon.svg?react';
 import styles from './RegistrationForm.module.css';
 
 const initialValues = {
@@ -87,7 +87,7 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.label}>
-              <LockIcon className={styles.icon} />
+              <PasswordIcon className={styles.icon} />
               <Field
                 className={styles.input}
                 type="password"
@@ -104,7 +104,7 @@ const RegistrationForm = () => {
             </div>
 
             <div className={styles.label}>
-              <LockIcon className={styles.icon} />
+              <PasswordIcon className={styles.icon} />
               <Field
                 className={styles.input}
                 type="password"
@@ -125,7 +125,7 @@ const RegistrationForm = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'REGISTERING...' : 'REGİSTER'}
+                {isSubmitting ? 'REGISTERING...' : 'REGISTER'}
               </button>
               <Link to="/login">
                 <button className={styles.loginButton}>Login</button>
