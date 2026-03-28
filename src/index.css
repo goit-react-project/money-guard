@@ -13,7 +13,28 @@
   --color-form-bg: rgba(255, 255, 255, 0.1);
 
   /* Gradient */
-  --gradient-btn: linear-gradient(125deg, #ffc727 16%, #9e40ba 97%, #7000ff);
+  --gradient-btn: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  --gradient-bg-mobile:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(48, 46, 142, 0.9) 0%,
+      rgba(48, 46, 142, 0.6) 30%,
+      rgba(48, 46, 142, 0.3) 55%,
+      transparent 75%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(109, 28, 119, 0.9) 0%,
+      rgba(109, 28, 119, 0.6) 30%,
+      rgba(109, 28, 119, 0.3) 55%,
+      transparent 75%
+    ),
+    linear-gradient(180deg, #6d1c77 0%, #302e8e 100%);
 
   /* Shadow */
   --shadow-form: 0px 4px 60px rgba(0, 0, 0, 0.25);
@@ -25,7 +46,7 @@
   --radius-btn: 20px;
 
   /* Font */
-  --font-main: "Poppins", sans-serif;
+  --font-main: 'Poppins', sans-serif;
 }
 
 /* react-toastify overrides */
