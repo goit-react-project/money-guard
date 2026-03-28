@@ -1,3 +1,5 @@
+import styles from './EditTransactionForm.module.css';
+
 const EditTransactionForm = () => {
   return (
     <div>

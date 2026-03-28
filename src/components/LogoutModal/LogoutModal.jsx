@@ -1,3 +1,5 @@
+import styles from './LogoutModal.module.css';
+
 const LogoutModal = () => {
   return (
     <div>

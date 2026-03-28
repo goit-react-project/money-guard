@@ -1,16 +1,17 @@
 import StatisticsDashboard from '../StatisticsDashboard/StatisticsDashboard';
 import Chart from '../Chart/Chart';
 import StatisticsTable from '../StatisticsTable/StatisticsTable';
-import css from './StatisticsTab.css';
+import styles from './StatisticsTab.module.css';
+
 const StatisticsTab = () => {
-// Mobilde flex-direction column Tablet ve Desktopta row
+  // Mobilde flex-direction column Tablet ve Desktopta row
   return (
-    <div className={css.statisticsLayout}>
-      <div className={css.left}>
+    <div className={styles.statisticsLayout}>
+      <div className={styles.left}>
         <StatisticsDashboard />
         <Chart />
       </div>
-      <div className={css.right}>
+      <div className={styles.right}>
         <StatisticsTable />
       </div>
     </div>

@@ -1,3 +1,5 @@
+import styles from './ModalEditTransaction.module.css';
+
 const ModalEditTransaction = () => {
   return (
     <div>

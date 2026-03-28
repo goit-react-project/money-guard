@@ -1,3 +1,5 @@
+import styles from './Balance.module.css';
+
 const Balance = () => {
   return (
     <div>

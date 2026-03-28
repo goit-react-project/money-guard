@@ -1,3 +1,5 @@
+import styles from './TransactionsItem.module.css';
+
 const TransactionsItem = () => {
   return (
     <div>

@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchStatistics } from '../../redux/finance/financeOperations';
-import css from './StatisticsDashboard.css';
+import styles from './StatisticsDashboard.module.css';
 
 const MONTHS = [
-  { value: 1,  label: 'January'   },
-  { value: 2,  label: 'February'  },
-  { value: 3,  label: 'March'     },
-  { value: 4,  label: 'April'     },
-  { value: 5,  label: 'May'       },
-  { value: 6,  label: 'June'      },
-  { value: 7,  label: 'July'      },
-  { value: 8,  label: 'August'    },
-  { value: 9,  label: 'September' },
-  { value: 10, label: 'October'   },
-  { value: 11, label: 'November'  },
-  { value: 12, label: 'December'  },
+  { value: 1, label: 'January' },
+  { value: 2, label: 'February' },
+  { value: 3, label: 'March' },
+  { value: 4, label: 'April' },
+  { value: 5, label: 'May' },
+  { value: 6, label: 'June' },
+  { value: 7, label: 'July' },
+  { value: 8, label: 'August' },
+  { value: 9, label: 'September' },
+  { value: 10, label: 'October' },
+  { value: 11, label: 'November' },
+  { value: 12, label: 'December' },
 ];
 
 // Son 5 yıl ve içinde bulunduğumuz yıl olarak 6 yıl
@@ -28,35 +28,47 @@ const StatisticsDashboard = () => {
   const dispatch = useDispatch();
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
-  const [year,  setYear]  = useState(now.getFullYear());
+  const [year, setYear] = useState(now.getFullYear());
 
   useEffect(() => {
     dispatch(fetchStatistics({ month, year }));
-  }, []); //  ilk açılışta bir kere 
+  }, []); //  ilk açılışta bir kere
 
-  const handleMonthChange = e => {
+  const handleMonthChange = (e) => {
     const newMonth = Number(e.target.value);
     setMonth(newMonth);
     dispatch(fetchStatistics({ month: newMonth, year }));
   };
 
-  const handleYearChange = e => {
+  const handleYearChange = (e) => {
     const newYear = Number(e.target.value);
     setYear(newYear);
     dispatch(fetchStatistics({ month, year: newYear }));
   };
 
   return (
- <div className={css.wrapper}>
-      <select className={css.select} value={month} onChange={handleMonthChange}>
-        {MONTHS.map(opt => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
+    <div className={styles.wrapper}>
+      <select
+        className={styles.select}
+        value={month}
+        onChange={handleMonthChange}
+      >
+        {MONTHS.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
         ))}
       </select>
 
-      <select className={css.select} value={year} onChange={handleYearChange}>
-        {getYears().map(y => (
-          <option key={y} value={y}>{y}</option>
+      <select
+        className={styles.select}
+        value={year}
+        onChange={handleYearChange}
+      >
+        {getYears().map((y) => (
+          <option key={y} value={y}>
+            {y}
+          </option>
         ))}
       </select>
     </div>
