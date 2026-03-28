@@ -8,11 +8,13 @@ export const registerUser = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axiosInstance.post('/auth/sign-up', credentials);
-      setAuthHeader(response.data.token);
-      return response.data;
+      const { data } = await axiosInstance.post('/auth/sign-up', credentials);
+      setAuthHeader(data.token);
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Registration failed.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Registration failed.'
+      );
     }
   }
 );
@@ -39,7 +41,9 @@ export const logoutUser = createAsyncThunk(
       await axiosInstance.delete('/auth/sign-out');
       clearAuthHeader();
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout failed.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Logout failed.'
+      );
     }
   }
 );
@@ -54,7 +58,9 @@ export const fetchCurrentUser = createAsyncThunk(
       const response = await axiosInstance.get('/auth/current');
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || 'Session expired.');
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || 'Session expired.'
+      );
     }
   }
 );
