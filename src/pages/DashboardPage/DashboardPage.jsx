@@ -1,9 +1,10 @@
+import { Outlet } from 'react-router-dom';
 import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
   return (
     <div>
-      <p></p>
+      <Outlet />
     </div>
   );
 };
