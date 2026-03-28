@@ -1,0 +1,107 @@
+.wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    border-radius: 8px;
+    color: #fbfbfb;
+    font-weight: 600;
+    font-size: 16px;
+    background-color: #523b7e99;
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.item {
+    display: flex;
+    gap: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 100%;
+    max-width: 100%;
+    border-bottom: 1px solid #ffffff69;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.name {
+    flex: 1;
+    color: #fbfbfb;
+    font-size: 16px;
+}
+
+.amount {
+    color: #fbfbfb;
+    font-size: 16px;
+}
+
+.summary {
+    padding-left: 12px;
+    color: #fbfbfb;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px;
+    margin-right: 24px;
+}
+
+.expense {
+    color: #ff868d;
+}
+
+.income {
+    color: #ffb627;
+}
+
+.placeholder {
+    color: #fbfbfb;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .item {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .item {
+        width: 100%;
+        max-width: 395px;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 395px;
+    }
+
+    .summaryRow {
+        margin-right: 24px;
+    }
+}

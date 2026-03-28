@@ -1,10 +1,20 @@
-import styles from './CurrencyTab.module.css';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Currency from '../Currency/Currency';
+
+const TABLET_BREAKPOINT = 768;
 
 const CurrencyTab = () => {
-  return (
-    <div>
-      <p></p>
-    </div>
-  );
+  const navigate = useNavigate();
+
+  // Tablet veya daha büyük ekranda home
+  useEffect(() => {
+    if (window.innerWidth >= TABLET_BREAKPOINT) {
+      navigate('/home', { replace: true });
+    }
+  }, [navigate]);
+
+  return <Currency />;
 };
+
 export default CurrencyTab;
