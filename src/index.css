@@ -13,12 +13,7 @@
   --color-form-bg: rgba(255, 255, 255, 0.1);
 
   /* Gradient */
-  --gradient-btn: linear-gradient(
-    167deg,
-    #ffc727 0%,
-    #9e40ba 61.46%,
-    #7000ff 90.54%
-  );
+  --gradient-btn: linear-gradient(125deg, #ffc727 16%, #9e40ba 97%, #7000ff);
   --gradient-bg-mobile:
     radial-gradient(
       circle at 20% 20%,
