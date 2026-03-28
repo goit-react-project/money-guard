@@ -4,12 +4,17 @@ import { registerSchema } from '../../utils/validationSchema';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/auth/authOperations';
 
+import PasswordStrengthBarPkg from 'react-password-strength-bar';
+
 // İkonlar
-import LogoIcon from '../../../public/money-guard-favicon.svg?react';
+import LogoIcon from '../../assets/icons/logo-icon.svg?react';
 import UserIcon from '../../assets/icons/name-icon.svg?react';
 import EmailIcon from '../../assets/icons/email-icon.svg?react';
 import PasswordIcon from '../../assets/icons/password-icon.svg?react';
 import styles from './RegistrationForm.module.css';
+
+const PasswordStrengthBar =
+  PasswordStrengthBarPkg.default ?? PasswordStrengthBarPkg;
 
 const initialValues = {
   username: '',
@@ -47,7 +52,7 @@ const RegistrationForm = () => {
         validationSchema={registerSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values }) => (
           <Form className={styles.formContainer}>
             <div className={styles.regContent}>
               <LogoIcon className={styles.logoIcon} />
@@ -100,7 +105,6 @@ const RegistrationForm = () => {
                 component="div"
                 className={styles.errorText}
               />
-              {/* Password Strengh Bar */}
             </div>
 
             <div className={styles.label}>
@@ -117,6 +121,8 @@ const RegistrationForm = () => {
                 component="div"
                 className={styles.errorText}
               />
+              {/* Password Strengh Bar */}
+              <PasswordStrengthBar password={values.password} />
             </div>
 
             <div className={styles.buttonContainer}>
