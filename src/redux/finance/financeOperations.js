@@ -1,6 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import axiosInstance, { setAuthHeader } from '../../utils/axiosInstance';
+import axios from 'axios';
+
+
+
+// ISO 4217 kodları
+const UAH = 980;
+const USD = 840;
+const EUR = 978;
 
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
@@ -70,17 +78,27 @@ export const addTransaction = createAsyncThunk(
 );
 
 export const deleteTransaction = createAsyncThunk(
-  'finance/deleteTransaction',
+  "finance/deleteTransaction",
   async (id, thunkAPI) => {
     try {
+      const token =
+        thunkAPI.getState().auth.token || localStorage.getItem("token");
+
+      if (!token) throw new Error("No token found");
+
+      setAuthHeader(token);
+
       await axiosInstance.delete(`/transactions/${id}`);
-      toast.success('Transaction deleted.');
-      return { id };
+
+      toast.success("Transaction deleted.");
+      return id; 
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || 'Failed to delete transaction.'
-      );
-      return thunkAPI.rejectWithValue(error.message);
+      const message =
+        error.response?.data?.message || "Failed to delete transaction.";
+
+      toast.error(message); //  BACKEND HATASI BURADA GÖSTERİLİR
+
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -131,19 +149,28 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      const response = await axiosInstance.get(
-        'https://api.monobank.ua/bank/currency'
-      );
+      const response = await axios.get('https://api.monobank.ua/bank/currency');
+
       const filtered = response.data.filter(
-        (item) =>
+        item =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
           item.currencyCodeB === 980
       );
 
-      localStorage.setItem('currencyData', JSON.stringify(filtered));
+      const normalized = filtered.map(item => ({
+        currency: item.currencyCodeA === 840 ? 'USD' : 'EUR',
+        purchase: item.rateBuy ?? item.rateCross ?? 0,
+        sale: item.rateSell ?? item.rateCross ?? 0,
+      }));
+
+      const ordered = ['USD', 'EUR']
+        .map(code => normalized.find(item => item.currency === code))
+        .filter(Boolean);
+
+      localStorage.setItem('currencyData', JSON.stringify(ordered));
       localStorage.setItem('currencyTimestamp', String(Date.now()));
 
-      return filtered;
+      return ordered;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

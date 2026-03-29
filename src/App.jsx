@@ -49,10 +49,6 @@ const App = () => {
           }
           />
         <Route
-          path="/currency"
-          element={<CurrencyTab />}
-        />
-        <Route
           path="/dashboard"
           element={
             <PrivateRoute>
@@ -65,7 +61,7 @@ const App = () => {
           <Route path="currency" element={<CurrencyTab />} />
           <Route index element={<Navigate to="home" />} />
         </Route>
-         <Route path="*" element={<Navigate to="/currency" />} />
+         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       </Suspense>
     </>

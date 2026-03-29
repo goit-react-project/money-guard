@@ -40,12 +40,13 @@ const financeSlice = createSlice({
         state.error = null;
     });
     builder.addCase(fetchTransactions.fulfilled, (state, action) => {
-      state.transactions = action.payload;
-      state.totalBalance = action.payload.reduce(
-        (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),        
-        0
-      );
-    });
+  state.loading = false;
+  state.transactions = action.payload;
+  state.totalBalance = action.payload.reduce(
+    (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),
+    0
+  );
+});
     builder.addCase(fetchTransactions.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -73,27 +74,37 @@ const financeSlice = createSlice({
           : state.totalBalance - action.payload.amount;
     });
     // Delete transaction
-    builder.addCase(deleteTransaction.fulfilled, (state, action) => {
-      const deleted = state.transactions.find(
-        (t) => t.id === action.payload.id
-      );
-      if (deleted) {
-        state.totalBalance =
-          deleted.type === 'INCOME'
-            ? state.totalBalance - deleted.amount
-            : state.totalBalance + deleted.amount;
-      }
-      state.transactions = state.transactions.filter(
-        (t) => t.id !== action.payload.id
-      );
-    });
+   builder.addCase(deleteTransaction.fulfilled, (state, action) => {
+  const deleted = state.transactions.find(
+    (t) => t.id === action.payload.id
+  );
+
+  if (deleted) {
+    state.totalBalance =
+      deleted.type === "INCOME"
+        ? state.totalBalance - deleted.amount
+        : state.totalBalance + deleted.amount;
+  }
+
+  state.transactions = state.transactions.filter(
+    (t) => t.id !== action.payload.id
+  );
+});
     // Edit transaction
-    builder.addCase(editTransaction.fulfilled, (state, action) => {
-      const index = state.transactions.findIndex(
-        (t) => t.id === action.payload.id
-      );
-      if (index !== -1) state.transactions[index] = action.payload;
-    });
+   builder.addCase(editTransaction.fulfilled, (state, action) => {
+  const index = state.transactions.findIndex(
+    (t) => t.id === action.payload.id
+  );
+
+  if (index !== -1) {
+    state.transactions[index] = action.payload;
+  }
+
+  state.totalBalance = state.transactions.reduce(
+    (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),
+    0
+  );
+});
     // Statistics
     builder.addCase(fetchStatistics.fulfilled, (state, action) => {
       state.statistics = action.payload;

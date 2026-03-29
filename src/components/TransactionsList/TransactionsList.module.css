@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 8px;
     align-items: center;
+    overflow-y: auto;
 }
 
 .card {
@@ -27,59 +28,71 @@
     border-radius: 16px 0 0 16px;
 }
 
-.row {
+
+
+.emptyWrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 13px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5px;
 }
 
-.label {
+.emptyCard {
+    width: 100%;
+    max-width: 280px;
+    min-height: 350px;
+    padding: 32px 20px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #2a165c 0%, #1f0f47 100%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.emptyTitle {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: semibold;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #fbfbfb;
+}
+
+.emptyText {
+    margin: 0 0 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: semibold;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fbfbfb;
+}
+
+.emptyBtn {
+    min-width: 170px;
+    height: 42px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 1.2;
-    font-family: var(--font-main);
-    color: var(--color-white);
-}
-
-.value {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.2;
-    color: var(--color-white);
-    text-align: right;
-    max-width: 140px;
-}
-
-.sum {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 1.2;
-    color: var(--color-expense);
-}
-
-.actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 20px;
-}
-
-.deleteBtn {
-    min-width: 80px;
-    height: 30px;
-    border: none;
-    border-radius: var(--radius-btn);
+    font-size: 13px;
     color: #ffffff;
-    cursor: pointer;
-    background: var(--gradient-btn);
+
+    background: linear-gradient(90deg, #ffb627 0%, #e08aff 100%);
+    box-shadow: 0 6px 20px rgba(255, 182, 39, 0.25);
 }
 
-.editBtn {
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    font-size: 16px;
+.emptyBtn:hover {
+    transform: translateY(-1px);
+}
+
+.emptyBtn:active {
+    transform: translateY(0);
 }

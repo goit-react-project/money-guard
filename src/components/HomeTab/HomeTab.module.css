@@ -1,7 +1,7 @@
 .container {
     display: flex;
     background: #101010;
-    padding: 243px 20.5px 0 20.5px;
+    padding: 0 20.5px 0 20.5px;
     color: white;
     max-width: 400px;
     height: 568px;

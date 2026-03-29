@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { /* useEffect, */ useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./HomeTab.module.css";
+import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import Balance from "../Balance/Balance";
 import Currency from "../Currency/Currency";
@@ -11,20 +12,37 @@ import {
   addTransaction,
   deleteTransaction,
   editTransaction,
+ // fetchTransactions,
 } from "../../redux/finance/financeOperations";
 
 
 
 const HomeTab = () => {
   const transactions = useSelector((state) => state.finance.transactions);
+
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+
   const dispatch = useDispatch();
 
-  
-  const handleAddTransaction = (newTransaction) => {
-    dispatch(addTransaction(newTransaction));
-  }; 
+ /* useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);  */
+
+  const handleOpenAdd = () => {
+    setSelectedTransaction(null);
+    setIsAddOpen(true);
+  };
+
+  const handleCloseAdd = () => {
+    setIsAddOpen(false);
+  };
+
+  const handleAddTransaction = async (newTransaction) => {
+    await dispatch(addTransaction(newTransaction));
+    setIsAddOpen(false);
+  };
 
   const handleDelete = (id) => {
     dispatch(deleteTransaction(id));
@@ -40,16 +58,16 @@ const HomeTab = () => {
     setIsEditOpen(false);
   };
 
-  const handleUpdateTransaction = (updatedTransaction) => {
-  const { id, ...data } = updatedTransaction;
-
-  dispatch(editTransaction({ id, data }));
-  handleCloseEdit();
-};
+  const handleUpdateTransaction = async (updatedTransaction) => {
+    const { id, ...data } = updatedTransaction;
+    await dispatch(editTransaction({ id, data }));
+    handleCloseEdit();
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.left}>
+        <Header />
         <Navigation />
         <Balance />
         <Currency />
@@ -64,7 +82,7 @@ const HomeTab = () => {
           onEdit={handleOpenEdit}
         />
 
-        <ButtonAddTransactions onAddTransaction={handleAddTransaction} />
+        <ButtonAddTransactions onAddTransaction={handleOpenAdd} />
       </div>
 
       {isEditOpen && selectedTransaction && (
@@ -72,6 +90,14 @@ const HomeTab = () => {
           transaction={selectedTransaction}
           onClose={handleCloseEdit}
           onSave={handleUpdateTransaction}
+        />
+      )}
+
+      {isAddOpen && (
+        <ModalEditTransaction
+          transaction={null}
+          onClose={handleCloseAdd}
+          onSave={handleAddTransaction}
         />
       )}
     </div>
