@@ -23,7 +23,7 @@ const financeSlice = createSlice({
   name: "finance",
   initialState,
   reducers: {
-    //  login sonrası backend’den gelen transactions için
+ //  login sonrası backend'den gelen transactions için       /// ND
     setTransactions: (state, action) => {
       state.transactions = action.payload;
       state.totalBalance = action.payload.reduce(
@@ -32,18 +32,37 @@ const financeSlice = createSlice({
       );
     },
   },
+
   extraReducers: (builder) => {
-    // Transactions
+    // Transactions   /// ND
+    builder.addCase(fetchTransactions.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+    });
     builder.addCase(fetchTransactions.fulfilled, (state, action) => {
-      state.transactions = action.payload.data;
-      state.totalBalance = action.payload.data.reduce(
-        (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),
-        0,
+      state.transactions = action.payload;
+      state.totalBalance = action.payload.reduce(
+        (acc, t) => (t.type === "INCOME" ? acc + t.amount : acc - t.amount),        
+        0
       );
     });
-    // Categories
-    builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload;
+    builder.addCase(fetchTransactions.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // Categories       ///   ND
+    builder
+    .addCase(fetchCategories.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchCategories.fulfilled, (state, action) => {
+      state.loading = false;
+      state.categories = action.payload;   // Burası Redux state'e yazıyor    
+    })
+    .addCase(fetchCategories.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
     // Add transaction
     builder.addCase(addTransaction.fulfilled, (state, action) => {
@@ -86,5 +105,5 @@ const financeSlice = createSlice({
   },
 });
 
-export const { setTransactions } = financeSlice.actions;
+export const { setTransactions} = financeSlice.actions;
 export default financeSlice.reducer;

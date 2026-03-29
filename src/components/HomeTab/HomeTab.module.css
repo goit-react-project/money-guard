@@ -1,36 +1,15 @@
-.homeContainer {
-    display: flex;
-    flex-direction:row;
-    gap: 20px;
-    justify-content: center;
-}
-
-
-.card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 24px;
-    font-weight: bold;
-    color: #111827;
-}
-
 .container {
     display: flex;
-    min-height: 100vh;
     background: #101010;
+    padding: 243px 20.5px 0 20.5px;
     color: white;
+    max-width: 400px;
+    height: 568px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
 }
 
-/* SOL PANEL */
-.left {
-    width: 480px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
 /* AYRAÇ */
 .divider {
@@ -38,13 +17,7 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* SAĞ PANEL */
-.right {
-    flex: 1;
-    padding: 20px;
-}
 
-/*  MOBILE */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;

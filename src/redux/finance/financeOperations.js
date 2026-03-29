@@ -8,12 +8,13 @@ export const fetchTransactions = createAsyncThunk(
     try {
       const token = thunkAPI.getState().auth.token || localStorage.getItem("token");
       if (!token) throw new Error("No token found");
-
-      setAuthHeader(token); // Header'a token ekle          // ND
-
+      setAuthHeader(token); // Header'a token ekle          /// ND
       const response = await axiosInstance.get("/transactions");
       return response.data;
     } catch (error) {
+      toast.error(
+        error.response?.data?.message || 'Failed to fetch transactions.'
+      );
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
       );
@@ -21,33 +22,49 @@ export const fetchTransactions = createAsyncThunk(
   }
 );
 
-export const fetchCategories = createAsyncThunk(
-  'finance/fetchCategories',
+export const fetchCategories = createAsyncThunk(   /// ND
+  "finance/fetchCategories",
   async (_, thunkAPI) => {
     try {
-      const response = await axiosInstance.get('/transaction-categories');
-      return response.data;
+      // Token Redux state veya localStorage'dan al
+      const token = thunkAPI.getState().auth.token || localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
+      // Header'a token ekle
+      setAuthHeader(token);
+      //  Backend request
+      const response = await axiosInstance.get("/transaction-categories");        /// ND
+      //  Slice'a döndür
+      return response.data; // genellikle array döner
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      //  Hata durumunda toast
+      toast.error(
+        error.response?.data?.message || 'Could not fetch categories. Please try again.'
+      );
+       return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );
 
 export const addTransaction = createAsyncThunk(
-  'finance/addTransaction',
+  "finance/addTransaction",
   async (transactionData, thunkAPI) => {
     try {
-      const response = await axiosInstance.post(
-        '/transactions',
-        transactionData
-      );
-      toast.success('Transaction added successfully!');
+      const token =
+        thunkAPI.getState().auth.token || localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
+
+      setAuthHeader(token);
+
+      const response = await axiosInstance.post("/transactions", transactionData);
+      toast.success("Transaction added successfully!");
       return response.data;
     } catch (error) {
       toast.error(
-        error.response?.data?.message || 'Failed to add transaction.'
+        error.response?.data?.message || "Failed to add transaction."
       );
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );

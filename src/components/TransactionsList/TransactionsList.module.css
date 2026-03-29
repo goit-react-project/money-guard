@@ -1,0 +1,85 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.card {
+    position: relative;
+    width: clamp(282px, 90%, 400px);
+    height: 293px;
+    background: var(--gradient-bg-mobile);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    margin: 0 auto;
+}
+
+.leftBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff868d 0%, #fd9498 100%);
+    border-radius: 16px 0 0 16px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    font-family: var(--font-main);
+    color: var(--color-white);
+}
+
+.value {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--color-white);
+    text-align: right;
+    max-width: 140px;
+}
+
+.sum {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--color-expense);
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+
+.deleteBtn {
+    min-width: 80px;
+    height: 30px;
+    border: none;
+    border-radius: var(--radius-btn);
+    color: #ffffff;
+    cursor: pointer;
+    background: var(--gradient-btn);
+}
+
+.editBtn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 16px;
+}

@@ -12,10 +12,16 @@ const authPersistConfig = {
   whitelist: ["token"],
 };
 
+const financePersistConfig = {
+  key: "finance",
+  storage,
+  whitelist: ["transactions"],
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    finance: financeReducer,
+    finance: persistReducer(financePersistConfig, financeReducer),
     global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
