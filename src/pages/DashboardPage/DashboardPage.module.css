@@ -1,0 +1,23 @@
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 0 0 0; 
+}
+
+.pageContent {
+  flex: 1;
+  padding: 20px; 
+}
