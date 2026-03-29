@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchTransactions,
   fetchCategories,
@@ -7,7 +7,7 @@ import {
   editTransaction,
   fetchStatistics,
   fetchCurrency,
-} from "./financeOperations";
+} from './financeOperations';
 
 const initialState = {
   transactions: [],
@@ -20,7 +20,7 @@ const initialState = {
 };
 
 const financeSlice = createSlice({
-  name: "finance",
+  name: 'finance',
   initialState,
   reducers: {
  //  login sonrası backend'den gelen transactions için       /// ND
@@ -68,29 +68,29 @@ const financeSlice = createSlice({
     builder.addCase(addTransaction.fulfilled, (state, action) => {
       state.transactions.unshift(action.payload);
       state.totalBalance =
-        action.payload.type === "INCOME"
+        action.payload.type === 'INCOME'
           ? state.totalBalance + action.payload.amount
           : state.totalBalance - action.payload.amount;
     });
     // Delete transaction
     builder.addCase(deleteTransaction.fulfilled, (state, action) => {
       const deleted = state.transactions.find(
-        (t) => t.id === action.payload.id,
+        (t) => t.id === action.payload.id
       );
       if (deleted) {
         state.totalBalance =
-          deleted.type === "INCOME"
+          deleted.type === 'INCOME'
             ? state.totalBalance - deleted.amount
             : state.totalBalance + deleted.amount;
       }
       state.transactions = state.transactions.filter(
-        (t) => t.id !== action.payload.id,
+        (t) => t.id !== action.payload.id
       );
     });
     // Edit transaction
     builder.addCase(editTransaction.fulfilled, (state, action) => {
       const index = state.transactions.findIndex(
-        (t) => t.id === action.payload.id,
+        (t) => t.id === action.payload.id
       );
       if (index !== -1) state.transactions[index] = action.payload;
     });
