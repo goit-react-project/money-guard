@@ -1,27 +1,42 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { editTransaction } from '../../redux/finance/financeOperations';
+import {
+  editTransaction,
+  fetchCategories,
+} from '../../redux/finance/financeOperations';
+import css from './EditTransactionForm.module.css';
+import calendarIcon from '../../assets/icons/calendar.svg';
 
 // Yup ile validation
 const validationSchema = Yup.object().shape({
   amount: Yup.number()
     .positive('Sum must be greater than zero') // Sıfırdan büyük olmalı
     .required('Sum is required'), // Zorunlu
-  transactionDate: Yup.date()
-    .required('Date is required') // Zorunlu
-    .nullable(),
+  transactionDate: Yup.date().required('Date is required'), // Zorunlu
   comment: Yup.string().required('Comment is required'), // Zorunlu
+  categoryId: Yup.string().when('type', {
+    is: 'EXPENSE',
+    then: () => Yup.string().required('Category is required'),
+  }),
 });
 
 const EditTransactionForm = ({ transaction, closeModal }) => {
   const dispatch = useDispatch();
-  // İşlem türünü gösterebilmek için (Değiştirilimez)
-  const isIncome = transaction.type === 'INCOME';
+  const categories = useSelector((state) => state.finance.categories);
+
+  useEffect(() => {
+    if (!categories || categories.length === 0) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, categories]);
+
   const initialValues = {
+    type: transaction.type || 'INCOME',
+    categoryId: transaction.categoryId || '',
     amount: transaction.amount || 0,
     transactionDate: transaction.transactionDate
       ? new Date(transaction.transactionDate)
@@ -29,15 +44,19 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
     comment: transaction.comment || '',
   };
   const handleSubmit = async (values, { setSubmitting }) => {
-    // APInin beklediği format
     const payload = {
       id: transaction.id,
       data: {
-        amount: values.amount,
+        type: values.type,
+        amount: Number(values.amount),
         transactionDate: values.transactionDate.toISOString(),
         comment: values.comment,
       },
     };
+
+    if (!values.type === 'EXPENSE' && values.categoryId) {
+      payload.data.categoryId = values.categoryId;
+    }
 
     try {
       await dispatch(editTransaction(payload)).unwrap();
@@ -50,78 +69,135 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
   };
 
   return (
-    <div className="edit-form-container">
-      <div className="transaction-type-display">
-        <span className={isIncome ? 'income-text' : 'expense-text'}>
-          {isIncome ? 'Income' : 'Expense'}
-        </span>
-      </div>
-
+    <div className={css.editFormContainer}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, setFieldValue, isSubmitting }) => (
-          <Form>
-            <div className="form-group">
-              <label htmlFor="Sum">Sum</label>
-              <Field
-                type="number"
-                name="amount"
-                id="amount"
-                placeholder="0.00"
-              />
-              <ErrorMessage
-                name="amount"
-                component="div"
-                className="error-message"
-              />
-            </div>
+        {({ values, setFieldValue, isSubmitting }) => {
+          const isIncomeForm = values.type === 'INCOME';
+          return (
+            <Form style={{ width: '100%' }}>
+              <div className={css.transactionTypeDisplay}>
+                <span
+                  className={`${css.typeText} ${isIncomeForm ? css.activeIncome : css.inactiveText}`}
+                  onClick={() => setFieldValue('type', 'INCOME')}
+                >
+                  Income
+                </span>
+                <span className={css.slash}>/</span>
+                <span
+                  className={`${css.typeText} ${!isIncomeForm ? css.activeExpense : css.inactiveText}`}
+                  onClick={() => setFieldValue('type', 'EXPENSE')}
+                >
+                  Expense
+                </span>
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="transactionDate">Date</label>
-              <DatePicker
-                id="transactionDate"
-                selected={values.transactionDate}
-                onChange={(date) => setFieldValue('transactionDate', date)}
-                dateFormat="dd.MM.yyyy"
-              />
-              <ErrorMessage
-                name="transactionDate"
-                component="div"
-                className="error-message"
-              />
-            </div>
+              {!isIncomeForm && (
+                <div className={css.formGroup}>
+                  <Field
+                    as="select"
+                    name="categoryId"
+                    className={css.inputField}
+                  >
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+                    {Array.isArray(categories) &&
+                      categories.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                  </Field>
+                  <ErrorMessage
+                    name="categoryId"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </div>
+              )}
+              <div className={css.rowGroup}>
+                <div className={css.formGroup}>
+                  <Field
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    placeholder="0.00"
+                    className={`${css.inputField} ${css.amountInput}`}
+                  />
+                  <ErrorMessage
+                    name="amount"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="comment">Comment</label>
-              <Field
-                as="textarea"
-                name="comment"
-                id="comment"
-                placeholder="Comment"
-              />
-              <ErrorMessage
-                name="comment"
-                component="div"
-                className="error-message"
-              />
-            </div>
+                <div className={css.formGroup}>
+                  <div className={css.dateWrapper}>
+                    <DatePicker
+                      id="transactionDate"
+                      selected={values.transactionDate}
+                      onChange={(date) =>
+                        setFieldValue('transactionDate', date)
+                      }
+                      dateFormat="dd.MM.yyyy"
+                      className={css.inputField}
+                    />
+                    <div className={css.calendarIcon}>
+                      <img
+                        src={calendarIcon}
+                        alt="Calendar"
+                        width="18"
+                        height="20"
+                      />
+                    </div>
+                  </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="btn-save-gradient"
-            >
-              {isSubmitting ? 'Saving...' : 'Save'}
-            </button>
+                  <ErrorMessage
+                    name="transactionDate"
+                    component="div"
+                    className={css.errorMessage}
+                  />
+                </div>
+              </div>
 
-            <button type="button" onClick={closeModal} className="btn-cancel">
-              Cancel
-            </button>
-          </Form>
-        )}
+              <div className={css.formGroup}>
+                <Field
+                  type="text"
+                  name="comment"
+                  id="comment"
+                  placeholder="Comment"
+                  className={css.inputField}
+                />
+                <ErrorMessage
+                  name="comment"
+                  component="div"
+                  className={css.errorMessage}
+                />
+              </div>
+              <div className={css.buttonGroup}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`${css.btn} ${css.btnSave}`}
+                >
+                  {isSubmitting ? 'Saving...' : 'Save'}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className={`${css.btn} ${css.btnCancel}`}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );

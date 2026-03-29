@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import EditTransactionForm from '../EditTransactionForm/EditTransactionForm';
+import css from './ModalEditTransaction.module.css';
+import closeIcon from '../../assets/icons/close.svg';
 
 const ModalEditTransaction = ({ isOpen, onClose, transactionData }) => {
   // ESC ile kapatma ve arka plan scroll kilidi
@@ -29,16 +31,16 @@ const ModalEditTransaction = ({ isOpen, onClose, transactionData }) => {
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || !transactionData) return null;
 
   return (
-    <div className="modal-backdrop" onClick={handleBackdropClick}>
-      <div className="modal-content">
-        <button className="close-btn" onClick={onClose} type="button">
-          X
+    <div className={css.modalBackdrop} onClick={handleBackdropClick}>
+      <div className={css.modalContent}>
+        <button className={css.closeBtn} onClick={onClose} type="button">
+          <img src={closeIcon} alt="Close modal" width="16" height="16" />
         </button>
 
-        <h3 className="modal-title">Edit transaction</h3>
+        <h3 className={css.modalTitle}>Edit transaction</h3>
 
         <EditTransactionForm
           transaction={transactionData}
