@@ -1,163 +1,75 @@
 .page {
   min-width: 320px;
   min-height: 100vh;
-  
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  overflow: hidden;
-  background:
-  radial-gradient(
-    circle at 20% 20%,
-    rgba(48, 46, 142, 0.9) 0%,
-    rgba(48, 46, 142, 0.6) 30%,
-    rgba(48, 46, 142, 0.3) 55%,
-    transparent 75%
-  ),
-  radial-gradient(
-    circle at 80% 80%,
-    rgba(109, 28, 119, 0.9) 0%,
-    rgba(109, 28, 119, 0.6) 30%,
-    rgba(109, 28, 119, 0.3) 55%,
-    transparent 75%
-  ),
-  linear-gradient(
-    180deg,
-    #6d1c77 0%,
-    #302e8e 100%
-  );
-  
-}
-
-.container {
-  width: 100%;
-  max-width: 320px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   
-}
-
-.card {
-  width: 100%;
-  min-height: 568px;
   padding: 32px 20px 24px;
-  border-radius: 8px;
-  
-  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--gradient-bg-mobile);
 }
-
 
 @media screen and (max-width: 374px) {
   .page {
-    padding: 0;
-  }
-
-  .container {
-    max-width: 320px;
-  }
-
-  .card {
     min-height: 568px;
-    border-radius: 0;
     padding: 32px 20px 24px;
   }
 }
 
-
 @media screen and (min-width: 375px) {
   .page {
-    padding: 0;
-  }
-
-  .container {
-    max-width: 375px;
-  }
-
-  .card {
-    min-height: 100vh;
     padding: 40px 20px 32px;
-    border-radius: 0;
   }
 }
-
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .page {
+    padding: 32px;
     background-color: #101010;
-    background-image: url('/src/assets/images/img-login/tablet-back.webp');
+    background-image: url('/src/assets/images/tablet-back-login.webp');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 32px;
   }
 
-  .container {
-    max-width: 533px;
-  }
-
-  .card {
+  .page > * {
     width: 533px;
     min-height: 570px;
     padding: 80px 58px;
-
     border-radius: 8px;
-
     background: rgba(255, 255, 255, 0.1);
-
+   
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
-
-    box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 }
 
-
-
-
-
-
 @media screen and (min-width: 1280px) {
   .page {
+    padding: 40px;
     background-color: #101010;
-    background-image: url('/src/assets/images/img-login/pc-back.webp');
+    background-image: url('/src/assets/images/pc-back-login.webp');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
   }
 
-  .container {
-    max-width: 533px;
-  }
-
-  .card {
+  .page > * {
     width: 533px;
     height: 570px;
     padding: 80px 58px;
-
     border-radius: 8px;
-
     background: rgba(255, 255, 255, 0.1);
-
+    
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
-
-    box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
   }
 }
