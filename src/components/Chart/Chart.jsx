@@ -8,7 +8,7 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js';
-import { selectStatistics } from '../../redux/finance/financeSlice';
+import { selectStatistics } from '../../redux/finance/financeSelectors';
 import styles from './Chart.module.css';
 
 // register olmadan render olmaz
@@ -38,7 +38,7 @@ export function color(category) {
     case 'Entertainment':
       return '#e20a5dff';
     default:
-      return '#fff';
+      return '#888888';
   }
 }
 
@@ -76,14 +76,13 @@ const Chart = () => {
       };
 
   const total = hasData
-    ? expenses.reduce((sum, c) => sum + Math.abs(c.total), 0).toFixed(2)
-    : 0;
+  ? expenses.reduce((sum, c) => sum + Math.abs(c.total), 0).toFixed(2)
+  : "0.00";
 
   return (
     <div className={styles.box}>
       {/* Statistics başlığı */}
       <p className={styles.title}>Statistics</p>
-
       {/* Grafik ortasına toplam */}
       <p className={styles.centerText}>$ {total}</p>
 
@@ -97,6 +96,19 @@ const Chart = () => {
           },
         }}
       />
+      <div className={styles.chartWrapper}>
+        <p className={styles.centerText}>$ {total}</p>
+        <Doughnut
+          data={chartData}
+          options={{
+            cutout: '70%',
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: hasData },
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const CurrencyTab = () => {
   // Tablet veya daha büyük ekranda home
   useEffect(() => {
     if (window.innerWidth >= TABLET_BREAKPOINT) {
-      navigate('/home', { replace: true });
+      navigate('/dashboard/home', { replace: true });
     }
   }, [navigate]);
 

@@ -9,9 +9,13 @@
 .box {
   width: 100%;
   max-width: 520px;
-  height: 333px;
   position: relative;
   box-sizing: border-box;
+}
+
+.chartWrapper {
+  position: relative;
+  width: 100%;
 }
 
 .centerText {
@@ -24,4 +28,6 @@
   height: 32px;
   width: auto;
   text-align: center;
+  z-index: 1;
+  pointer-events: none;
 }

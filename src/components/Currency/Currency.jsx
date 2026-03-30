@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from '../../redux/finance/financeOperations';
-import { selectCurrency } from '../../redux/finance/financeSlice';
+import { selectCurrency } from '../../redux/finance/financeSelectors';
 import styles from './Currency.module.css';
+
+const CURRENCY_LABELS = { 840: 'USD', 978: 'EUR' };
 
 const Currency = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ const Currency = () => {
         ) : (
           currency.map((item) => (
             <div className={styles.currencyRow} key={item.currencyCodeA}>
-              <div>{item.currencyCodeA === 840 ? 'USD' : 'EUR'}</div>
+              <div>{CURRENCY_LABELS[item.currencyCodeA] ?? String(item.currencyCodeA)}</div>
               <div>{item.rateBuy?.toFixed(2) ?? '-'}</div>
               <div>{item.rateSell?.toFixed(2) ?? '-'}</div>
             </div>
