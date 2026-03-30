@@ -83,19 +83,6 @@ const Chart = () => {
     <div className={styles.box}>
       {/* Statistics başlığı */}
       <p className={styles.title}>Statistics</p>
-      {/* Grafik ortasına toplam */}
-      <p className={styles.centerText}>$ {total}</p>
-
-      <Doughnut
-        data={chartData}
-        options={{
-          cutout: '70%',
-          plugins: {
-            legend: { display: false },
-            tooltip: { enabled: hasData }, // veri yoksa tooltip çalışmaz
-          },
-        }}
-      />
       <div className={styles.chartWrapper}>
         <p className={styles.centerText}>$ {total}</p>
         <Doughnut
