@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { selectUser } from "../../redux/auth/authSelectors";
 import LogoutModal from "../LogoutModal/LogoutModal";
 import Logo from "../../assets/icons/logo-icon.svg";
 import ExitIcon from "../../assets/icons/logout-icon.svg";
@@ -9,8 +10,8 @@ import styles from "./Header.module.css";
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const email = useSelector((state) => state.auth.user?.email);
-  const username = email?.split("@")[0] || "User";
+  const user = useSelector(selectUser);
+  const username = user?.email?.split("@")[0] || "User";
 
   useEffect(() => {
     const handleEsc = (e) => {

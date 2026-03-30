@@ -14,10 +14,10 @@ const LogoutModal = ({ onClose }) => {
     try {
       const resultAction = await dispatch(logoutUser());
       if (logoutUser.rejected.match(resultAction)) {
-        toast.error("Logout hatası oluştu!");
+        toast.error("Logout error occurred!");
       }
     } catch (error) {
-      toast.error("Sunucuya bağlanırken hata oluştu!");
+      toast.error("An error occurred while connecting to the server!");
       console.error("Logout error:", error);
     } finally {
       dispatch(clearAuth());
@@ -34,7 +34,7 @@ const LogoutModal = ({ onClose }) => {
         onClick={(e) => e.stopPropagation()} 
       >
         <p className={styles.modalText}>
-          Gerçekten çıkmak istiyor musun?
+          Are you sure you want to log out?
         </p>
 
         <div className={styles.actions}>
