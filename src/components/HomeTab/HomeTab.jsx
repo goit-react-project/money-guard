@@ -103,13 +103,13 @@ const HomeTab = () => {
         </div>
 
         <div className={styles.rightSide}>
-          <CurrencyTab />
+            <CurrencyTab />
         </div>
       </div>
 
       <div className={styles.bottomSection}>
         <TransactionsList
-           transactions={displayedTransactions}
+          transactions={displayedTransactions}
           onDelete={handleDelete}
           onEdit={handleOpenEdit}
           onOpenAdd={handleOpenAdd}

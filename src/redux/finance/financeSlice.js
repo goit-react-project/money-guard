@@ -76,7 +76,7 @@ const financeSlice = createSlice({
     // Delete transaction
    builder.addCase(deleteTransaction.fulfilled, (state, action) => {
   const deleted = state.transactions.find(
-    (t) => t.id === action.payload.id
+    (t) => t.id === action.payload
   );
 
   if (deleted) {
@@ -87,7 +87,7 @@ const financeSlice = createSlice({
   }
 
   state.transactions = state.transactions.filter(
-    (t) => t.id !== action.payload.id
+    (t) => t.id !== action.payload
   );
 });
     // Edit transaction
@@ -116,5 +116,6 @@ const financeSlice = createSlice({
   },
 });
 
+export const selectStatistics = (state) => state.finance.statistics;
 export const { setTransactions} = financeSlice.actions;
 export default financeSlice.reducer;
