@@ -28,7 +28,7 @@ const RegistrationForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values, actions) => {
-    const { confirmPassword, ...payload } = values;
+    const { confirmPassword: _confirmPassword, ...payload } = values;
 
     const resultAction = await dispatch(registerUser(payload));
 
