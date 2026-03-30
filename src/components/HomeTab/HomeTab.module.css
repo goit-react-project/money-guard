@@ -1,15 +1,44 @@
 .container {
     display: flex;
     background: #101010;
-    padding: 0 20.5px 0 20.5px;
     color: white;
-    max-width: 400px;
-    height: 568px;
-    display: flex;
-    align-items: center;
     margin: 0 auto;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.topSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.rightSide {
+    width: 100%;
+}
+
+.bottomSection {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 20px 20px;
+    box-sizing: border-box;
+}
 
 /* AYRAÇ */
 .divider {
@@ -17,21 +46,76 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
-
-@media (max-width: 768px) {
-    .container {
+@media (max-width: 767px) {
+    .topSection {
+        display: flex;
         flex-direction: column;
+        gap: 20px;
     }
 
-    .left {
-        width: 100%;
-    }
-
-    .divider {
+    .rightSide {
         display: none;
     }
 
-    .right {
-        width: 100%;
+    .bottomSection {
+        margin-top: 20px;
     }
 }
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .container {
+            margin: 0 auto;
+            background: var(--color-nav-bg);
+        }
+    
+        .content {
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+            grid-template-rows: 214px auto;
+            grid-template-areas:
+                "leftcol currencySection"
+                "main main";
+            gap: 32px;
+            padding: clamp(24px, 3vw, 40px);
+            padding-top: 0;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: clamp(704px, 92vw, 1200px);
+            margin: 0 auto;
+        }
+    
+        .topSection {
+            display: contents;
+            padding: 0;
+        }
+    
+        .leftSide {
+            grid-area: leftcol;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: clamp(320px, 50vw, 700px);
+            gap: clamp(20px, 2vw, 32px);
+        }
+    
+        .rightSide {
+            grid-area: currencySection;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+    
+        .bottomSection {
+            grid-area: main;
+            max-width: clamp(704px, 80vw, 1100px);
+            margin: 0 auto;
+            min-height: 312px;
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+}
+
+
+
+

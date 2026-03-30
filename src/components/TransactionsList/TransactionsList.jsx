@@ -29,16 +29,27 @@ const TransactionsList = ({
     );
   }
 
-  return (
-    <div className={styles.list}>
-      {transactions.map((item) => (
-        <TransactionsItem
-          key={item.id}
-          transaction={item}
-          onDelete={onDelete}
-          onEdit={onEdit}
-        />
-      ))}
+    return (
+    <div className={styles.wrapper}>
+      <div className={styles.tableHead}>
+        <span>Date</span>
+        <span>Type</span>
+        <span>Category</span>
+        <span>Comment</span>
+        <span>Sum</span>
+        <span></span>
+      </div>
+
+      <div className={styles.list}>
+        {transactions.map((item) => (
+          <TransactionsItem
+            key={item.id}
+            transaction={item}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ))}
+      </div>
     </div>
   );
 };

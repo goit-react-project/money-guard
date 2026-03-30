@@ -25,73 +25,95 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
   const isIncome = type === "INCOME" || type === "+";
 
   return (
-    <div className={styles.card}>
-      <div className={styles.leftBorder}></div>
+    <>
+      {/* MOBILE CARD */}
+      <div className={styles.card}>
+        <div className={styles.leftBorder}></div>
 
-      {/* DATE */}
-      <div className={styles.row}>
-        <span className={styles.label}>Date</span>
-        <span className={styles.value}>
-          {formatDate(transactionDate)}
-        </span>
+        <div className={styles.row}>
+          <span className={styles.label}>Date</span>
+          <span className={styles.value}>{formatDate(transactionDate)}</span>
+        </div>
+
+        <div className={styles.row}>
+          <span className={styles.label}>Type</span>
+          <span className={styles.value}>{isIncome ? "+" : "-"}</span>
+        </div>
+
+        <div className={styles.row}>
+          <span className={styles.label}>Category</span>
+          <span className={styles.value}>{category}</span>
+        </div>
+
+        <div className={styles.row}>
+          <span className={styles.label}>Comment</span>
+          <span className={styles.value}>{comment}</span>
+        </div>
+
+        <div className={styles.row}>
+          <span className={styles.label}>Sum</span>
+          <span
+            className={`${styles.sum} ${
+              isIncome ? styles.income : styles.expense
+            }`}
+          >
+            {amount}
+          </span>
+        </div>
+
+        <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.deleteBtn}
+            onClick={() => onDelete(id)}
+          >
+            Delete
+          </button>
+
+          <button
+            type="button"
+            className={styles.editBtn}
+            onClick={() => onEdit(transaction)}
+          >
+            <HiPencil />
+            Edit
+          </button>
+        </div>
       </div>
 
-      {/* TYPE */}
-      <div className={styles.row}>
-        <span className={styles.label}>Type</span>
-        <span className={styles.value}>
-          {isIncome ? "+" : "-"}
-        </span>
-      </div>
+      {/* TABLET / DESKTOP ROW */}
+      <div className={styles.tableRow}>
+  <span className={styles.cell}>{formatDate(transactionDate)}</span>
+  <span className={styles.cell}>{isIncome ? "+" : "-"}</span>
+  <span className={styles.cell}>{category}</span>
+  <span className={styles.cell}>{comment}</span>
+  <span
+    className={`${styles.cell} ${styles.amount} ${
+      isIncome ? styles.income : styles.expense
+    }`}
+  >
+    {amount}
+  </span>
 
-      {/* CATEGORY */}
-      <div className={styles.row}>
-        <span className={styles.label}>Category</span>
-        <span className={styles.value}>
-          {category}
-        </span>
-      </div>
+  <div className={styles.tableActions}>
+    <button
+      type="button"
+      className={styles.tableEditBtn}
+      onClick={() => onEdit(transaction)}
+    >
+      <HiPencil />
+    </button>
 
-      {/* COMMENT */}
-      <div className={styles.row}>
-        <span className={styles.label}>Comment</span>
-        <span className={styles.value}>
-          {comment}
-        </span>
+    <button
+      type="button"
+      className={styles.tableDeleteBtn}
+      onClick={() => onDelete(id)}
+    >
+      Delete
+    </button>
+        </div>
       </div>
-
-      {/* SUM */}
-      <div className={styles.row}>
-        <span className={styles.label}>Sum</span>
-        <span
-          className={`${styles.sum} ${
-            isIncome ? styles.income : styles.expense
-          }`}
-        >
-          {amount}
-        </span>
-      </div>
-
-      {/* ACTIONS */}
-      <div className={styles.actions}>
-        <button
-          type="button"
-          className={styles.deleteBtn}
-          onClick={() => onDelete(id)}
-        >
-          Delete
-        </button>
-
-        <button
-          type="button"
-          className={styles.editBtn}
-          onClick={() => onEdit(transaction)}
-        >
-          <HiPencil />
-          Edit
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -17,35 +17,33 @@ const CurrencyTab = () => {
   }, [dispatch]);
 
   return (
-    <div className={styles.pageWrapper}>
-      <section className={styles.card}>
-        <div className={styles.header}>
-          <span>Currency</span>
-          <span>Purchase</span>
-          <span>Sale</span>
-        </div>
+    <section className={styles.card}>
+      <div className={styles.header}>
+        <span>Currency</span>
+        <span>Purchase</span>
+        <span>Sale</span>
+      </div>
 
-        {isLoading && <p className={styles.message}>Loading...</p>}
+      {isLoading && <p className={styles.message}>Loading...</p>}
 
-        {error && <p className={styles.message}>Failed to load currency</p>}
+      {error && <p className={styles.message}>Failed to load currency</p>}
 
-        {!isLoading && !error && (
-          <ul className={styles.list}>
-            {rates.map(({ currency, purchase, sale }) => (
-              <li key={currency} className={styles.row}>
-                <span>{currency}</span>
-                <span>{purchase.toFixed(2)}</span>
-                <span>{sale.toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+      {!isLoading && !error && (
+        <ul className={styles.list}>
+          {rates.map(({ currency, purchase, sale }) => (
+            <li key={currency} className={styles.row}>
+              <span>{currency}</span>
+              <span>{purchase.toFixed(2)}</span>
+              <span>{sale.toFixed(2)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
-        <div className={styles.chart}>
-          <CurrencyChart />
-        </div>
-      </section>
-    </div>
+      <div className={styles.chart}>
+        <CurrencyChart />
+      </div>
+    </section>
   );
 };
 
