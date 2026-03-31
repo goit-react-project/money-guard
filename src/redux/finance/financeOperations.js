@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../utils/axiosInstance';
+import axios from 'axios';
 
 export const fetchTransactions = createAsyncThunk(
   'finance/fetchTransactions',
@@ -107,9 +108,8 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      const response = await axiosInstance.get(
-        'https://api.monobank.ua/bank/currency'
-      );
+      //axios instance kullanımı kaldırıldı çünkü farklı bir API'ye istek atılıyor
+      const response = await axios.get('https://api.monobank.ua/bank/currency');
       const filtered = response.data.filter(
         (item) =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
