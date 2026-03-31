@@ -12,6 +12,7 @@ import { selectCategories } from '../../redux/finance/financeSelectors';
 import styles from './AddTransactionForm.module.css';
 import calendarIcon from '@/assets/icons/calendar-icon.svg';
 import CursorPointerIcon from '@/assets/icons/cursor-pointer-icon.svg?react';
+import { toast } from 'react-toastify';
 
 const fallbackExpenseCategories = [
   'Main expenses',
@@ -133,6 +134,7 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
           resetForm();
           onSuccess();
         } catch {
+          toast.error('Failed to add transaction. Please try again.');
           setSubmitting(false);
         }
       }}

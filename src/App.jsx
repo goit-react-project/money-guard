@@ -1,20 +1,25 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, lazy, Suspense } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCurrentUser } from "./redux/auth/authOperations";
-import { selectIsRefreshing } from "./redux/auth/authSelectors";
-import PrivateRoute from "./components/routes/PrivateRoute";
-import PublicRoute from "./components/routes/PublicRoute";
-import Loader from "./components/Loader/Loader.jsx";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUser } from './redux/auth/authOperations';
+import { selectIsRefreshing } from './redux/auth/authSelectors';
+import PrivateRoute from './components/routes/PrivateRoute';
+import PublicRoute from './components/routes/PublicRoute';
+import Loader from './components/Loader/Loader.jsx';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const RegistrationPage = lazy(() => import("./pages/RegistrationPage/RegistrationPage.jsx"));
-const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
-const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
-const HomeTab = lazy(() => import("./components/HomeTab/HomeTab"));
-const StatisticsTab = lazy(() => import("./components/StatisticsTab/StatisticsTab"));
-const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
+const RegistrationPage = lazy(
+  () => import('./pages/RegistrationPage/RegistrationPage.jsx')
+);
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
+const HomeTab = lazy(() => import('./components/HomeTab/HomeTab'));
+const StatisticsTab = lazy(
+  () => import('./components/StatisticsTab/StatisticsTab')
+);
+const CurrencyTab = lazy(() => import('./components/CurrencyTab/CurrencyTab'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,44 +32,44 @@ const App = () => {
   if (isRefreshing) return null;
 
   return (
-    <>
+    <ErrorBoundary>
       <ToastContainer position="top-right" autoClose={3000} />
       <Loader />
-      <Suspense fallback={null}>
-      <Routes>
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegistrationPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        >
-          <Route path="home" element={<HomeTab />} />
-          <Route path="statistics" element={<StatisticsTab />} />
-          <Route path="currency" element={<CurrencyTab />} />
-          <Route index element={<Navigate to="home" />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
+            <Route path="home" element={<HomeTab />} />
+            <Route path="statistics" element={<StatisticsTab />} />
+            <Route path="currency" element={<CurrencyTab />} />
+            <Route index element={<Navigate to="home" />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
       </Suspense>
-    </>
+    </ErrorBoundary>
   );
 };
 

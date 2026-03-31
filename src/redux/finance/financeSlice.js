@@ -105,24 +105,24 @@ const financeSlice = createSlice({
       const index = state.transactions.findIndex(
         (t) => t.id === action.payload.id
       );
-      
+
       if (index !== -1) {
-        // Eski işlemi al
+        // get previous transaction and new transaction
         const oldTransaction = state.transactions[index];
         const newTransaction = action.payload;
 
-        // İşlemi listede güncelle
+        // update transaction in the list
         state.transactions[index] = newTransaction;
 
-        // Önce eski işlemi bakiyeden "geri alıyoruz"
-        if (oldTransaction.type === "INCOME") {
+        // Revert the old transaction from the balance
+        if (oldTransaction.type === 'INCOME') {
           state.totalBalance -= oldTransaction.amount;
         } else {
-          state.totalBalance += oldTransaction.amount; // Giderdi, geri ekliyoruz
+          state.totalBalance += oldTransaction.amount;
         }
 
-        // Sonra yeni işlemi bakiyeye "ekliyoruz"
-        if (newTransaction.type === "INCOME") {
+        // Apply the new transaction to the balance
+        if (newTransaction.type === 'INCOME') {
           state.totalBalance += newTransaction.amount;
         } else {
           state.totalBalance -= newTransaction.amount;

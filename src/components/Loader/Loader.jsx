@@ -1,7 +1,7 @@
 import styles from './Loader.module.css';
 import { useSelector } from "react-redux";
 import { ThreeDots } from "react-loader-spinner";
-import { selectIsLoading } from "../../redux/global/globalSelectors";
+import { selectIsLoading } from "../../redux/finance/financeSelectors";
 
 const Loader = () => {
   const isLoading = useSelector(selectIsLoading);
