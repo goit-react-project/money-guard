@@ -1,0 +1,33 @@
+.title {
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.box {
+  width: 100%;
+  max-width: 520px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.chartWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.centerText {
+  font-size: 30px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 32px;
+  width: auto;
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+}
