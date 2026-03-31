@@ -16,8 +16,6 @@
   align-items: center;
   justify-content: center;
   gap: 40px;
-  margin-top: 40px;
-  margin-bottom: 48px;
 }
 
 .regContent {
@@ -25,6 +23,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.logoIcon {
+  width: 26px;
+  height: 26px;
 }
 
 .regTitle {
@@ -126,19 +129,12 @@
 
 @media screen and (min-width: 768px) {
   .regContainer {
-    background-image: url("../../assets/images/register-tablet.jpg");
+    background-image: url('../../assets/images/register-tablet.jpg');
     background-size: cover;
     background-repeat: no-repeat;
   }
 
-  .logoIcon {
-    width: 36px;
-    height: 36px;
-  }
-
   .formContainer {
-    width: 533px;
-    height: 624px;
     background: var(--color-white-10);
     border-radius: var(--radius-form);
     box-shadow: var(--shadow-form);
@@ -146,15 +142,32 @@
     padding: 40px 62px;
   }
 
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .regTitle {
+    font-size: 26px;
+  }
+
   .input {
     min-width: 409px;
   }
-}
 
+  .registerButton,
+  .loginButton {
+    width: 300px;
+  }
+
+  .errorText {
+    font-size: 14px;
+  }
+}
 
 @media screen and (min-width: 1280px) {
   .regContainer {
-    background-image: url("../../assets/images/register-desktop.jpg");
+    background-image: url('../../assets/images/register-desktop.jpg');
     background-size: cover;
     background-repeat: no-repeat;
   }
