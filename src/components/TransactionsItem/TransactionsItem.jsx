@@ -37,7 +37,13 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
 
         <div className={styles.row}>
           <span className={styles.label}>Type</span>
-          <span className={styles.value}>{isIncome ? "+" : "-"}</span>
+          <span
+      className={`${styles.value} ${
+        isIncome ? styles.income : styles.expense
+      }`}
+    >
+      {isIncome ? "+" : "-"}
+    </span>
         </div>
 
         <div className={styles.row}>
@@ -84,16 +90,22 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
       {/* TABLET / DESKTOP ROW */}
       <div className={styles.tableRow}>
   <span className={styles.cell}>{formatDate(transactionDate)}</span>
-  <span className={styles.cell}>{isIncome ? "+" : "-"}</span>
+  <span
+  className={`${styles.cell} ${
+    isIncome ? styles.income : styles.expense
+  }`}
+>
+  {isIncome ? "+" : "-"}
+</span>
   <span className={styles.cell}>{category}</span>
   <span className={styles.cell}>{comment}</span>
   <span
-    className={`${styles.cell} ${styles.amount} ${
-      isIncome ? styles.income : styles.expense
-    }`}
-  >
-    {amount}
-  </span>
+  className={`${styles.cell} ${styles.amount} ${
+    isIncome ? styles.income : styles.expense
+  }`}
+>
+  {amount}
+</span>
 
   <div className={styles.tableActions}>
     <button
