@@ -10,7 +10,7 @@ import {
 } from '../../redux/finance/financeOperations';
 import { selectCategories } from '../../redux/finance/financeSelectors';
 import styles from './AddTransactionForm.module.css';
-import calendarIcon from '../../assets/icons/calendar-icon.svg';
+import calendarIcon from '@/assets/icons/calendar-icon.svg';
 import CursorPointerIcon from '@/assets/icons/cursor-pointer-icon.svg?react';
 
 const fallbackExpenseCategories = [
@@ -26,25 +26,26 @@ const fallbackExpenseCategories = [
   'Entertainment',
 ];
 
-const validationSchema = Yup.object({
-  type: Yup.string()
-    .oneOf(['INCOME', 'EXPENSE'])
-    .required('Transaction type is required'),
-  category: Yup.string().when('type', {
-    is: 'EXPENSE',
-    then: (schema) => schema.required('Category is required'),
-    otherwise: (schema) => schema.notRequired(),
-  }),
-  amount: Yup.number()
-    .typeError('Sum must be a number')
-    .moreThan(0, 'Sum must be greater than 0')
-    .required('Sum is required'),
-  date: Yup.date()
-    .typeError('Enter a valid date')
-    .max(new Date(), 'Date cannot be in the future')
-    .required('Date is required'),
-  comment: Yup.string().trim().required('Comment is required'),
-});
+const getValidationSchema = () =>
+  Yup.object({
+    type: Yup.string()
+      .oneOf(['INCOME', 'EXPENSE'])
+      .required('Transaction type is required'),
+    category: Yup.string().when('type', {
+      is: 'EXPENSE',
+      then: (schema) => schema.required('Category is required'),
+      otherwise: (schema) => schema.notRequired(),
+    }),
+    amount: Yup.number()
+      .typeError('Sum must be a number')
+      .moreThan(0, 'Sum must be greater than 0')
+      .required('Sum is required'),
+    date: Yup.date()
+      .typeError('Enter a valid date')
+      .max(new Date(), 'Date cannot be in the future')
+      .required('Date is required'),
+    comment: Yup.string().trim().required('Comment is required'),
+  });
 
 const formatTransactionDate = (value) => {
   const year = value.getFullYear();
@@ -68,7 +69,7 @@ const normalizeCategory = (item) => {
 
 const AddTransactionForm = ({ onSuccess = () => {} }) => {
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
+  const categories = useSelector(selectCategories) ?? [];
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoryRef = useRef(null);
 
@@ -111,7 +112,7 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
         date: new Date(),
         comment: '',
       }}
-      validationSchema={validationSchema}
+      validationSchema={getValidationSchema}
       onSubmit={async (values, { resetForm, setSubmitting }) => {
         const selectedCategory = expenseCategories.find(
           (item) => item.name === values.category
@@ -293,7 +294,9 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
                 >
                   <DatePicker
                     selected={values.date}
-                    onChange={(value) => setFieldValue('date', value)}
+                    onChange={(value) =>
+                      setFieldValue('date', value ?? new Date())
+                    }
                     onBlur={() => setFieldTouched('date', true)}
                     dateFormat="dd.MM.yyyy"
                     placeholderText="07.07.2023"
