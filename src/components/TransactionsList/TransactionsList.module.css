@@ -1,3 +1,103 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.card {
+    position: relative;
+    width: clamp(282px, 90%, 400px);
+    height: 293px;
+    background: var(--gradient-bg-mobile);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    margin: 0 auto;
+}
+
+.leftBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #ff868d 0%, #fd9498 100%);
+    border-radius: 16px 0 0 16px;
+}
+
+
+
+.emptyWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 5px;
+}
+
+.emptyCard {
+    width: 100%;
+    min-height: 350px;
+    padding: 32px 20px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #2a165c 0%, #1f0f47 100%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.emptyTitle {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: semibold;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #fbfbfb;
+}
+
+.emptyText {
+    margin: 0 0 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: semibold;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fbfbfb;
+}
+
+.emptyBtn {
+    min-width: 170px;
+    height: 42px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #ffffff;
+
+    background: linear-gradient(90deg, #ffb627 0%, #e08aff 100%);
+    box-shadow: 0 6px 20px rgba(255, 182, 39, 0.25);
+}
+
+.emptyBtn:hover {
+    transform: translateY(-1px);
+}
+
+.emptyBtn:active {
+    transform: translateY(0);
+}
+
+
+
 
 .wrapper {
     width: 100%;
@@ -16,6 +116,34 @@
         margin: 0 auto;
     }
     
+        .emptyCard {
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 480px;
+            max-width: none;
+            /* önemli */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        .emptyTitle {
+            font-size: clamp(16px, 2.5vw, 28px);
+            font-weight: 600;
+        }
+        
+        .emptyText {
+            font-size: clamp(14px, 2vw, 20px);
+        }
+
+        .emptyBtn {
+            font-size: clamp(12px, 1.8vw, 18px);
+            padding: clamp(8px, 1.5vw, 14px) clamp(16px, 3vw, 32px);
+            border-radius: 24px;
+            cursor: pointer;
+        }
     .tableHead {
         display: grid;
         grid-template-columns:
@@ -60,6 +188,29 @@
         margin-right: 0;
         flex: 0 0 715px;
     }
+
+        .emptyWrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 16px;
+            box-sizing: border-box;
+        }
+    
+        .emptyCard {
+            width: clamp(280px, 90vw, 715px);
+            padding: clamp(20px, 3vw, 40px);
+            border-radius: 16px;
+    
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(12px, 2vw, 20px);
+    
+            text-align: center;
+            box-sizing: border-box;
+        }
 
     .tableHead {
         display: grid;
