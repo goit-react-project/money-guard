@@ -1,10 +1,12 @@
-import styles from './LoginPage.module.css';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import css from './LoginPage.module.css';
 
 const LoginPage = () => {
   return (
-    <div>
-      <p></p>
-    </div>
+    <section className={css.page}>
+      <LoginForm />
+    </section>
   );
 };
+
 export default LoginPage;

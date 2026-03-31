@@ -1,0 +1,409 @@
+.form {
+  width: 100%;
+  max-width: 394px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.typeSwitch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.toggleTrack {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  background: #fbfbfb;
+}
+
+.typeLabel,
+.activeType {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  transition: color 200ms ease;
+}
+
+.typeLabel {
+  color: rgba(251, 251, 251, 0.6);
+}
+
+.typeSwitch button:first-child.activeType {
+  color: #ffb627;
+}
+
+.typeSwitch button:last-child.activeType {
+  color: #ff868d;
+}
+
+.toggleButton {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  color: #fbfbfb;
+  font-size: 28px;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(255, 134, 141, 0.35);
+  transition:
+    background-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+  transform: translateX(-2px);
+}
+
+.toggleIncome {
+  background-color: #ffb627;
+  box-shadow: 0 4px 14px rgba(255, 182, 39, 0.35);
+  transform: translateX(-2px);
+}
+
+.toggleExpense {
+  background-color: #ff868d;
+  box-shadow: 0 4px 14px rgba(255, 134, 141, 0.35);
+  transform: translateX(38px);
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
+
+.fieldGroup {
+  width: 100%;
+}
+
+.categoryField {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.categoryTrigger {
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 8px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: rgba(251, 251, 251, 0.5);
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+}
+
+.categoryTriggerOpen {
+  border-bottom-color: transparent;
+}
+
+.categorySelected {
+  color: #fbfbfb;
+}
+
+.fieldInvalid {
+  border-bottom-color: #ff868d;
+}
+
+.categoryChevron {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(251, 251, 251, 0.8);
+  border-bottom: 1px solid rgba(251, 251, 251, 0.8);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 200ms ease;
+}
+
+.categoryChevronOpen {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.categoryTriggerIcons {
+  display: inline-flex;
+  align-items: center;
+}
+
+.categoryMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 272px;
+  margin: 0;
+  padding: 12px 8px 12px 0;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(83, 61, 186, 0.7) 0%,
+    rgba(80, 48, 154, 0.7) 35%,
+    rgba(106, 70, 165, 0.53) 100%
+  );
+  backdrop-filter: blur(50px);
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.25);
+}
+
+.categoryMenu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.categoryMenu::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: #bfb4dd;
+}
+
+.categoryMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.categoryOption {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border: none;
+  background: transparent;
+  color: rgba(251, 251, 251, 0.6);
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.categoryOption:hover,
+.categoryOption:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fbfbfb;
+  outline: none;
+}
+
+.categoryOptionActive {
+  color: #ff868d;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.categoryOptionPointer {
+  width: 19px;
+  height: 23px;
+  flex-shrink: 0;
+}
+
+.amountField {
+  width: 181px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.amountInput {
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fbfbfb;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+}
+
+.amountInput::placeholder {
+  color: #fbfbfb;
+  opacity: 1;
+}
+
+.amountInput::-webkit-outer-spin-button,
+.amountInput::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.amountInput[type='number'] {
+  -moz-appearance: textfield;
+}
+.dateField {
+  width: 181px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dateInput {
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fbfbfb;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  margin-right: 8px;
+}
+
+.dateInput:focus {
+  outline: none;
+}
+
+.dateInput::placeholder {
+  color: #fbfbfb;
+  opacity: 1;
+}
+.dateIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.commentField {
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.commentInput {
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fbfbfb;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.commentInput::placeholder {
+  color: rgba(251, 251, 251, 0.5);
+  opacity: 1;
+}
+
+.submitButton {
+  width: 300px;
+  min-height: 50px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(97deg, #ffc727 16%, #9e40ba 76%, #7000ff 100%);
+  color: #fbfbfb;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.typeLabel,
+.activeType,
+.toggleButton,
+.categoryTrigger,
+.categoryOption,
+.submitButton {
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.errorText {
+  margin: 8px 0 0;
+  color: #ff868d;
+  font-family: Poppins, sans-serif;
+  font-size: 12px;
+  line-height: 1.33;
+}
+
+:global(.react-datepicker-popper) {
+  z-index: 5;
+}
+
+:global(.react-datepicker) {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: Poppins, sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+:global(.react-datepicker__header) {
+  border-bottom: none;
+  background: #523b7e;
+}
+
+:global(.react-datepicker__current-month),
+:global(.react-datepicker-time__header),
+:global(.react-datepicker-year-header) {
+  color: #fbfbfb;
+}
+
+:global(.react-datepicker__day-name),
+:global(.react-datepicker__day),
+:global(.react-datepicker__time-name) {
+  color: #2f2f2f;
+}
+
+:global(.react-datepicker__day--selected),
+:global(.react-datepicker__day--keyboard-selected) {
+  background-color: #ff868d;
+  color: #fbfbfb;
+}
+
+@media screen and (max-width: 767px) {
+  .form {
+    max-width: 280px;
+    margin-top: 32px;
+    gap: 32px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .amountField,
+  .dateField,
+  .submitButton {
+    width: 100%;
+  }
+
+  .categoryMenu {
+    max-height: 288px;
+  }
+}

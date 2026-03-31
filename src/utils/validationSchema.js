@@ -19,3 +19,13 @@ export const registerSchema = Yup.object({
     .min(6, 'Password must be at least 6 characters')
     .required('Confirm password is required'),
 }).required();
+
+export const loginSchema = Yup.object({
+  email: Yup.string()
+    .required('E-mail is required')
+    .email('Please enter a valid e-mail'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters')
+    .max(12, 'Password must be at most 12 characters'),
+});

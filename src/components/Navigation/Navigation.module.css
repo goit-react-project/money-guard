@@ -1,0 +1,71 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 16px;
+}
+
+/* Ensure the icon fits properly inside */
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.navText {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* LINK (Inactive) */
+.link {
+  display: flex;
+  align-items: center;
+  gap: 16px; 
+  font-weight: 400;
+  color: rgba(251, 251, 251, 0.6); 
+  text-decoration: none;
+  height: 27px;
+  transition: all 0.3s ease;
+}
+
+/* ACTIVE LINK */
+.activeLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #fbfbfb;
+  text-decoration: none;
+  height: 27px;
+}
+
+.activeLink .navText {
+  font-weight: 700;
+}
+
+/* Hover effect behaves like active */
+.link:hover {
+  color: #fbfbfb;
+}
+.link:hover .navText {
+  font-weight: 700;
+}
+
+/* MOBILE ONLY */
+.mobileOnly {
+  display: inline;
+}
+
+.mobileCurrencyLink {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none;
+  }
+  .mobileCurrencyLink {
+    display: none;
+  }
+}

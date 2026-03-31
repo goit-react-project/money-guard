@@ -16,30 +16,68 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
+  error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    // Register
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    });
-    // Login
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    });
-    // Logout
-    builder.addCase(logoutUser.fulfilled, (state) => {
+  reducers: {
+    clearAuth: (state) => {
       state.user = { id: null, username: null, email: null, balance: null };
       state.token = null;
       state.isLoggedIn = false;
+      state.isRefreshing = false;
+      state.isLoading = false;
+      state.error = null;
+    }
+  },
+  extraReducers: (builder) => {
+    // Register
+    builder.addCase(registerUser.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
+    builder.addCase(registerUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    // Login
+    builder.addCase(loginUser.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
+    builder.addCase(loginUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    // Logout
+    builder.addCase(logoutUser.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(logoutUser.fulfilled, (state) => {
+      state.isLoading = false;
+      state.user = { id: null, username: null, email: null, balance: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    });
+    builder.addCase(logoutUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     });
     // Fetch current user
     builder.addCase(fetchCurrentUser.pending, (state) => {
@@ -56,4 +94,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { clearAuth } = authSlice.actions;
 export default authSlice.reducer;
