@@ -1,9 +1,19 @@
+import StatisticsDashboard from '../StatisticsDashboard/StatisticsDashboard';
+import Chart from '../Chart/Chart';
+import StatisticsTable from '../StatisticsTable/StatisticsTable';
 import styles from './StatisticsTab.module.css';
 
 const StatisticsTab = () => {
+  // Mobilde flex-direction column Tablet ve Desktopta row
   return (
-    <div>
-      <p></p>
+    <div className={styles.statisticsLayout}>
+      <div className={styles.left}>
+        <Chart />
+        <StatisticsDashboard />
+      </div>
+      <div className={styles.right}>
+        <StatisticsTable />
+      </div>
     </div>
   );
 };
