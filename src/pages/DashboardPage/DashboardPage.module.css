@@ -27,6 +27,6 @@
     flex-direction: column;
   }
   .sidebar {
-    display: none; 
+    padding: 20px 0 0 0;
   }
 }
