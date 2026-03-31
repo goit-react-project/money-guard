@@ -20,7 +20,9 @@ const ModalEditTransaction = ({ isOpen, onClose, transactionData }) => {
     // Bileşen ekrandan kalktıktan sonra event listenerı temizler ve scrollu açar
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'auto'; // Kilidi kaldır
+      if (isOpen) {
+        document.body.style.overflow = 'unset';
+      }
     };
   }, [isOpen, onClose]);
 

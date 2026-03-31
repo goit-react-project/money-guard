@@ -14,6 +14,7 @@ import calendarIcon from '../../assets/icons/calendar.svg';
 // Yup ile validation
 const validationSchema = Yup.object().shape({
   amount: Yup.number()
+    .typeError('Sum must be a number')
     .positive('Sum must be greater than zero') // Sıfırdan büyük olmalı
     .required('Sum is required'), // Zorunlu
   transactionDate: Yup.date().required('Date is required'), // Zorunlu
@@ -54,7 +55,7 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
       },
     };
 
-    if (!values.type === 'EXPENSE' && values.categoryId) {
+    if (values.type === 'EXPENSE' && values.categoryId) {
       payload.data.categoryId = values.categoryId;
     }
 
@@ -76,26 +77,23 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
         onSubmit={handleSubmit}
       >
         {({ values, setFieldValue, isSubmitting }) => {
-          const isIncomeForm = values.type === 'INCOME';
           return (
             <Form style={{ width: '100%' }}>
               <div className={css.transactionTypeDisplay}>
                 <span
-                  className={`${css.typeText} ${isIncomeForm ? css.activeIncome : css.inactiveText}`}
-                  onClick={() => setFieldValue('type', 'INCOME')}
+                  className={`${css.typeText} ${values.type === 'INCOME' ? css.activeIncome : css.inactiveText}`}
                 >
                   Income
                 </span>
                 <span className={css.slash}>/</span>
                 <span
-                  className={`${css.typeText} ${!isIncomeForm ? css.activeExpense : css.inactiveText}`}
-                  onClick={() => setFieldValue('type', 'EXPENSE')}
+                  className={`${css.typeText} ${values.type === 'EXPENSE' ? css.activeExpense : css.inactiveText}`}
                 >
                   Expense
                 </span>
               </div>
 
-              {!isIncomeForm && (
+              {values.type === 'EXPENSE' && (
                 <div className={css.formGroup}>
                   <Field
                     as="select"
