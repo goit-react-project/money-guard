@@ -28,6 +28,9 @@ const authSlice = createSlice({
       state.user = { id: null, username: null, email: null, balance: null };
       state.token = null;
       state.isLoggedIn = false;
+      state.isRefreshing = false;
+      state.isLoading = false;
+      state.error = null;
     }
   },
   extraReducers: (builder) => {
