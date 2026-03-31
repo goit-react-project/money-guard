@@ -8,43 +8,26 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js';
-import { selectStatistics } from '../../redux/finance/financeSelectors';
+import {
+  selectStatistics,
+  selectIsLoading,
+  selectError,
+} from '../../redux/finance/financeSelectors';
+import { color } from '../../utils/categoryColors';
+import Loader from '../Loader/Loader';
 import styles from './Chart.module.css';
 
 // register olmadan render olmaz
 ChartJS.register(CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
-// Kategori adına göre renk döndürür StatisticsTable.jsx import eder renkler eşleşir.
-export function color(category) {
-  switch (category) {
-    case 'Main expenses':
-      return '#FED057';
-    case 'Products':
-      return '#FFD8D0';
-    case 'Car':
-      return '#FD9498';
-    case 'Self care':
-      return '#C5BAFF';
-    case 'Child care':
-      return '#6E78E8';
-    case 'Household products':
-      return '#4A56E2';
-    case 'Education':
-      return '#81E1FF';
-    case 'Leisure':
-      return '#24CCA7';
-    case 'Other expenses':
-      return '#00AD84';
-    case 'Entertainment':
-      return '#e20a5dff';
-    default:
-      return '#888888';
-  }
-}
-
 const Chart = () => {
   // Redux'tan istatistik okur StatisticsDashboard dispatch edince otomatik güncel
   const stats = useSelector(selectStatistics);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  if (isLoading) return <Loader />;
+  if (error) return <div>Failed to Receive Data.</div>;
 
   // Sadece EXPENSE kategorileri grafikte gösterilir
   const expenses =
