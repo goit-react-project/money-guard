@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react';
 
-import ModalAddTransaction from '../ModalAddTransaction/ModalAddTransaction'
-import styles from './ButtonAddTransactions.module.css'
+import ModalAddTransaction from '../ModalAddTransaction/ModalAddTransaction';
+import styles from './ButtonAddTransactions.module.css';
 
 const ButtonAddTransactions = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
   return (
     <>
       <button
@@ -17,10 +19,8 @@ const ButtonAddTransactions = () => {
         +
       </button>
 
-      {isModalOpen && (
-        <ModalAddTransaction onClose={() => setIsModalOpen(false)} />
-      )}
+      {isModalOpen && <ModalAddTransaction onClose={handleClose} />}
     </>
-  )
-}
-export default ButtonAddTransactions
+  );
+};
+export default ButtonAddTransactions;
