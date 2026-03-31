@@ -1,7 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrency } from '../../redux/finance/financeOperations';
-import { selectCurrency } from '../../redux/finance/financeSelectors';
+import {
+  selectCurrency,
+  selectIsLoading,
+  selectError,
+} from '../../redux/finance/financeSelectors';
+import Loader from '../Loader/Loader';
 import styles from './Currency.module.css';
 
 const CURRENCY_LABELS = { 840: 'USD', 978: 'EUR' };
@@ -9,11 +14,16 @@ const CURRENCY_LABELS = { 840: 'USD', 978: 'EUR' };
 const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   // 1 saat dolmadı local, doldu api
   useEffect(() => {
     dispatch(fetchCurrency());
   }, [dispatch]);
+
+  if (isLoading) return <Loader />;
+  if (error) return <div>Failed to Receive Data.</div>;
 
   return (
     <div className={styles.currencyWrapper}>

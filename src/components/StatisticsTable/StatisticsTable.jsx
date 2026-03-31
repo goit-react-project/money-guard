@@ -1,10 +1,20 @@
 import { useSelector } from 'react-redux';
-import { selectStatistics } from '../../redux/finance/financeSelectors';
-import { color } from '../Chart/Chart';
+import {
+  selectStatistics,
+  selectIsLoading,
+  selectError,
+} from '../../redux/finance/financeSelectors';
+import { color } from '../../utils/categoryColors';
+import Loader from '../Loader/Loader';
 import styles from './StatisticsTable.module.css';
 
 const StatisticsTable = () => {
   const stats = useSelector(selectStatistics);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  if (isLoading) return <Loader />;
+  if (error) return <div>Data could not be received.</div>;
 
   // Sadece EXPENSE kategorileri
   const expenses =
