@@ -26,7 +26,7 @@
   .page {
     padding: 32px;
     background-color: #101010;
-    background-image: url('/src/assets/images/tablet-back-login.webp');
+    background-image: url('/src/assets/images/register-tablet.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -52,7 +52,7 @@
   .page {
     padding: 40px;
     background-color: #101010;
-    background-image: url('/src/assets/images/pc-back-login.webp');
+    background-image: url('/src/assets/images/register-desktop.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

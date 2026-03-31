@@ -21,50 +21,40 @@ const LoginForm = () => {
 
  const handleFormSubmit = async (values, actions) => {
   try {
-    await dispatch(loginUser(values)).unwrap();
+    const resultAction = await dispatch(loginUser(values));
 
-    actions.setSubmitting(false);
-    navigate('/dashboard');
-  } catch (error) {
-    console.log('LOGIN ERROR:', error);
-
-    let userMessage = 'Email or password is wrong';
-    let statusMessage = '';
-
-    if (typeof error === 'string') {
-      if (error.includes('404')) {
-        statusMessage = '404 - Resource not found';
-      } else if (error.includes('401')) {
-        statusMessage = '401 - Unauthorized';
-      } else if (error.includes('400')) {
-        statusMessage = '400 - Bad request';
-      } else if (error.includes('500')) {
-        statusMessage = '500 - Internal server error';
-      } else {
-        userMessage = error;
-      }
-    } else if (error?.message) {
-      if (error.message.includes('404')) {
-        statusMessage = '404 - Resource not found';
-      } else if (error.message.includes('401')) {
-        statusMessage = '401 - Unauthorized';
-      } else if (error.message.includes('400')) {
-        statusMessage = '400 - Bad request';
-      } else if (error.message.includes('500')) {
-        statusMessage = '500 - Internal server error';
-      } else {
-        userMessage = error.message;
-      }
+    if (loginUser.fulfilled.match(resultAction)) {
+      navigate('/dashboard');
+      return;
     }
 
-    toast.error(userMessage, { toastId: 'login-user-error' });
+    if (loginUser.rejected.match(resultAction)) {
+      const error = resultAction.error;
 
-    if (statusMessage) {
-      setTimeout(() => {
-        toast.error(statusMessage, { toastId: 'login-status-error' });
-      }, 100);
+      console.log('LOGIN ERROR FULL:', resultAction);
+
+      const status = error?.code || error?.response?.status;
+
+      let message = 'An error occurred';
+
+      if (status === 401) {
+        message = 'Email or password is wrong';
+      } else if (status === 404) {
+        message = '404 - Resource not found';
+      } else if (status === 400) {
+        message = '400 - Bad request';
+      } else if (status === 500) {
+        message = '500 - Internal server error';
+      } else {
+        message =
+          resultAction.payload ||
+          error?.message ||
+          'An error occurred';
+      }
+
+      toast.error(message, { toastId: 'login-error' });
     }
-
+  } finally {
     actions.setSubmitting(false);
   }
 };
@@ -128,11 +118,9 @@ const LoginForm = () => {
               {isSubmitting ? 'LOADING...' : 'LOG IN'}
             </button>
 
-            <Link to="/register" className={css.registerLink}>
-              <button type="button" className={css.registerBtn}>
-                REGISTER
-              </button>
-            </Link>
+            <Link to="/register" className={`${css.registerLink} ${css.registerBtn}`}>
+  REGISTER
+</Link>
           </Form>
         )}
       </Formik>

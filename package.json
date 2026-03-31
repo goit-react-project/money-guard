@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
-    "axios": "^1.14.0",
+    "axios": "^1.13.6",
     "chart.js": "^4.5.1",
     "formik": "^2.4.9",
     "modern-normalize": "^3.0.1",
