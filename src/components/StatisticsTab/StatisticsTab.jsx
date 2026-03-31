@@ -8,8 +8,8 @@ const StatisticsTab = () => {
   return (
     <div className={styles.statisticsLayout}>
       <div className={styles.left}>
-        <StatisticsDashboard />
         <Chart />
+        <StatisticsDashboard />
       </div>
       <div className={styles.right}>
         <StatisticsTable />

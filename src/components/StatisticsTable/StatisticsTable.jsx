@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectStatistics } from '../../redux/finance/financeSlice';
+import { selectStatistics } from '../../redux/finance/financeSelectors';
 import { color } from '../Chart/Chart';
 import styles from './StatisticsTable.module.css';
 
