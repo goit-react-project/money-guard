@@ -34,7 +34,7 @@ const Navigation = () => {
         }
       >
         <CurrencyIcon className={styles.icon} />
-        <span className={styles.navText}>Currency</span>
+        <span className={styles.mobileOnly}>Currency</span>
       </NavLink>
     </nav>
   );

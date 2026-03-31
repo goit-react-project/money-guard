@@ -17,6 +17,24 @@
   padding: 40px 0 0 0; 
 }
 
+.balanceToggle {
+  background: none;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 20px;
+  padding: 8px 16px;
+  color: #fbfbfb;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.balanceToggle:hover {
+  background: rgba(251, 251, 251, 0.1);
+  border-color: #fbfbfb;
+}
+
 .pageContent {
   flex: 1;
   padding: 20px; 
@@ -28,5 +46,6 @@
   }
   .sidebar {
     padding: 20px 0 0 0;
+    align-items: center; /* Center navigation items on mobile if preferred */
   }
 }
