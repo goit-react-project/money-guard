@@ -1,0 +1,73 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  width: 540px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: var(--color-form-bg);
+  box-shadow: var(--shadow-form);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px); /* Safari desteği için */
+  border-radius: var(--radius-form);
+  transition: height 0.3s ease;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeBtn:hover {
+  opacity: 0.8;
+}
+
+.modalTitle {
+  font-family: var(--font-main);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 45px;
+  text-align: center;
+  color: var(--color-white);
+  margin-bottom: 40px;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .modalContent {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+    padding: 20px;
+  }
+
+  .modalTitle {
+    font-size: 24px;
+    margin-top: 40px;
+  }
+}
