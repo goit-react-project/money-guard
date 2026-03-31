@@ -1,0 +1,75 @@
+.page {
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px 24px;
+  overflow: hidden;
+  background: var(--gradient-bg-mobile);
+}
+
+@media screen and (max-width: 374px) {
+  .page {
+    min-height: 568px;
+    padding: 32px 20px 24px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .page {
+    padding: 40px 20px 32px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .page {
+    padding: 32px;
+    background-color: #101010;
+    background-image: url('/src/assets/images/register-tablet.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .page > * {
+    width: 533px;
+    min-height: 570px;
+    padding: 80px 58px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+   
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .page {
+    padding: 40px;
+    background-color: #101010;
+    background-image: url('/src/assets/images/register-desktop.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .page > * {
+    width: 533px;
+    height: 570px;
+    padding: 80px 58px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}

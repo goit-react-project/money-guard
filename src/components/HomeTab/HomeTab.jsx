@@ -18,7 +18,6 @@ import {
 
 
 
-
 const HomeTab = () => {
 const transactions = useSelector((state) => state.finance.transactions) || [];
 
@@ -121,6 +120,9 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
           />
         )}
       </div>
+    <div className={styles.homeTab}>
+        {/* Home tab content */}
+       </div> 
     </div>
   );
 };

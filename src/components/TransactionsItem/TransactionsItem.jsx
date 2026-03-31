@@ -104,7 +104,8 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
     isIncome ? styles.income : styles.expense
   }`}
 >
-  {amount}
+          {amount}
+          
 </span>
 
   <div className={styles.tableActions}>
