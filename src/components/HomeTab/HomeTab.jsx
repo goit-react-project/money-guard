@@ -1,25 +1,22 @@
-import {  useEffect,  useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./HomeTab.module.css";
-import Navigation from "../Navigation/Navigation";
-import Balance from "../Balance/Balance";
-import Currency from "../Currency/Currency";
-import TransactionsList from "../TransactionsList/TransactionsList";
-import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
-import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction"
-import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './HomeTab.module.css';
+import Navigation from '../Navigation/Navigation';
+import Balance from '../Balance/Balance';
+import Currency from '../Currency/Currency';
+import TransactionsList from '../TransactionsList/TransactionsList';
+import ButtonAddTransactions from '../ButtonAddTransactions/ButtonAddTransactions';
+import ModalAddTransaction from '../ModalAddTransaction/ModalAddTransaction';
+import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction';
 import {
-  addTransaction,
   deleteTransaction,
   editTransaction,
   fetchTransactions,
   fetchCategories,
-} from "../../redux/finance/financeOperations";
-
-
+} from '../../redux/finance/financeOperations';
 
 const HomeTab = () => {
-const transactions = useSelector((state) => state.finance.transactions) || [];
+  const transactions = useSelector((state) => state.finance.transactions) || [];
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
@@ -30,7 +27,7 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
   useEffect(() => {
     dispatch(fetchTransactions());
     dispatch(fetchCategories());
-  }, [dispatch]);  
+  }, [dispatch]);
 
   const handleOpenAdd = () => {
     setSelectedTransaction(null);
@@ -38,11 +35,6 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
   };
 
   const handleCloseAdd = () => {
-    setIsAddOpen(false);
-  };
-
-  const handleAddTransaction = async (newTransaction) => {
-    await dispatch(addTransaction(newTransaction));
     setIsAddOpen(false);
   };
 
@@ -69,7 +61,6 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
   return (
     <div className={styles.pageBg}>
       <div className={styles.container}>
-
         <div className={styles.content}>
           <div className={styles.topSection}>
             <div className={styles.leftSide}>
@@ -80,13 +71,13 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
                 <Balance />
               </div>
               <div className={styles.currencyWrap}>
-                <Currency shouldFetch={true} />
+                <Currency />
               </div>
             </div>
 
             <div className={styles.rightSide}>
               <div className={styles.rightTop}>
-                <Currency shouldFetch={false} />
+                <Currency />
               </div>
             </div>
           </div>
@@ -113,12 +104,7 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
           />
         )}
 
-        {isAddOpen && (
-          <ModalAddTransaction
-            onClose={handleCloseAdd}
-            onSave={handleAddTransaction}
-          />
-        )}
+        {isAddOpen && <ModalAddTransaction onClose={handleCloseAdd} />}
       </div>
     </div>
   );

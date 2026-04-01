@@ -1,14 +1,3 @@
-.cell {
-    color: var(--color-white);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-word;
-}
-
 .amount {
     font-weight: 600;
     font-family: var(--font-main);
@@ -132,7 +121,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    white-space: normal;
+    color: var(--color-white);
+    overflow: hidden;
+    text-overflow: ellipsis;
     word-break: break-word;
     max-width: 100%;
 }

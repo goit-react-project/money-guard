@@ -1,42 +1,34 @@
-import { HiPencil } from "react-icons/hi2";
-import { useSelector } from "react-redux";
-import styles from "./TransactionsItem.module.css";
+import { useSelector } from 'react-redux';
+import styles from './TransactionsItem.module.css';
 
 const formatDate = (dateString) => {
-  if (!dateString) return "";
-  
+  if (!dateString) return '';
+
   const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = String(date.getFullYear()).slice(-2);
 
   return `${day}.${month}.${year}`;
 };
 
-
 const formatAmount = (value) => {
-  if (value === null || value === undefined) return "0,00";
-  return Math.abs(Number(value)).toLocaleString("tr-TR", {
+  if (value === null || value === undefined) return '0,00';
+  return Math.abs(Number(value)).toLocaleString('tr-TR', {
     minimumFractionDigits: 2,
   });
 };
 
 const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
-  const categories = useSelector(state => state.finance.categories);
-  const {
-    id,
-    transactionDate,
-    type,
-    categoryId,
-    comment,
-    amount,
-  } = transaction;
+  const categories = useSelector((state) => state.finance.categories);
+  const { id, transactionDate, type, categoryId, comment, amount } =
+    transaction;
 
-  const isIncome = type === "INCOME" || type === "+";
-const categoryName = isIncome
-  ? "Income"
-  : categories.find(c => c.id === categoryId)?.name || "Unknown";
-  
+  const isIncome = type === 'INCOME' || type === '+';
+  const categoryName = isIncome
+    ? 'Income'
+    : categories.find((c) => c.id === categoryId)?.name || 'Unknown';
+
   return (
     <>
       <div className={styles.card}>
@@ -54,7 +46,7 @@ const categoryName = isIncome
               isIncome ? styles.income : styles.expense
             }`}
           >
-            {isIncome ? "+" : "-"}
+            {isIncome ? '+' : '-'}
           </span>
         </div>
 
@@ -106,7 +98,7 @@ const categoryName = isIncome
             isIncome ? styles.income : styles.expense
           }`}
         >
-          {isIncome ? "+" : "-"}
+          {isIncome ? '+' : '-'}
         </span>
         <span className={styles.cell}>{categoryName}</span>
         <span className={styles.cell}>{comment}</span>

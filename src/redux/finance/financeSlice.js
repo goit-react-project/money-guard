@@ -22,15 +22,7 @@ const initialState = {
 const financeSlice = createSlice({
   name: 'finance',
   initialState,
-  reducers: {
-    setTransactions: (state, action) => {
-      state.transactions = action.payload;
-      state.totalBalance = action.payload.reduce(
-        (acc, t) => (t.type === 'INCOME' ? acc + t.amount : acc - t.amount),
-        0
-      );
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTransactions.pending, (state) => {
       state.isLoading = true;
@@ -42,8 +34,8 @@ const financeSlice = createSlice({
       const data = Array.isArray(action.payload?.data)
         ? action.payload.data
         : Array.isArray(action.payload)
-        ? action.payload
-        : [];
+          ? action.payload
+          : [];
 
       state.transactions = data;
       state.totalBalance = data.reduce(
@@ -98,7 +90,7 @@ const financeSlice = createSlice({
 
     builder.addCase(deleteTransaction.fulfilled, (state, action) => {
       state.isLoading = false;
-      const deletedId = action.payload?.id ?? action.payload;
+      const deletedId = action.payload;
       const deleted = state.transactions.find((t) => t.id === deletedId);
 
       if (deleted) {
@@ -188,6 +180,5 @@ const financeSlice = createSlice({
   },
 });
 
-export const selectStatistics = (state) => state.finance.statistics;
 export const { setTransactions } = financeSlice.actions;
 export default financeSlice.reducer;

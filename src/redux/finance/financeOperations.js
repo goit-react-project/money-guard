@@ -1,55 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import axiosInstance, { setAuthHeader } from '../../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance';
 import axios from 'axios';
 
 // Toast notifications for add/delete/edit are handled in components via .unwrap()
 // Only fetchCurrency uses toast here because it has no dedicated component-level handler
 
-// Toast notifications for add/delete/edit are handled in components via .unwrap()
-// Only fetchCurrency uses toast here because it has no dedicated component-level handler
-
 export const fetchTransactions = createAsyncThunk(
-  "finance/fetchTransactions",
+  'finance/fetchTransactions',
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.token;
-
-      if (!token) {
-        return thunkAPI.rejectWithValue("No token found");
-      }
-
-      setAuthHeader(token);
-
-      const response = await axiosInstance.get("/transactions");
+      const response = await axiosInstance.get('/transactions');
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || error.message || "Failed to fetch transactions."
-      );
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const fetchCategories = createAsyncThunk(   /// ND
-  "finance/fetchCategories",
+export const fetchCategories = createAsyncThunk(
+  'finance/fetchCategories',
   async (_, thunkAPI) => {
     try {
-      // Token Redux state veya localStorage'dan al
-      const token = thunkAPI.getState().auth.token || localStorage.getItem("token");
-      if (!token) throw new Error("No token found");
-      // Header'a token ekle
-      setAuthHeader(token);
-      //  Backend request
-      const response = await axiosInstance.get("/transaction-categories");        /// ND
-      //  Slice'a döndür
-      return response.data; // genellikle array döner
+      const response = await axiosInstance.get('/transaction-categories');
+      return response.data;
     } catch (error) {
-      //  Hata durumunda toast
-      toast.error(
-        error.response?.data?.message || 'Could not fetch categories. Please try again.'
-      );
-       return thunkAPI.rejectWithValue(error.response?.data?.message || error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -74,27 +50,19 @@ export const addTransaction = createAsyncThunk(
 );
 
 export const deleteTransaction = createAsyncThunk(
-  "finance/deleteTransaction",
+  'finance/deleteTransaction',
   async (id, thunkAPI) => {
     try {
-      const token =
-        thunkAPI.getState().auth.token || localStorage.getItem("token");
-
-      if (!token) throw new Error("No token found");
-
-      setAuthHeader(token);
-
       await axiosInstance.delete(`/transactions/${id}`);
 
-      toast.success("Transaction deleted.");
-      return id; 
+      toast.success('Transaction deleted.');
+      return id;
     } catch (error) {
-      const message =
-        error.response?.data?.message || "Failed to delete transaction.";
+      toast.error(
+        error.response?.data?.message || 'Failed to delete transaction.'
+      );
 
-      toast.error(message); //  BACKEND HATASI BURADA GÖSTERİLİR
-
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -143,8 +111,8 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      //axios instance kullanımı kaldırıldı çünkü farklı bir API'ye istek atılıyor
-      const response = await axios.get('https://api.monobank.ua/bank/currency');
+      // separate axios instance used because this is an external API
+      const response = await axios.get(import.meta.env.VITE_MONOBANK_API_URL);
       const filtered = response.data.filter(
         (item) =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
@@ -156,6 +124,7 @@ export const fetchCurrency = createAsyncThunk(
 
       return filtered;
     } catch (error) {
+      toast.error('Failed to fetch currency rates. Please try again later.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -119,10 +119,9 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
           (item) => item.name === values.category
         );
 
-        const amount = Number(values.amount);
         const payload = {
           type: values.type,
-          amount: values.type === 'EXPENSE' ? -amount : amount,
+          amount: Number(values.amount),
           transactionDate: formatTransactionDate(values.date),
           comment: values.comment.trim(),
           ...(values.type === 'EXPENSE' && {

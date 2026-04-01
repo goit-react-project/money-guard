@@ -147,8 +147,7 @@
         }
     .tableHead {
         display: grid;
-        grid-template-columns:
-        minmax(80px, 1fr) minmax(50px, 0.6fr) minmax(120px, 1.2fr) minmax(180px, 2fr) minmax(100px, 1fr) minmax(100px, 1fr);
+        grid-template-columns: 90px 60px 120px 1fr 100px 100px;
         align-items: center;
         min-height: 56px;
         padding: 0 1px;
@@ -215,8 +214,7 @@
 
     .tableHead {
         display: grid;
-        grid-template-columns:
-            90px 60px 120px minmax(170px, 1fr) 100px 100px;
+        grid-template-columns: 90px 60px 120px 1fr 100px 100px;
         align-items: center;
         min-height: 56px;
         padding: 0 1px;
