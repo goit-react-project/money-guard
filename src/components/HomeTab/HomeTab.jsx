@@ -10,7 +10,6 @@ import ModalAddTransaction from '../ModalAddTransaction/ModalAddTransaction';
 import ModalEditTransaction from '../ModalEditTransaction/ModalEditTransaction';
 import {
   deleteTransaction,
-  editTransaction,
   fetchTransactions,
   fetchCategories,
 } from '../../redux/finance/financeOperations';
@@ -18,8 +17,8 @@ import {
 const HomeTab = () => {
   const transactions = useSelector((state) => state.finance.transactions) || [];
 
-  const [isEditOpen, setIsEditOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const dispatch = useDispatch();
@@ -29,14 +28,8 @@ const HomeTab = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const handleOpenAdd = () => {
-    setSelectedTransaction(null);
-    setIsAddOpen(true);
-  };
-
-  const handleCloseAdd = () => {
-    setIsAddOpen(false);
-  };
+  const handleOpenAdd = () => setIsAddOpen(true);
+  const handleCloseAdd = () => setIsAddOpen(false);
 
   const handleDelete = (id) => {
     dispatch(deleteTransaction(id));
@@ -50,12 +43,6 @@ const HomeTab = () => {
   const handleCloseEdit = () => {
     setSelectedTransaction(null);
     setIsEditOpen(false);
-  };
-
-  const handleUpdateTransaction = async (updatedTransaction) => {
-    const { id, ...data } = updatedTransaction;
-    await dispatch(editTransaction({ id, data }));
-    handleCloseEdit();
   };
 
   return (
@@ -91,20 +78,20 @@ const HomeTab = () => {
             />
 
             <div className={styles.floatingButton}>
-              <ButtonAddTransactions onAddTransaction={handleOpenAdd} />
+              <ButtonAddTransactions />
             </div>
           </div>
         </div>
 
+        {isAddOpen && <ModalAddTransaction onClose={handleCloseAdd} />}
+
         {isEditOpen && selectedTransaction && (
           <ModalEditTransaction
-            transaction={selectedTransaction}
+            isOpen={isEditOpen}
+            transactionData={selectedTransaction}
             onClose={handleCloseEdit}
-            onSave={handleUpdateTransaction}
           />
         )}
-
-        {isAddOpen && <ModalAddTransaction onClose={handleCloseAdd} />}
       </div>
     </div>
   );

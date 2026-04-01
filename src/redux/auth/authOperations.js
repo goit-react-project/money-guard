@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import axiosInstance, {
   setAuthHeader,
   clearAuthHeader,
@@ -10,8 +11,10 @@ export const registerUser = createAsyncThunk(
     try {
       const response = await axiosInstance.post('/auth/sign-up', credentials);
       setAuthHeader(response.data.token);
+      toast.success('Registration successful! Welcome to Money Guard.');
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || 'Registration failed.');
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || 'Registration failed.'
       );

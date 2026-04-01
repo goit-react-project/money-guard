@@ -39,7 +39,10 @@ const financeSlice = createSlice({
 
       state.transactions = data;
       state.totalBalance = data.reduce(
-        (acc, t) => (t.type === 'INCOME' ? acc + t.amount : acc - t.amount),
+        (acc, t) =>
+          t.type === 'INCOME'
+            ? acc + Math.abs(t.amount)
+            : acc - Math.abs(t.amount),
         0
       );
     });
@@ -74,8 +77,8 @@ const financeSlice = createSlice({
       state.transactions.unshift(action.payload);
       state.totalBalance =
         action.payload.type === 'INCOME'
-          ? state.totalBalance + action.payload.amount
-          : state.totalBalance - action.payload.amount;
+          ? state.totalBalance + Math.abs(action.payload.amount)
+          : state.totalBalance - Math.abs(action.payload.amount);
     });
 
     builder.addCase(addTransaction.rejected, (state, action) => {
@@ -96,8 +99,8 @@ const financeSlice = createSlice({
       if (deleted) {
         state.totalBalance =
           deleted.type === 'INCOME'
-            ? state.totalBalance - deleted.amount
-            : state.totalBalance + deleted.amount;
+            ? state.totalBalance - Math.abs(deleted.amount)
+            : state.totalBalance + Math.abs(deleted.amount);
       }
 
       state.transactions = state.transactions.filter((t) => t.id !== deletedId);
@@ -129,16 +132,16 @@ const financeSlice = createSlice({
 
         // Revert the old transaction from the balance
         if (oldTransaction.type === 'INCOME') {
-          state.totalBalance -= oldTransaction.amount;
+          state.totalBalance -= Math.abs(oldTransaction.amount);
         } else {
-          state.totalBalance += oldTransaction.amount;
+          state.totalBalance += Math.abs(oldTransaction.amount);
         }
 
         // Apply the new transaction to the balance
         if (newTransaction.type === 'INCOME') {
-          state.totalBalance += newTransaction.amount;
+          state.totalBalance += Math.abs(newTransaction.amount);
         } else {
-          state.totalBalance -= newTransaction.amount;
+          state.totalBalance -= Math.abs(newTransaction.amount);
         }
       }
     });

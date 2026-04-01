@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { toast } from 'react-toastify';
 import {
   editTransaction,
   fetchCategories,
@@ -26,6 +25,13 @@ const validationSchema = Yup.object().shape({
   }),
 });
 
+const formatTransactionDate = (value) => {
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, '0');
+  const day = String(value.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 const EditTransactionForm = ({ transaction, closeModal }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.finance.categories);
@@ -39,7 +45,7 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
   const initialValues = {
     type: transaction.type || 'INCOME',
     categoryId: transaction.categoryId || '',
-    amount: transaction.amount || 0,
+    amount: Math.abs(transaction.amount) || 0,
     transactionDate: transaction.transactionDate
       ? new Date(transaction.transactionDate)
       : new Date(),
@@ -50,8 +56,8 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
       id: transaction.id,
       data: {
         type: values.type,
-        amount: Number(values.amount),
-        transactionDate: values.transactionDate.toISOString(),
+        amount: values.type === 'EXPENSE' ? -Math.abs(Number(values.amount)) : Math.abs(Number(values.amount)),
+        transactionDate: formatTransactionDate(values.transactionDate),
         comment: values.comment,
       },
     };
@@ -62,10 +68,9 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
 
     try {
       await dispatch(editTransaction(payload)).unwrap();
-      toast.success('Transaction updated successfully!');
       closeModal();
-    } catch (error) {
-      toast.error(error?.message || 'Failed to update transaction.');
+    } catch {
+      // toast is handled in editTransaction operation
     } finally {
       setSubmitting(false);
     }

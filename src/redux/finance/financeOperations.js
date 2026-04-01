@@ -13,6 +13,7 @@ export const fetchTransactions = createAsyncThunk(
       const response = await axiosInstance.get('/transactions');
       return response.data;
     } catch (error) {
+      toast.error('Failed to load transactions.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -25,6 +26,7 @@ export const fetchCategories = createAsyncThunk(
       const response = await axiosInstance.get('/transaction-categories');
       return response.data;
     } catch (error) {
+      toast.error('Failed to load categories.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -72,8 +74,10 @@ export const editTransaction = createAsyncThunk(
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await axiosInstance.patch(`/transactions/${id}`, data);
+      toast.success('Transaction updated successfully!');
       return response.data;
     } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to update transaction.');
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message
       );
@@ -90,6 +94,7 @@ export const fetchStatistics = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
+      toast.error('Failed to load statistics.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }

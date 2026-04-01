@@ -16,12 +16,13 @@ const StatisticsTable = () => {
   if (isLoading) return <Loader />;
   if (error) return <div>Data could not be received.</div>;
 
-  // Sadece EXPENSE kategorileri
   const expenses =
     stats?.categoriesSummary?.filter((c) => c.type === 'EXPENSE') ?? [];
+  const incomeTotal = stats?.incomeSummary ?? 0;
+  const expenseTotal = stats?.expenseSummary ?? 0;
+  const hasAnyData = expenses.length > 0 || incomeTotal !== 0 || expenseTotal !== 0;
 
-  // Veri yoksa placeholder
-  if (!stats || expenses.length === 0) {
+  if (!stats || !hasAnyData) {
     return (
       <div className={styles.placeholder}>No transactions for this period.</div>
     );
@@ -29,38 +30,41 @@ const StatisticsTable = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.header}>
-        <span>Category</span>
-        <span>Sum</span>
-      </div>
+      {expenses.length > 0 && (
+        <>
+          <div className={styles.header}>
+            <span>Category</span>
+            <span>Sum</span>
+          </div>
 
-      <ul className={styles.list}>
-        {expenses.map((cat) => (
-          <li key={cat.name} className={styles.item}>
-            {/* Charttaki renkle eşleşir */}
-            <span
-              className={styles.dot}
-              style={{ backgroundColor: color(cat.name) }}
-            />
-            <span className={styles.name}>{cat.name}</span>
-            <span className={styles.amount}>
-              {Math.abs(cat.total).toFixed(2)}
-            </span>
-          </li>
-        ))}
-      </ul>
+          <ul className={styles.list}>
+            {expenses.map((cat) => (
+              <li key={cat.name} className={styles.item}>
+                <span
+                  className={styles.dot}
+                  style={{ backgroundColor: color(cat.name) }}
+                />
+                <span className={styles.name}>{cat.name}</span>
+                <span className={styles.amount}>
+                  {Math.abs(cat.total).toFixed(2)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
 
       <div className={styles.summary}>
         <div className={styles.summaryRow}>
           <span>Expenses:</span>
           <span className={styles.expense}>
-            {Math.abs(stats.expenseSummary ?? 0).toFixed(2)}
+            {Math.abs(expenseTotal).toFixed(2)}
           </span>
         </div>
         <div className={styles.summaryRow}>
           <span>Income:</span>
           <span className={styles.income}>
-            {(stats.incomeSummary ?? 0).toFixed(2)}
+            {Math.abs(incomeTotal).toFixed(2)}
           </span>
         </div>
       </div>

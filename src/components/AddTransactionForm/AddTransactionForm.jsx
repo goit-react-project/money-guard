@@ -12,7 +12,6 @@ import { selectCategories } from '../../redux/finance/financeSelectors';
 import styles from './AddTransactionForm.module.css';
 import calendarIcon from '@/assets/icons/calendar-icon.svg';
 import CursorPointerIcon from '@/assets/icons/cursor-pointer-icon.svg?react';
-import { toast } from 'react-toastify';
 
 const fallbackExpenseCategories = [
   'Main expenses',
@@ -113,20 +112,28 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
         date: new Date(),
         comment: '',
       }}
-      validationSchema={getValidationSchema}
+      validationSchema={getValidationSchema()}
       onSubmit={async (values, { resetForm, setSubmitting }) => {
         const selectedCategory = expenseCategories.find(
           (item) => item.name === values.category
         );
 
+        const incomeCategory = categories
+          .map(normalizeCategory)
+          .find((item) => item.type === 'INCOME');
+
+        const categoryId =
+          values.type === 'INCOME'
+            ? incomeCategory?.id
+            : selectedCategory?.id ?? values.category;
+
+        const rawAmount = Math.abs(Number(values.amount));
         const payload = {
           type: values.type,
-          amount: Number(values.amount),
+          amount: values.type === 'EXPENSE' ? -rawAmount : rawAmount,
           transactionDate: formatTransactionDate(values.date),
           comment: values.comment.trim(),
-          ...(values.type === 'EXPENSE' && {
-            categoryId: selectedCategory?.id ?? values.category,
-          }),
+          categoryId,
         };
 
         try {
@@ -134,7 +141,7 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
           resetForm();
           onSuccess();
         } catch {
-          toast.error('Failed to add transaction. Please try again.');
+          // toast is handled in addTransaction operation
           setSubmitting(false);
         }
       }}
@@ -173,18 +180,29 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
                 Income
               </button>
 
-              <div className={styles.toggleTrack} aria-hidden="true">
-                <button
-                  type="button"
+              <div
+                className={styles.toggleTrack}
+                aria-hidden="true"
+                onClick={() => {
+                  const next = values.type === 'INCOME' ? 'EXPENSE' : 'INCOME';
+                  setFieldValue('type', next);
+                  if (next === 'INCOME') {
+                    setFieldValue('category', '');
+                    setFieldTouched('category', false);
+                    setIsCategoryOpen(false);
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
+                <span
                   className={`${styles.toggleButton} ${
                     values.type === 'INCOME'
                       ? styles.toggleIncome
                       : styles.toggleExpense
                   }`}
-                  tabIndex={-1}
                 >
                   {values.type === 'INCOME' ? '+' : '-'}
-                </button>
+                </span>
               </div>
 
               <button

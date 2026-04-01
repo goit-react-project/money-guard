@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { HiPencil } from 'react-icons/hi';
 import styles from './TransactionsItem.module.css';
 
 const formatDate = (dateString) => {

@@ -17,10 +17,11 @@ const Currency = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  // 1 saat dolmadı local, doldu api
   useEffect(() => {
-    dispatch(fetchCurrency());
-  }, [dispatch]);
+    if (currency.length === 0) {
+      dispatch(fetchCurrency());
+    }
+  }, [dispatch, currency.length]);
 
   if (isLoading) return <Loader />;
   if (error) return <div>Failed to Receive Data.</div>;
