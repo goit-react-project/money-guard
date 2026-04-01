@@ -24,16 +24,12 @@
 .card {
     display: block;
     position: relative;
-    width: clamp(282px, 90%, 400px);
-    height: 293px;
+    width: 280px;
     background: var(--gradient-bg-mobile);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     overflow: hidden;
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(12px);
-    margin: 0 auto;
-    margin-bottom: 10px;
 }
 
 .leftBorder {
@@ -79,14 +75,14 @@
     font-size: 18px;
     line-height: 1.2;
     font-family: var(--font-main);
-    
+
 }
 
 .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px;
+    padding: 12px 20px;
     font-family: var(--font-main);
 }
 
@@ -136,7 +132,7 @@
     .card {
         display: none;
     }
-    
+
     .tableRow {
         display: grid;
             grid-template-columns: 90px 60px 120px 1fr 100px 100px;
@@ -146,15 +142,15 @@
             width: 100%;
             box-sizing: border-box;
     }
-    
-    
+
+
     .tableActions {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         gap: 12px;
     }
-    
+
     .cell {
         font-size: 14px;
         line-height: 1.3;
@@ -168,7 +164,7 @@
         font-weight: 600;
         text-align: right;
     }
-    
+
     .tableEditBtn {
         display: flex;
         align-items: center;
@@ -179,9 +175,9 @@
         background: transparent;
         border: none;
         color: var(--color-white);
-        cursor: pointer;   
+        cursor: pointer;
     }
-    
+
     .tableDeleteBtn {
         min-width: 69px;
         height: 29px;
@@ -197,7 +193,7 @@
         color: var(--color-income);
         font-weight: 600;
     }
-    
+
     .expense {
         color: var(--color-expense);
         font-weight: 600;
@@ -205,11 +201,11 @@
  }
 
 
- @media (min-width: 1280px) { 
+ @media (min-width: 1280px) {
     .card {
             display: none;
         }
-    
+
         .tableRow {
             display: grid;
             grid-template-columns: 90px 60px 120px 1fr 100px 100px;
@@ -219,14 +215,14 @@
             width: 100%;
             box-sizing: border-box;
         }
-    
+
         .tableActions {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             gap: 12px;
         }
-    
+
         .cell {
             font-size: 14px;
             line-height: 1.3;
@@ -235,12 +231,12 @@
             justify-content: center;
             color: var(--color-white);
         }
-    
+
         .amount {
             font-weight: 600;
             text-align: right;
         }
-    
+
         .tableEditBtn {
             display: flex;
             align-items: center;
@@ -253,7 +249,7 @@
             color: var(--color-white);
             cursor: pointer;
         }
-    
+
         .tableDeleteBtn {
             min-width: 69px;
             height: 29px;
@@ -264,12 +260,12 @@
             background: var(--gradient-btn);
             cursor: pointer;
         }
-    
+
         .income {
             color: var(--color-income);
             font-weight: 600;
         }
-    
+
         .expense {
             color: var(--color-expense);
             font-weight: 600;

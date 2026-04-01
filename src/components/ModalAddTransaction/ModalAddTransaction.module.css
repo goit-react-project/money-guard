@@ -91,7 +91,7 @@
   }
 
   .modalTitle {
-    width: auto;
+    width: 100%;
     margin: 40px 20px 0;
     font-size: 24px;
   }

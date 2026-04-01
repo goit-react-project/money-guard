@@ -1,41 +1,41 @@
-
 .dashboard {
+  background: var(--gradient-bg-mobile);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 .mainContent {
-  display: flex;
-  flex: 1;
+  position: relative;
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0px auto;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 28px;
-  padding: 40px 0 0 0;
+  padding: 12px 0 0 0;
 }
 
 /* Desktop & tablet: always visible regardless of route */
 .balanceVisible,
 .balanceHidden {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pageContent {
-  flex: 1;
-  padding: 20px;
-}
-
-@media (max-width: 767px) {
+@media screen and (min-width: 768px) {
   .mainContent {
-    flex-direction: column;
+    max-width: 768px;
   }
 
   .sidebar {
     padding: 20px 0 0 0;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   /* Mobile: only show balance on /dashboard/home */
@@ -45,5 +45,11 @@
 
   .balanceVisible {
     display: block;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .mainContent {
+    max-width: 1280px;
   }
 }

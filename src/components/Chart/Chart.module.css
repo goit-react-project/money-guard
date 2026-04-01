@@ -1,9 +1,11 @@
 .title {
+  width: 280px;
   font-family: sans-serif;
   font-weight: 400;
   font-size: 30px;
   color: white;
-  margin-bottom: 16px;
+  margin: 0 auto;
+  padding: 8px;
 }
 
 .box {

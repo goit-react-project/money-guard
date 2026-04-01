@@ -1,29 +1,29 @@
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { selectUser } from "../../redux/auth/authSelectors";
-import LogoutModal from "../LogoutModal/LogoutModal";
-import Logo from "../../assets/icons/logo-icon.svg";
-import ExitIcon from "../../assets/icons/logout-icon.svg";
-import styles from "./Header.module.css";
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { selectUser } from '../../redux/auth/authSelectors';
+import LogoutModal from '../LogoutModal/LogoutModal';
+import LogoIcon from '../../assets/icons/logo-icon.svg?react';
+import ExitIcon from '../../assets/icons/logout-icon.svg';
+import styles from './Header.module.css';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const user = useSelector(selectUser);
-  const username = user?.email?.split("@")[0] || "User";
+  const username = user?.email?.split('@')[0] || 'User';
 
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === "Escape") setIsModalOpen(false);
+      if (e.key === 'Escape') setIsModalOpen(false);
     };
 
     if (isModalOpen) {
-      window.addEventListener("keydown", handleEsc);
+      window.addEventListener('keydown', handleEsc);
     }
 
     return () => {
-      window.removeEventListener("keydown", handleEsc);
+      window.removeEventListener('keydown', handleEsc);
     };
   }, [isModalOpen]);
 
@@ -31,10 +31,13 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <div className={styles.container}>
-          
           {/* LOGO */}
-          <Link to="/dashboard/home" className={styles.logoWrap} style={{ textDecoration: 'none' }}>
-            <img src={Logo} alt="Money Guard" className={styles.logo} />
+          <Link
+            to="/dashboard/home"
+            className={styles.logoWrap}
+            style={{ textDecoration: 'none' }}
+          >
+            <LogoIcon className={styles.logo} alt="Money Guard" />
             <span className={styles.logoText}>Money Guard</span>
           </Link>
 
@@ -53,13 +56,10 @@ const Header = () => {
               <span className={styles.exitText}>Exit</span>
             </button>
           </div>
-
         </div>
       </header>
 
-      {isModalOpen && (
-        <LogoutModal onClose={() => setIsModalOpen(false)} />
-      )}
+      {isModalOpen && <LogoutModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };
