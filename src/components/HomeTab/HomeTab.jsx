@@ -4,7 +4,6 @@ import styles from "./HomeTab.module.css";
 import Navigation from "../Navigation/Navigation";
 import Balance from "../Balance/Balance";
 import Currency from "../Currency/Currency";
-import Chart from "../Chart/Chart";
 import TransactionsList from "../TransactionsList/TransactionsList";
 import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction"

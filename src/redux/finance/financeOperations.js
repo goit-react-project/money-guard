@@ -29,7 +29,7 @@ export const fetchTransactions = createAsyncThunk(
       );
     }
   }
-)
+);
 
 export const fetchCategories = createAsyncThunk(   /// ND
   "finance/fetchCategories",
@@ -143,8 +143,8 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      // separate axios instance used because this is an external API
-      const response = await axios.get(import.meta.env.VITE_MONOBANK_API_URL);
+      //axios instance kullanımı kaldırıldı çünkü farklı bir API'ye istek atılıyor
+      const response = await axios.get('https://api.monobank.ua/bank/currency');
       const filtered = response.data.filter(
         (item) =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
@@ -156,7 +156,6 @@ export const fetchCurrency = createAsyncThunk(
 
       return filtered;
     } catch (error) {
-      toast.error('Failed to fetch currency rates. Please try again later.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
