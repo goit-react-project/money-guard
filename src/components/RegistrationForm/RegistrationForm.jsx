@@ -38,10 +38,6 @@ const RegistrationForm = () => {
       return;
     }
 
-    if (resultAction.payload) {
-      actions.setFieldError('email', resultAction.payload);
-    }
-
     actions.setSubmitting(false);
   };
 

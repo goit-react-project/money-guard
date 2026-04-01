@@ -28,6 +28,7 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await axiosInstance.post('/auth/sign-in', credentials);
       setAuthHeader(response.data.token);
+      toast.success('Welcome back!');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
