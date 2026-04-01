@@ -39,8 +39,5 @@ const Navigation = () => {
     </nav>
   );
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> 12d881e092009fae88f4c410ce511415ce6c9d8c
 export default Navigation;

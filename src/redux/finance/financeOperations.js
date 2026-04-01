@@ -7,14 +7,19 @@ export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.token || localStorage.getItem("token");
+      const token =
+        thunkAPI.getState().auth.token || localStorage.getItem("token");
+
       if (!token) throw new Error("No token found");
-      setAuthHeader(token); // Header'a token ekle          /// ND
+
+      setAuthHeader(token);
+
       const response = await axiosInstance.get("/transactions");
+
       return response.data;
     } catch (error) {
       toast.error(
-        error.response?.data?.message || 'Failed to fetch transactions.'
+        error.response?.data?.message || "Failed to fetch transactions."
       );
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message

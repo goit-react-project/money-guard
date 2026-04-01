@@ -1,7 +1,6 @@
 import {  useEffect,  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./HomeTab.module.css";
-import Header from "../Header/Header";
 import Navigation from "../Navigation/Navigation";
 import Balance from "../Balance/Balance";
 import Currency from "../Currency/Currency";
@@ -14,6 +13,7 @@ import {
   deleteTransaction,
   editTransaction,
   fetchTransactions,
+  fetchCategories,
 } from "../../redux/finance/financeOperations";
 
 
@@ -29,6 +29,7 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
 
   useEffect(() => {
     dispatch(fetchTransactions());
+    dispatch(fetchCategories());
   }, [dispatch]);  
 
   const handleOpenAdd = () => {
@@ -68,7 +69,6 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
   return (
     <div className={styles.pageBg}>
       <div className={styles.container}>
-        <Header />
 
         <div className={styles.content}>
           <div className={styles.topSection}>
