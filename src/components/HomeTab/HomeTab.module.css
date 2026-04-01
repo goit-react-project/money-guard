@@ -20,7 +20,7 @@
 }
 
 .pageBg {
-  background: var(--color-nav-bg);
+  background: var(--gradient-bg-mobile);
 }
 
 .content {
@@ -77,7 +77,6 @@
   }
 
   .topSection {
-    display: none;
     flex-direction: column;
     gap: 20px;
   }
@@ -105,7 +104,6 @@
     grid-template-areas:
       'leftcol currencySection'
       'main main';
-    gap: 32px;
     padding-top: 0;
     box-sizing: border-box;
     width: 100%;
@@ -181,11 +179,6 @@
     position: relative;
     max-height: calc(100vh - 80px);
     box-sizing: border-box;
-  }
-
-  .topSection {
-    display: contents;
-    padding: 0;
   }
 
   .leftSide {

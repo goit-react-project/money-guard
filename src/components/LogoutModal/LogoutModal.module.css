@@ -9,52 +9,125 @@
 }
 
 .modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #2e225f;
-  padding: 24px;
-  border-radius: 12px;
-  width: 320px;
-  text-align: center;
+  width: 100vw;
+  height: 100vh;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
+.logoContainer {
+  display: none;
+}
+
 .modalText {
-  font-size: 16px;
-  color: #fbfbfb;
-  margin-bottom: 20px;
+  width: 214px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .actions {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.cancelBtn {
-  flex: 1;
-  background: rgba(251, 251, 251, 0.2);
-  color: #fbfbfb;
-  padding: 8px 0;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.cancelBtn:hover {
-  background: rgba(251, 251, 251, 0.4);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .logoutBtn {
-  flex: 1;
-  background: #e74c3c;
-  color: #fff;
-  padding: 8px 0;
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-white);
+  border-radius: var(--radius-btn);
+  background: var(--gradient-btn);
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 9px 15px 0px;
+  padding: 13px 55px;
   border: none;
-  border-radius: 8px;
+  width: 280px;
+  min-height: 50px;
   cursor: pointer;
-  font-size: 14px;
+  filter: drop-shadow(rgba(0, 0, 0, 0.2) 1px 9px 15px);
+  transform: scale(1);
+  transition: transform 0.3s ease;
 }
 
 .logoutBtn:hover {
-  background: #c0392b;
+  transform: scale(1.03);
+}
+
+.cancelBtn {
+  font-family: var(--font-main);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-btn-text);
+  border-radius: var(--radius-btn);
+  background: var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.2) 1px 9px 15px 0px;
+  padding: 13px 55px;
+  border: none;
+  width: 280px;
+  min-height: 50px;
+  cursor: pointer;
+  filter: drop-shadow(rgba(0, 0, 0, 0.2) 1px 9px 15px);
+  transition: transform 0.3s ease;
+}
+
+.cancelBtn:hover {
+  transform: scale(1.03);
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 533px;
+    height: 447px;
+    border-radius: 8px;
+    backdrop-filter: blur(100px);
+    box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+    background: var(--color-form-bg);
+  }
+
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 52px;
+  }
+
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logoText {
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--color-white);
+  }
+
+  .modalText {
+    width: 100%;
+    margin-bottom: 52px;
+  }
+
+  .logoutBtn,
+  .cancelBtn {
+    width: 300px;
+  }
 }

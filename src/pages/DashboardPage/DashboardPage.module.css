@@ -33,6 +33,7 @@
   }
 
   .sidebar {
+    display: none;
     padding: 20px 0 0 0;
     flex-direction: column;
     align-items: flex-start;
@@ -40,7 +41,7 @@
 
   /* Mobile: only show balance on /dashboard/home */
   .balanceHidden {
-    display: none;
+    display: flex;
   }
 
   .balanceVisible {
@@ -51,5 +52,9 @@
 @media screen and (min-width: 1280px) {
   .mainContent {
     max-width: 1280px;
+  }
+
+  .sidebar {
+    display: none;
   }
 }

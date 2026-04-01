@@ -101,7 +101,7 @@
 
 .wrapper {
     width: 100%;
-    
+
 }
 
 .tableHead {
@@ -115,7 +115,7 @@
         max-width: clamp(704px, 90vw, 1100px);
         margin: 0 auto;
     }
-    
+
         .emptyCard {
             max-width: 1000px;
             margin: 0 auto;
@@ -127,12 +127,12 @@
             align-items: center;
             padding: 40px;
         }
-        
+
         .emptyTitle {
             font-size: clamp(16px, 2.5vw, 28px);
             font-weight: 600;
         }
-        
+
         .emptyText {
             font-size: clamp(14px, 2vw, 20px);
         }
@@ -159,7 +159,7 @@
         box-sizing: border-box;
         font-family: var(--font-main);
         color: var(--color-white);
-        
+
     }
 
     .tableHead>span{
@@ -167,13 +167,13 @@
         align-items: center;
         justify-content: center;
     }
-        
+
     .tableHead>span:nth-child(5),
     .tableHead>span:nth-child(6) {
         justify-content: center;
         text-align: right;
     }
-    
+
         .list {
             width: 100%;
             gap: 0;
@@ -196,18 +196,18 @@
             padding: 0 16px;
             box-sizing: border-box;
         }
-    
+
         .emptyCard {
             width: clamp(280px, 90vw, 715px);
             padding: clamp(20px, 3vw, 40px);
             border-radius: 16px;
-    
+
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: clamp(12px, 2vw, 20px);
-    
+
             text-align: center;
             box-sizing: border-box;
         }
@@ -243,7 +243,6 @@
 
     .list {
         width: 100%;
-        height: calc(308px - 64px);
         overflow-y: auto;
         overflow-x: hidden;
     }
