@@ -4,6 +4,7 @@ import styles from "./HomeTab.module.css";
 import Navigation from "../Navigation/Navigation";
 import Balance from "../Balance/Balance";
 import Currency from "../Currency/Currency";
+import Chart from "../Chart/Chart";
 import TransactionsList from "../TransactionsList/TransactionsList";
 import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction"
@@ -80,13 +81,13 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
                 <Balance />
               </div>
               <div className={styles.currencyWrap}>
-                <Currency />
+                <Currency shouldFetch={true} />
               </div>
             </div>
 
             <div className={styles.rightSide}>
               <div className={styles.rightTop}>
-                <Currency />
+                <Currency shouldFetch={false} />
               </div>
             </div>
           </div>
@@ -120,9 +121,6 @@ const transactions = useSelector((state) => state.finance.transactions) || [];
           />
         )}
       </div>
-    <div className={styles.homeTab}>
-        {/* Home tab content */}
-       </div> 
     </div>
   );
 };

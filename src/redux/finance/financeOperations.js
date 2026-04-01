@@ -1,32 +1,32 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import axiosInstance, { setAuthHeader } from '../../utils/axiosInstance';
-import axios from 'axios';
+
+
+// Toast notifications for add/delete/edit are handled in components via .unwrap()
+// Only fetchCurrency uses toast here because it has no dedicated component-level handler
 
 export const fetchTransactions = createAsyncThunk(
   "finance/fetchTransactions",
   async (_, thunkAPI) => {
     try {
-      const token =
-        thunkAPI.getState().auth.token || localStorage.getItem("token");
+      const token = thunkAPI.getState().auth.token;
 
-      if (!token) throw new Error("No token found");
+      if (!token) {
+        return thunkAPI.rejectWithValue("No token found");
+      }
 
       setAuthHeader(token);
 
       const response = await axiosInstance.get("/transactions");
-
       return response.data;
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Failed to fetch transactions."
-      );
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || error.message
+        error.response?.data?.message || error.message || "Failed to fetch transactions."
       );
     }
   }
-);
+)
 
 export const fetchCategories = createAsyncThunk(   /// ND
   "finance/fetchCategories",
@@ -52,25 +52,20 @@ export const fetchCategories = createAsyncThunk(   /// ND
 );
 
 export const addTransaction = createAsyncThunk(
-  "finance/addTransaction",
+  'finance/addTransaction',
   async (transactionData, thunkAPI) => {
     try {
-      const token =
-        thunkAPI.getState().auth.token || localStorage.getItem("token");
-      if (!token) throw new Error("No token found");
-
-      setAuthHeader(token);
-
-      const response = await axiosInstance.post("/transactions", transactionData);
-      toast.success("Transaction added successfully!");
+      const response = await axiosInstance.post(
+        '/transactions',
+        transactionData
+      );
+      toast.success('Transaction added successfully!');
       return response.data;
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Failed to add transaction."
+        error.response?.data?.message || 'Failed to add transaction.'
       );
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.message || error.message
-      );
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -147,8 +142,9 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      //axios instance kullanımı kaldırıldı çünkü farklı bir API'ye istek atılıyor
-      const response = await axios.get('https://api.monobank.ua/bank/currency');
+      const response = await axiosInstance.get(
+        'https://api.monobank.ua/bank/currency'
+      );
       const filtered = response.data.filter(
         (item) =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
