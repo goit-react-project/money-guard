@@ -1,10 +1,57 @@
-import styles from './TransactionsList.module.css';
+import TransactionsItem from "../TransactionsItem/TransactionsItem";
+import styles from "./TransactionsList.module.css";
 
-const TransactionsList = () => {
-  return (
-    <div>
-      <p></p>
+
+const TransactionsList = ({
+  transactions = [],
+  onDelete,
+  onEdit,
+  onOpenAdd,
+}) => {
+  if (transactions.length === 0) {
+    return (
+      <div className={styles.emptyWrapper}>
+        <div className={styles.emptyCard}>
+          <p className={styles.emptyTitle}>No transactions available yet.</p>
+          <p className={styles.emptyText}>
+            Let&apos;s add your first transaction:
+          </p>
+
+          <button
+            type="button"
+            className={styles.emptyBtn}
+            onClick={onOpenAdd}
+          >
+            ADD TRANSACTION
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+    return (
+    <div className={styles.wrapper}>
+      <div className={styles.tableHead}>
+        <span>Date</span>
+        <span>Type</span>
+        <span>Category</span>
+        <span>Comment</span>
+        <span>Sum</span>
+        <span></span>
+      </div>
+
+      <div className={styles.list}>
+        {transactions.map((item) => (
+          <TransactionsItem
+            key={item.id}
+            transaction={item}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ))}
+      </div>
     </div>
   );
 };
+
 export default TransactionsList;

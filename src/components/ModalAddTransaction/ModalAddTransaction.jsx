@@ -1,7 +1,7 @@
+import styles from "./ModalAddTransaction.module.css";
 import { useEffect } from 'react'
 
 import AddTransactionForm from '../AddTransactionForm/AddTransactionForm'
-import styles from './ModalAddTransaction.module.css'
 
 const ModalAddTransaction = ({ onClose }) => {
   useEffect(() => {
@@ -41,6 +41,6 @@ const ModalAddTransaction = ({ onClose }) => {
         </button>
       </div>
     </div>
-  )
-}
-export default ModalAddTransaction
+  );
+};
+export default ModalAddTransaction;

@@ -54,12 +54,14 @@ export const deleteTransaction = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await axiosInstance.delete(`/transactions/${id}`);
+
       toast.success('Transaction deleted.');
-      return { id };
+      return id;
     } catch (error) {
       toast.error(
         error.response?.data?.message || 'Failed to delete transaction.'
       );
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
