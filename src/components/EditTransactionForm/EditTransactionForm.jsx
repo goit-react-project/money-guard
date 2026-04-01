@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { toast } from 'react-toastify';
 import {
   editTransaction,
   fetchCategories,
@@ -61,9 +62,10 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
 
     try {
       await dispatch(editTransaction(payload)).unwrap();
+      toast.success('Transaction updated successfully!');
       closeModal();
     } catch (error) {
-      console.error('Update failed:', error);
+      toast.error(error?.message || 'Failed to update transaction.');
     } finally {
       setSubmitting(false);
     }

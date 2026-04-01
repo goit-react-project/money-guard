@@ -33,7 +33,7 @@ const StatisticsDashboard = () => {
   useEffect(() => {
     dispatch(fetchStatistics({ month, year }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+  }, [dispatch, month, year]);
 
   const handleMonthChange = (e) => {
     const newMonth = Number(e.target.value);

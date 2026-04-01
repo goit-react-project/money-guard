@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import axiosInstance, { setAuthHeader } from '../../utils/axiosInstance';
+import axios from 'axios';
 
+// Toast notifications for add/delete/edit are handled in components via .unwrap()
+// Only fetchCurrency uses toast here because it has no dedicated component-level handler
 
 // Toast notifications for add/delete/edit are handled in components via .unwrap()
 // Only fetchCurrency uses toast here because it has no dedicated component-level handler
@@ -101,13 +104,11 @@ export const editTransaction = createAsyncThunk(
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await axiosInstance.patch(`/transactions/${id}`, data);
-      toast.success('Transaction updated.');
       return response.data;
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || 'Failed to update transaction.'
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
       );
-      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -142,9 +143,8 @@ export const fetchCurrency = createAsyncThunk(
         return JSON.parse(savedData);
       }
 
-      const response = await axiosInstance.get(
-        'https://api.monobank.ua/bank/currency'
-      );
+      // separate axios instance used because this is an external API
+      const response = await axios.get(import.meta.env.VITE_MONOBANK_API_URL);
       const filtered = response.data.filter(
         (item) =>
           (item.currencyCodeA === 840 || item.currencyCodeA === 978) &&
@@ -156,6 +156,7 @@ export const fetchCurrency = createAsyncThunk(
 
       return filtered;
     } catch (error) {
+      toast.error('Failed to fetch currency rates. Please try again later.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }

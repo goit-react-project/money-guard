@@ -19,45 +19,41 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
- const handleFormSubmit = async (values, actions) => {
-  try {
-    const resultAction = await dispatch(loginUser(values));
+  const handleFormSubmit = async (values, actions) => {
+    try {
+      const resultAction = await dispatch(loginUser(values));
 
-    if (loginUser.fulfilled.match(resultAction)) {
-      navigate('/dashboard');
-      return;
-    }
-
-    if (loginUser.rejected.match(resultAction)) {
-      const error = resultAction.error;
-
-      console.log('LOGIN ERROR FULL:', resultAction);
-
-      const status = error?.code || error?.response?.status;
-
-      let message = 'An error occurred';
-
-      if (status === 401) {
-        message = 'Email or password is wrong';
-      } else if (status === 404) {
-        message = '404 - Resource not found';
-      } else if (status === 400) {
-        message = '400 - Bad request';
-      } else if (status === 500) {
-        message = '500 - Internal server error';
-      } else {
-        message =
-          resultAction.payload ||
-          error?.message ||
-          'An error occurred';
+      if (loginUser.fulfilled.match(resultAction)) {
+        navigate('/dashboard');
+        return;
       }
 
-      toast.error(message, { toastId: 'login-error' });
+      if (loginUser.rejected.match(resultAction)) {
+        const error = resultAction.error;
+
+        const status = error?.code || error?.response?.status;
+
+        let message = 'An error occurred';
+
+        if (status === 401) {
+          message = 'Email or password is wrong';
+        } else if (status === 404) {
+          message = '404 - Resource not found';
+        } else if (status === 400) {
+          message = '400 - Bad request';
+        } else if (status === 500) {
+          message = '500 - Internal server error';
+        } else {
+          message =
+            resultAction.payload || error?.message || 'An error occurred';
+        }
+
+        toast.error(message, { toastId: 'login-error' });
+      }
+    } finally {
+      actions.setSubmitting(false);
     }
-  } finally {
-    actions.setSubmitting(false);
-  }
-};
+  };
   return (
     <div className={css.wrapper}>
       <div className={css.logoBox}>
@@ -89,7 +85,7 @@ const LoginForm = () => {
               </div>
               <div className={css.line}></div>
               <ErrorMessage name="email">
-                {msg => <p className={css.error}>{msg}</p>}
+                {(msg) => <p className={css.error}>{msg}</p>}
               </ErrorMessage>
             </div>
 
@@ -106,7 +102,7 @@ const LoginForm = () => {
               </div>
               <div className={css.line}></div>
               <ErrorMessage name="password">
-                {msg => <p className={css.error}>{msg}</p>}
+                {(msg) => <p className={css.error}>{msg}</p>}
               </ErrorMessage>
             </div>
 
@@ -118,9 +114,12 @@ const LoginForm = () => {
               {isSubmitting ? 'LOADING...' : 'LOG IN'}
             </button>
 
-            <Link to="/register" className={`${css.registerLink} ${css.registerBtn}`}>
-  REGISTER
-</Link>
+            <Link
+              to="/register"
+              className={`${css.registerLink} ${css.registerBtn}`}
+            >
+              REGISTER
+            </Link>
           </Form>
         )}
       </Formik>

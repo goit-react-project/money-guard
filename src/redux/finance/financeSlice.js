@@ -128,17 +128,21 @@ const financeSlice = createSlice({
       );
 
       if (index !== -1) {
+        // get previous transaction and new transaction
         const oldTransaction = state.transactions[index];
         const newTransaction = action.payload;
 
+        // update transaction in the list
         state.transactions[index] = newTransaction;
 
+        // Revert the old transaction from the balance
         if (oldTransaction.type === 'INCOME') {
           state.totalBalance -= oldTransaction.amount;
         } else {
           state.totalBalance += oldTransaction.amount;
         }
 
+        // Apply the new transaction to the balance
         if (newTransaction.type === 'INCOME') {
           state.totalBalance += newTransaction.amount;
         } else {

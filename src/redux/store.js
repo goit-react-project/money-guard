@@ -4,7 +4,6 @@ import storage from "redux-persist/es/storage";
 
 import authReducer from "./auth/authSlice";
 import financeReducer from "./finance/financeSlice";
-import globalReducer from "./global/globalSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -16,7 +15,6 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     finance: financeReducer,
-    global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
