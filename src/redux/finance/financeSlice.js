@@ -17,6 +17,7 @@ const initialState = {
   currency: [],
   isLoading: false,
   error: null,
+  currencyError: null,
 };
 
 const financeSlice = createSlice({
@@ -168,7 +169,7 @@ const financeSlice = createSlice({
 
     builder.addCase(fetchCurrency.pending, (state) => {
       state.isLoading = true;
-      state.error = null;
+      state.currencyError = null;
     });
 
     builder.addCase(fetchCurrency.fulfilled, (state, action) => {
@@ -178,7 +179,7 @@ const financeSlice = createSlice({
 
     builder.addCase(fetchCurrency.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = action.payload;
+      state.currencyError = action.payload;
     });
   },
 });

@@ -5,3 +5,4 @@ export const selectTotalBalance = (state) => state.finance.totalBalance;
 export const selectCurrency = (state) => state.finance.currency;
 export const selectIsLoading = (state) => state.finance.isLoading;
 export const selectError = (state) => state.finance.error;
+export const selectCurrencyError = (state) => state.finance.currencyError;

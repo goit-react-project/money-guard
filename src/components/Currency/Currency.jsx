@@ -4,7 +4,7 @@ import { fetchCurrency } from '../../redux/finance/financeOperations';
 import {
   selectCurrency,
   selectIsLoading,
-  selectError,
+  selectCurrencyError,
 } from '../../redux/finance/financeSelectors';
 import Loader from '../Loader/Loader';
 import styles from './Currency.module.css';
@@ -15,7 +15,7 @@ const Currency = () => {
   const dispatch = useDispatch();
   const currency = useSelector(selectCurrency);
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+  const error = useSelector(selectCurrencyError);
 
   useEffect(() => {
     if (currency.length === 0) {
