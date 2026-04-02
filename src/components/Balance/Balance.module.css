@@ -34,8 +34,7 @@
 /* MOBILE */
 @media screen and (min-width: 768px) {
   .balance {
-    display: flex;
-    max-width: 100%;
+    width: 336px !important;
   }
 
   .amount {
@@ -44,8 +43,8 @@
 }
 
 /* DESKTOP */
-@media (min-width: 1280px) {
+@media screen and (min-width: 1280px) {
   .balance {
-    max-width: 480px;
+    width: 460px !important;
   }
 }
