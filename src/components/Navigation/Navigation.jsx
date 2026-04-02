@@ -13,7 +13,9 @@ const Navigation = () => {
           isActive ? styles.activeLink : styles.link
         }
       >
-        <HomeIcon className={styles.icon} />
+        <span className={styles.iconWrap}>
+          <HomeIcon className={styles.icon} />
+        </span>
         <span className={styles.navText}>Home</span>
       </NavLink>
 
@@ -23,7 +25,9 @@ const Navigation = () => {
           isActive ? styles.activeLink : styles.link
         }
       >
-        <StatsIcon className={styles.icon} />
+        <span className={styles.iconWrap}>
+          <StatsIcon className={styles.icon} />
+        </span>
         <span className={styles.navText}>Statistics</span>
       </NavLink>
 
@@ -33,7 +37,9 @@ const Navigation = () => {
           `${isActive ? styles.activeLink : styles.link} ${styles.mobileCurrencyLink}`
         }
       >
-        <CurrencyIcon className={styles.icon} />
+        <span className={styles.iconWrap}>
+          <CurrencyIcon className={styles.icon} />
+        </span>
         <span className={styles.mobileOnly}>Currency</span>
       </NavLink>
     </nav>

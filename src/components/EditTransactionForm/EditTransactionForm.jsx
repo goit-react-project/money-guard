@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -10,6 +10,7 @@ import {
 } from '../../redux/finance/financeOperations';
 import css from './EditTransactionForm.module.css';
 import calendarIcon from '../../assets/icons/calendar.svg';
+import CursorPointerIcon from '@/assets/icons/cursor-pointer-icon.svg?react';
 
 // Yup ile validation
 const validationSchema = Yup.object().shape({
@@ -35,6 +36,18 @@ const formatTransactionDate = (value) => {
 const EditTransactionForm = ({ transaction, closeModal }) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.finance.categories);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const categoryRef = useRef(null);
+
+  useEffect(() => {
+    const handlePointerDown = (e) => {
+      if (categoryRef.current && !categoryRef.current.contains(e.target)) {
+        setIsCategoryOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, []);
 
   useEffect(() => {
     if (!categories || categories.length === 0) {
@@ -101,27 +114,48 @@ const EditTransactionForm = ({ transaction, closeModal }) => {
               </div>
 
               {values.type === 'EXPENSE' && (
-                <div className={css.formGroup}>
-                  <Field
-                    as="select"
-                    name="categoryId"
-                    className={css.inputField}
-                  >
-                    <option value="" disabled>
-                      Select a category
-                    </option>
-                    {Array.isArray(categories) &&
-                      categories.map((cat) => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name}
-                        </option>
-                      ))}
-                  </Field>
-                  <ErrorMessage
-                    name="categoryId"
-                    component="div"
-                    className={css.errorMessage}
-                  />
+                <div className={css.formGroup} ref={categoryRef}>
+                  <div className={css.categoryField}>
+                    <button
+                      type="button"
+                      className={`${css.categoryTrigger} ${isCategoryOpen ? css.categoryTriggerOpen : ''} ${values.categoryId ? css.categorySelected : ''}`}
+                      onClick={() => setIsCategoryOpen((o) => !o)}
+                      aria-haspopup="listbox"
+                      aria-expanded={isCategoryOpen}
+                    >
+                      <span>
+                        {categories.find((c) => c.id === values.categoryId)?.name || 'Select a category'}
+                      </span>
+                      <span className={css.categoryTriggerIcons}>
+                        <span className={`${css.categoryChevron} ${isCategoryOpen ? css.categoryChevronOpen : ''}`} aria-hidden="true" />
+                      </span>
+                    </button>
+
+                    {isCategoryOpen && (
+                      <ul className={css.categoryMenu} role="listbox">
+                        {Array.isArray(categories) && categories
+                          .filter((c) => c.type !== 'INCOME')
+                          .map((cat) => (
+                            <li key={cat.id}>
+                              <button
+                                type="button"
+                                className={`${css.categoryOption} ${cat.id === values.categoryId ? css.categoryOptionActive : ''}`}
+                                onClick={() => {
+                                  setFieldValue('categoryId', cat.id);
+                                  setIsCategoryOpen(false);
+                                }}
+                              >
+                                <span>{cat.name}</span>
+                                {cat.id === values.categoryId && (
+                                  <CursorPointerIcon className={css.categoryOptionPointer} aria-hidden="true" />
+                                )}
+                              </button>
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+                  </div>
+                  <ErrorMessage name="categoryId" component="div" className={css.errorMessage} />
                 </div>
               )}
               <div className={css.rowGroup}>

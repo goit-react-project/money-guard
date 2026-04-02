@@ -1,7 +1,28 @@
+.wrapper {
+  width: 100%;
+}
+
+.leftSide {
+  display: none;
+}
+
+.rightSide {
+  display: none;
+}
+
+.currencyWrap {
+  display: none;
+}
+
+.statisticsSection {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 .statisticsLayout {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
   gap: 24px;
 }
@@ -9,25 +30,129 @@
 .left {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .right {
-  width: 280px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
+/* TABLET */
 @media (min-width: 768px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content auto;
+    grid-template-areas:
+      'leftcol currencySection'
+      'main main';
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .leftSide {
+    grid-area: leftcol;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2vw, 32px);
+    justify-content: flex-end;
+    padding: 20px 16px 20px 0;
+    box-sizing: border-box;
+  }
+
+  .rightSide {
+    grid-area: currencySection;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .rightTop {
+    width: 100%;
+    padding: 20px 0 20px 16px;
+    box-sizing: border-box;
+  }
+
+  .statisticsSection {
+    grid-area: main;
+    padding: 0 0 20px;
+    box-sizing: border-box;
+  }
+
   .statisticsLayout {
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .left {
+    flex-shrink: 0;
+    width: 360px;
+  }
+
+  .right {
+    flex: 1;
+    min-width: 0;
   }
 }
 
+/* DESKTOP */
 @media (min-width: 1280px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'left right';
+    padding: 0;
+    min-height: calc(100vh - 80px);
+    box-sizing: border-box;
+  }
+
+  .leftSide {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: flex-start;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .rightSide {
+    display: none;
+  }
+
+  .currencyWrap {
+    display: block;
+    height: 380px;
+  }
+
+  .navWrap {
+    height: 70px;
+    margin-left: 16px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .balanceWrap {
+    height: 80px;
+  }
+
+  .statisticsSection {
+    grid-area: right;
+    padding: 16px 16px 20px;
+    box-sizing: border-box;
+  }
+
   .statisticsLayout {
     width: 100%;
-    max-width: 100%;
-    margin-top: 16px;
-    margin-bottom: 8px;
     justify-content: flex-start;
-    padding-left: 0;
   }
 }

@@ -14,9 +14,6 @@
   transition: 0.2s;
 }
 
-.link:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
 
 .link.active {
   background: #4f46e5;
@@ -48,32 +45,46 @@
   font-weight: 400;
   color: rgba(251, 251, 251, 0.6);
   text-decoration: none;
-  height: 27px;
   transition: all 0.3s ease;
+}
+
+.link .iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 6px;
 }
 
 /* ACTIVE LINK */
 .activeLink {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 16px;
   color: #fbfbfb;
   text-decoration: none;
-  height: 27px;
+}
+
+.activeLink .iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4a28a0;
+  border-radius: 10px;
+  padding: 6px;
 }
 
 .activeLink .navText {
   font-weight: 700;
 }
 
-/* Hover effect behaves like active */
 .link:hover {
   color: #fbfbfb;
 }
 
-.link:hover .navText {
-  font-weight: 700;
+.link:hover .iconWrap {
+  background: #4a28a0;
 }
 
 /* MOBILE ONLY */
@@ -93,8 +104,8 @@
   }
 
   .icon {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
   }
 
   .navText {
@@ -108,5 +119,11 @@
   .mobileCurrencyLink {
     display: none;
   }
+}
 
+@media (min-width: 1280px) {
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
 }

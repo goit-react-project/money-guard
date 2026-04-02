@@ -20,7 +20,7 @@
 }
 
 .pageBg {
-  background: var(--gradient-bg-mobile);
+  background: transparent;
 }
 
 .content {

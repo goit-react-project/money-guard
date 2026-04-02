@@ -47,6 +47,132 @@
   margin-bottom: 40px;
 }
 
+.categoryField {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.categoryTrigger {
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 8px;
+  border: none;
+  border-bottom: 1px solid var(--color-white-40);
+  background: transparent;
+  color: rgba(251, 251, 251, 0.5);
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+}
+
+.categoryTriggerOpen {
+  border-bottom-color: transparent;
+}
+
+.categorySelected {
+  color: #fbfbfb;
+}
+
+.categoryChevron {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(251, 251, 251, 0.8);
+  border-bottom: 1px solid rgba(251, 251, 251, 0.8);
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 200ms ease;
+}
+
+.categoryChevronOpen {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.categoryTriggerIcons {
+  display: inline-flex;
+  align-items: center;
+}
+
+.categoryMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 272px;
+  margin: 0;
+  padding: 12px 8px 12px 0;
+  overflow-y: auto;
+  list-style: none;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(83, 61, 186, 0.7) 0%,
+    rgba(80, 48, 154, 0.7) 35%,
+    rgba(106, 70, 165, 0.53) 100%
+  );
+  backdrop-filter: blur(50px);
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+.categoryMenu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.categoryMenu::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: #bfb4dd;
+}
+
+.categoryMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.categoryOption {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border: none;
+  background: transparent;
+  color: rgba(251, 251, 251, 0.6);
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.categoryOption:hover,
+.categoryOption:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fbfbfb;
+  outline: none;
+}
+
+.categoryOptionActive {
+  color: #ff868d;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.categoryOptionPointer {
+  width: 19px;
+  height: 23px;
+  flex-shrink: 0;
+}
+
 .rowGroup {
   display: flex;
   justify-content: space-between;

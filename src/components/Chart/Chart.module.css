@@ -17,7 +17,7 @@
 
 .chartWrapper {
   position: relative;
-  width: 100%;
+  width: fit-content;
 }
 
 .doughnut {
@@ -52,6 +52,6 @@
     height: 288px !important;
   }
   .centerText {
-    left: 36%;
+    left: 50%;
   }
 }
