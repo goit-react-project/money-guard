@@ -4,7 +4,7 @@
 }
 
 .currencyTable {
-  width: 100%;
+  width: 320px;
   background: rgba(82, 59, 126, 0.6);
   border-radius: 12px;
   padding: clamp(10px, 2vw, 16px) clamp(10px, 3vw, 16px);
@@ -40,11 +40,19 @@
   .currencyWrapper {
     margin-top: 0;
   }
+
+  .currencyTable {
+    width: 336px;
+  }
 }
 
 @media (min-width: 1280px) {
   .currencyWrapper {
     margin-top: 0;
+  }
+
+  .currencyTable {
+    width: 460px;
   }
 
   .currencyHeader {
