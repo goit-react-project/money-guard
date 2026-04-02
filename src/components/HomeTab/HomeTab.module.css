@@ -28,7 +28,6 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  flex: 1;
 }
 
 .floatingButton {
@@ -73,76 +72,59 @@
 
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 768px;
-  }
-
-  .topSection {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .rightSide {
-    display: none;
-  }
-
-  .bottomSection {
-    margin-top: 20px;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .currencyWrap {
     display: none;
   }
 
-  .container {
-    margin: 0 auto;
+  .topSection {
+    display: flex;
+    flex-direction: row;
   }
 
   .content {
-    display: grid;
-    grid-template-columns: minmax(320px, 1fr) minmax(336px, 1fr);
-    grid-template-rows: 214px auto;
-    grid-template-areas:
-      'leftcol currencySection'
-      'main main';
-    padding-top: 0;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    max-width: clamp(704px, 92vw, 1200px);
-    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .leftSide {
     grid-area: leftcol;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: clamp(320px, 50vw, 700px);
     gap: clamp(20px, 2vw, 32px);
     justify-content: flex-end;
+    padding: 20px 16px 20px 0;
+    box-sizing: border-box;
   }
 
   .rightSide {
     grid-area: currencySection;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     min-width: 0;
+    overflow: hidden;
   }
 
   .rightTop {
-    width: 336px;
-    height: 214px;
-    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .bottomSection {
     grid-area: main;
-    max-width: clamp(704px, 80vw, 1100px);
-    margin: 0 auto;
+    width: 100%;
     min-height: 312px;
-    margin: 0 auto;
-    padding: 0;
+    padding: 0 0 20px;
     box-sizing: border-box;
   }
 }

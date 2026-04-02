@@ -69,7 +69,8 @@ const normalizeCategory = (item) => {
 
 const AddTransactionForm = ({ onSuccess = () => {} }) => {
   const dispatch = useDispatch();
-  const categories = useSelector(selectCategories) ?? [];
+  const rawCategories = useSelector(selectCategories);
+  const categories = useMemo(() => rawCategories ?? [], [rawCategories]);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoryRef = useRef(null);
 
@@ -157,7 +158,6 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
         setFieldValue,
         isSubmitting,
       }) => {
-        const isExpense = values.type === 'EXPENSE';
         const categoryError = touched.category && errors.category;
 
         return (
@@ -220,7 +220,7 @@ const AddTransactionForm = ({ onSuccess = () => {} }) => {
               </button>
             </div>
 
-            {isExpense && (
+            {values.type === 'EXPENSE' && (
               <div className={styles.fieldGroup}>
                 <div className={styles.categoryField} ref={categoryRef}>
                   <button

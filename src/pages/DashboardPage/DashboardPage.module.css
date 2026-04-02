@@ -6,6 +6,9 @@
 }
 
 .mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   position: relative;
   min-width: 320px;
   max-width: 375px;
@@ -19,17 +22,20 @@
   padding: 12px 0 0 0;
 }
 
-/* Desktop & tablet: always visible regardless of route */
-.balanceVisible,
-.balanceHidden {
+.balanceVisible {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.balanceHidden {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   .mainContent {
-    max-width: 768px;
+    max-width: 100%;
+    width: 100%;
   }
 
   .sidebar {
@@ -37,15 +43,6 @@
     padding: 20px 0 0 0;
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  /* Mobile: only show balance on /dashboard/home */
-  .balanceHidden {
-    display: flex;
-  }
-
-  .balanceVisible {
-    display: block;
   }
 }
 

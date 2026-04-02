@@ -109,9 +109,8 @@
 .loginBtn {
   margin-top: 16px;
   color: #fcfcfc;
-  background: linear-gradient(125deg, #ffc727, #9e40ba, #7000ff);
+  background: var(--gradient-btn);
   box-shadow: var(--shadow-btn);
-
 }
 
 .loginBtn:disabled {

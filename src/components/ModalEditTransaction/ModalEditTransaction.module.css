@@ -7,13 +7,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(34, 13, 91, 0.73);
+  backdrop-filter: blur(7px);
   z-index: 1000;
 }
 
 .modalContent {
   position: relative;
-  max-width: 320px;
+  width: 90vw;
+  max-width: 540px;
+  min-height: auto;
   padding: 40px 0;
   display: flex;
   flex-direction: column;
@@ -22,7 +25,7 @@
   background: var(--color-form-bg);
   box-shadow: var(--shadow-form);
   backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px); /* Safari desteği için */
+  -webkit-backdrop-filter: blur(50px);
   border-radius: var(--radius-form);
   transition: height 0.3s ease;
 }
@@ -72,5 +75,4 @@
 }
 
 @media screen and (min-width: 1280px) {
-
 }
