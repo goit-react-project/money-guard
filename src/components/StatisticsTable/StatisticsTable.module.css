@@ -6,7 +6,8 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 12px;
+  padding: 16px 28px;
+  height: 56px;
   border-radius: 8px;
   color: #fbfbfb;
   font-weight: 600;
@@ -22,19 +23,18 @@
 
 .item {
   display: flex;
-  gap: 24px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  gap: 16px;
+  padding: 16px 30px 16px 16px;
   width: 100%;
   max-width: 100%;
   border-bottom: 1px solid #ffffff69;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .dot {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 2px;
   flex-shrink: 0;
 }
@@ -42,12 +42,12 @@
 .name {
   flex: 1;
   color: #fbfbfb;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .amount {
   color: #fbfbfb;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .summary {

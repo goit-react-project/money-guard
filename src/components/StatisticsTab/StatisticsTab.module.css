@@ -1,10 +1,9 @@
 .statisticsLayout {
   display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  padding-top: clamp(12px, 2vw, 16px);
-  gap: 24px;
   flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 24px;
 }
 
 .left {
@@ -13,7 +12,7 @@
 }
 
 .right {
-  width: 100%;
+  width: 280px;
 }
 
 @media (min-width: 768px) {

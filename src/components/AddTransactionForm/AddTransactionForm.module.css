@@ -104,7 +104,7 @@
   gap: 16px;
   padding: 0 0 8px;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--color-white-40);
   background: transparent;
   color: rgba(251, 251, 251, 0.5);
   font-family: Poppins, sans-serif;
@@ -221,7 +221,7 @@
 .amountField {
   width: 181px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--color-white-40);
 }
 
 .amountInput {
@@ -258,7 +258,6 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .dateInput {
@@ -291,7 +290,7 @@
 .commentField {
   width: 100%;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid var(--color-white-40);
 }
 
 .commentInput {

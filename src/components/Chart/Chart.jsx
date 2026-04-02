@@ -59,8 +59,8 @@ const Chart = () => {
       };
 
   const total = hasData
-  ? expenses.reduce((sum, c) => sum + Math.abs(c.total), 0).toFixed(2)
-  : "0.00";
+    ? expenses.reduce((sum, c) => sum + Math.abs(c.total), 0).toFixed(2)
+    : '0.00';
 
   return (
     <div className={styles.box}>
@@ -69,6 +69,7 @@ const Chart = () => {
       <div className={styles.chartWrapper}>
         <p className={styles.centerText}>$ {total}</p>
         <Doughnut
+          className={styles.doughnut}
           data={chartData}
           options={{
             cutout: '70%',
