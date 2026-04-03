@@ -6,7 +6,7 @@ A personal finance tracking application. Easily manage your income and expenses,
 
 ## Live Demo
 
-[money-guard.vercel.app](#) _(add your deploy link here)_
+[https://goit-react-money-guard.vercel.app/](#)
 
 ---
 
@@ -25,18 +25,18 @@ A personal finance tracking application. Easily manage your income and expenses,
 
 ### Frontend
 
-| Technology | Version | Description |
-|------------|---------|-------------|
-| React | 19 | UI library |
-| React Router DOM | 7 | Page routing (lazy-loaded) |
-| Redux Toolkit | 2 | State management |
-| React Redux | 9 | Redux bindings |
-| Redux Persist | 6 | Auth token persistence |
-| Axios | 1 | HTTP requests |
-| Formik + Yup | 2 + 1 | Form management and validation |
-| Chart.js + react-chartjs-2 | 4 + 5 | Chart components |
-| React Toastify | 11 | Notification system |
-| Vite | 8 | Build tool |
+| Technology                 | Version | Description                    |
+| -------------------------- | ------- | ------------------------------ |
+| React                      | 19      | UI library                     |
+| React Router DOM           | 7       | Page routing (lazy-loaded)     |
+| Redux Toolkit              | 2       | State management               |
+| React Redux                | 9       | Redux bindings                 |
+| Redux Persist              | 6       | Auth token persistence         |
+| Axios                      | 1       | HTTP requests                  |
+| Formik + Yup               | 2 + 1   | Form management and validation |
+| Chart.js + react-chartjs-2 | 4 + 5   | Chart components               |
+| React Toastify             | 11      | Notification system            |
+| Vite                       | 8       | Build tool                     |
 
 ### Styling
 
@@ -113,18 +113,18 @@ src/
 - **Base URL:** `https://wallet.b.goit.study/api`
 - **Auth:** Bearer token
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/auth/sign-up` | POST | Register |
-| `/auth/sign-in` | POST | Login |
-| `/auth/sign-out` | DELETE | Logout |
-| `/users/current` | GET | Current user |
-| `/transactions` | GET | Transaction list |
-| `/transactions` | POST | Add transaction |
-| `/transactions/:id` | DELETE | Delete transaction |
-| `/transactions/:id` | PATCH | Edit transaction |
-| `/transaction-categories` | GET | Categories |
-| `/transactions-summary` | GET | Statistics summary |
+| Endpoint                  | Method | Description        |
+| ------------------------- | ------ | ------------------ |
+| `/auth/sign-up`           | POST   | Register           |
+| `/auth/sign-in`           | POST   | Login              |
+| `/auth/sign-out`          | DELETE | Logout             |
+| `/users/current`          | GET    | Current user       |
+| `/transactions`           | GET    | Transaction list   |
+| `/transactions`           | POST   | Add transaction    |
+| `/transactions/:id`       | DELETE | Delete transaction |
+| `/transactions/:id`       | PATCH  | Edit transaction   |
+| `/transaction-categories` | GET    | Categories         |
+| `/transactions-summary`   | GET    | Statistics summary |
 
 ### Exchange Rates
 
@@ -198,7 +198,7 @@ Pages are lazy-loaded with `React.lazy()` + `Suspense`:
 
 ```js
 const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
-const HomeTab       = lazy(() => import('./components/HomeTab/HomeTab'));
+const HomeTab = lazy(() => import('./components/HomeTab/HomeTab'));
 ```
 
 ### Error Handling
