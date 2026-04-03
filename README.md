@@ -6,7 +6,7 @@ A personal finance tracking application. Easily manage your income and expenses,
 
 ## Live Demo
 
-[https://goit-react-money-guard.vercel.app/]
+https://goit-react-money-guard.vercel.app/
 
 ---
 
