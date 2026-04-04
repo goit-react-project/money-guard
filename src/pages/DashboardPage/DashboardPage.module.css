@@ -84,7 +84,6 @@
   .pageContent {
     grid-column: 2;
     grid-row: 2;
-    max-width: 0;
   }
 
   .sidebar {

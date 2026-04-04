@@ -174,10 +174,9 @@
 
 @media (min-width: 1280px) {
   .wrapper {
-    width: 715px;
-    height: 308px;
-    margin-right: 0;
-    flex: 0 0 715px;
+    width: 100%;
+    height: auto;
+    flex: 1;
   }
 
   .emptyWrapper {
