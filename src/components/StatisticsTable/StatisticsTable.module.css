@@ -93,12 +93,12 @@
 @media (min-width: 1280px) {
   .item {
     width: 100%;
-    max-width: 395px;
+    max-width: 100%;
   }
 
   .wrapper {
     width: 100%;
-    max-width: 395px;
+    max-width: 100%;
   }
 
   .summaryRow {
