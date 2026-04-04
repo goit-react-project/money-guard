@@ -34,7 +34,7 @@ const RegistrationForm = () => {
 
     if (registerUser.fulfilled.match(resultAction)) {
       actions.resetForm();
-      navigate('/login');
+      navigate('/dashboard/home');
       return;
     }
 

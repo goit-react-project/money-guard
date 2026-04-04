@@ -27,7 +27,7 @@
 .amount {
   font-size: 30px;
   font-weight: 700;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #fbfbfb;
 }
 
@@ -45,6 +45,6 @@
 /* DESKTOP */
 @media screen and (min-width: 1280px) {
   .balance {
-    width: 460px !important;
+    width: 100%;
   }
 }
